@@ -2,7 +2,7 @@
 
 # JSON Formatter
 
-### A Chrome Extensions for formating and preetifying JSON automatically in the browser
+### A Chrome Extensions for formating and prettifying JSON automatically in the browser
 
 ## Features:
 * Dark Mode
