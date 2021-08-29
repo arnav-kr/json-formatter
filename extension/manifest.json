@@ -1,0 +1,56 @@
+{
+  "name": "JSON Formatter",
+  "short_name": "JSON Formatter",
+  "version": "1.0.0",
+  "version_name": "Version 1 Beta",
+  "manifest_version": 3,
+  "description": "Format JSON codes on the go. Available with both Dark and Light mode. With Auto Linker.",
+  "author": "Arnav",
+  "homepage_url": "https://github.com/arnav-kr/json-formatter",
+  "minimum_chrome_version": "21",
+  "offline_enabled": true,
+  "icons": {
+    "16": "images/icons/icon_round_16.png",
+    "32": "images/icons/icon_round_32.png",
+    "48": "images/icons/icon_round_48.png",
+    "64": "images/icons/icon_round_64.png",
+    "72": "images/icons/icon_round_72.png",
+    "128": "images/icons/icon_round_128.png",
+    "256": "images/icons/icon_round_256.png",
+    "384": "images/icons/icon_round_384.png",
+    "512": "images/icons/icon_round_512.png",
+    "1024": "images/icons/icon_round_1024.png",
+    "2048": "images/icons/icon_round_2048.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "host_permissions": [
+    "*://*/*",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "images/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "content_security_policy": {
+    "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self';"
+  }
+}
