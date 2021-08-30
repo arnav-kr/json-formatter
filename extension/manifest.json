@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "version_name": "Version 1 Beta",
   "manifest_version": 3,
-  "description": "Format JSON codes on the go. Available with both Dark and Light mode. With Auto Linker.",
+  "description": "Format JSON in chrome automatically. Available with both Dark and Light mode, with Auto Linker and Syntax Highlighting.",
   "author": "Arnav",
   "homepage_url": "https://github.com/arnav-kr/json-formatter",
   "minimum_chrome_version": "88",
