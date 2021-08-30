@@ -15,7 +15,15 @@
 
 ## Screenshots:
 
-TODO: Add Screenshots
+![Automatic Linkified](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/linkified-dark.png?raw=true)
+
+![Parsed Mode Dark](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/parsed-dark.png?raw=true)
+
+![Raw Mode Dark](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/raw-dark.png?raw=true)
+
+![Parsed Mode Light](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/parsed-light.png?raw=true)
+
+![Raw Mode Light](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/raw-light.png?raw=true)
 
 ## Installation
 
@@ -32,3 +40,7 @@ TODO: Add Screenshots
 
 * [Arnav](https://githb.com/arnav-kr)
 * Extracts from [pgrabovets/json-view](https://github.com/pgrabovets/json-view)
+
+### Licence:
+
+[MIT Licence](LICENCE)
