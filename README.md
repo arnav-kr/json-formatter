@@ -12,7 +12,7 @@
 * Automatically Linkify Links
 * Formats JSON automatically
 * Raw and Parsed Mode
-* remembers Theme Preferences
+* Remembers Theme Preferences
 
 ## Screenshots:
 
