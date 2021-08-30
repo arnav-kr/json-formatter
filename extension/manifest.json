@@ -43,14 +43,12 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "images/*"
+        "images/*",
+        "js/messenger.js"
       ],
       "matches": [
         "<all_urls>"
       ]
     }
-  ],
-  "content_security_policy": {
-    "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self';"
-  }
+  ]
 }

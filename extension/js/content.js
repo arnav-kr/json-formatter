@@ -12,9 +12,12 @@ function formatJSON(str) {
   var formated = setupFormatter(JSON.stringify(obj));
   setTimeout(function () {
     var script = document.createElement("script");
-    script.innerHTML = 'window.json = ' + formated[1] + ';';
+    script.src = chrome.runtime.getURL("js/messenger.js");
     document.head.appendChild(script);
     console.log('JSON Formatter: Type "json" to access original JSON.');
+    setTimeout(() => {
+      postMessage({ type: "real_json", msg: JSON.parse(formated[1]) });
+    }, 100);
   }, 100);
 }
 
@@ -363,9 +366,7 @@ function prepareBody() {
   </div>
 </div>
 <div class="parsed" id="parsed"></div>
-<pre class="raw dark" id="raw" hidden></pre>
-<script type="text/javascript">
-</script>`;
+<pre class="raw dark" id="raw" hidden></pre>`;
   btn_parsed = document.getElementById("open_parsed"),
     btn_raw = document.getElementById("open_raw"),
     parsedCode = document.getElementById("parsed"),
@@ -379,6 +380,12 @@ function prepareBody() {
   document.getElementById("toggle_dark").addEventListener("click", function () {
     toggleDarkMode();
   });
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    toggleDarkMode(false);
+  }
+  else {
+    toggleDarkMode(true);
+  }
   if (localStorage && window.localStorage && localStorage.getItem("JSON_FORMATTER_DARK_MODE")) {
     isDark = JSON.parse(localStorage.getItem("JSON_FORMATTER_DARK_MODE"));
     toggleDarkMode(!isDark);
