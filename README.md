@@ -1,4 +1,4 @@
-<img alt="JSON Formatter" src="https://github.com/arnav-kr/json-formatter/blob/main/images/banners/promo_tile_sm.png?raw=true" align="center">
+![JSON Formatter](https://github.com/arnav-kr/json-formatter/blob/main/images/banners/promo_tile_marquee.png?raw=true)
 
 # JSON Formatter
 
