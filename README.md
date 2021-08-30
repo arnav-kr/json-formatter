@@ -7,6 +7,7 @@
 ## Features:
 * Dark Mode
 * Syntax Highlighing
+* Works Offline
 * Works with any JSON Webpage
 * Automatically Linkify Links
 * Formats JSON automatically
