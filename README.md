@@ -42,6 +42,6 @@
 * [Arnav](https://githb.com/arnav-kr)
 * Extracts from [pgrabovets/json-view](https://github.com/pgrabovets/json-view)
 
-### Licence:
+### License:
 
-[MIT Licence](LICENCE)
+[MIT Licence](LICENSE)
