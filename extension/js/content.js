@@ -30,7 +30,7 @@ function formatJSON(str) {
   }
   catch (e) {
     // Not JSON
-    document.body.innerHTML = '<pre style="word-wrap: break-word; white-space: pre-wrap;">' + text + '</pre>';
+    pre.hidden = false;
   }
   if (typeof obj !== 'object' && typeof obj !== 'array') return;
   var formated = setupFormatter(JSON.stringify(obj));
@@ -47,21 +47,36 @@ function formatJSON(str) {
 
 function _() {
   if (!document && !document.body) return;
-  var pre = document.body.childNodes[0]
+  var pre = document.body.childNodes[0];
+  pre.hidden = true;
+  codeTimeout = setTimeout(function () {
+    pre.hidden = false;
+  }, 1000);
   var jsonLen = (pre && pre.innerText || "").length;
   if (
     document.body.childNodes.length !== 1 ||
     pre.tagName !== 'PRE' ||
     jsonLen > (30000000)) {
     // JSON too big or the page doesn't contain code
+    pre.hidden = false;
   }
   else {
-    pre.hidden = true;
-    codeTimeout = setTimeout(function () {
+    var isJSON = false;
+    try {
+      var obj = JSON.parse(pre.innerText);
+      isJSON = true;
+      clearTimeout(codeTimeout);
+    }
+    catch (e) {
+      // Not JSON
       pre.hidden = false;
-    }, 1000);
-    prepareBody();
-    formatJSON(pre.innerText);
+      // document.body.innerHTML = '<pre style="word-wrap: break-word; white-space: pre-wrap;">' + pre.innerText + '</pre>';
+      // document.body.classList.remove("dark");
+    }
+    if (isJSON) {
+      prepareBody();
+      formatJSON(pre.innerText);
+    }
   }
 }
 
