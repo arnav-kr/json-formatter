@@ -19,8 +19,7 @@
     "256": "images/icons/icon_round_256.png",
     "384": "images/icons/icon_round_384.png",
     "512": "images/icons/icon_round_512.png",
-    "1024": "images/icons/icon_round_1024.png",
-    "2048": "images/icons/icon_round_2048.png"
+    "1024": "images/icons/icon_round_1024.png"
   },
   "content_scripts": [
     {

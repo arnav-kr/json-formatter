@@ -38,7 +38,6 @@ function formatJSON(str) {
     var script = document.createElement("script");
     script.src = chrome.runtime.getURL("js/messenger.js");
     document.head.appendChild(script);
-    console.log('JSON Formatter: Type "json" to access original JSON.');
     setTimeout(() => {
       postMessage({ type: "real_json", msg: JSON.parse(formated[1]) });
     }, 100);
@@ -420,14 +419,14 @@ function prepareBody() {
     toggleDarkMode();
   });
   if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-    toggleDarkMode(false);
+    toggleDarkMode(false, true);
   }
   else {
-    toggleDarkMode(true);
+    toggleDarkMode(true, true);
   }
   if (localStorage && window.localStorage && localStorage.getItem("JSON_FORMATTER_DARK_MODE")) {
     isDark = JSON.parse(localStorage.getItem("JSON_FORMATTER_DARK_MODE"));
-    toggleDarkMode(!isDark);
+    toggleDarkMode(isDark);
   }
 }
 function setupFormatter(str) {
@@ -464,17 +463,19 @@ function openView(type) {
     btn_raw.classList.add("active");
   }
 }
-function toggleDarkMode(bool) {
+function toggleDarkMode(bool, dontSave) {
   if (bool != undefined) {
-    if (bool) {
+    if (bool == true) {
       document.body.classList.add("dark");
       document.querySelectorAll(".json-container") && document.querySelectorAll(".json-container").forEach(e => {
         e.classList.add("dark");
       });
       rawCode.classList.add("dark");
       isDark = true;
-      if (localStorage && window.localStorage) {
-        localStorage.setItem("JSON_FORMATTER_DARK_MODE", String(isDark));
+      if (!dontSave) {
+        if (localStorage && window.localStorage) {
+          localStorage.setItem("JSON_FORMATTER_DARK_MODE", isDark);
+        }
       }
     }
     else {
@@ -482,29 +483,37 @@ function toggleDarkMode(bool) {
         e.classList.remove("dark");
       });
       isDark = false;
-      if (localStorage && window.localStorage) {
-        localStorage.setItem("JSON_FORMATTER_DARK_MODE", String(isDark));
+      if (!dontSave) {
+        if (localStorage && window.localStorage) {
+          localStorage.setItem("JSON_FORMATTER_DARK_MODE", isDark);
+        }
       }
     }
   }
-  if (isDark) {
-    document.querySelectorAll(".dark") && document.querySelectorAll(".dark").forEach(e => {
-      e.classList.remove("dark");
-    });
-    isDark = false;
-    if (localStorage && window.localStorage) {
-      localStorage.setItem("JSON_FORMATTER_DARK_MODE", String(isDark));
-    }
-  }
   else {
-    document.body.classList.add("dark");
-    document.querySelectorAll(".json-container") && document.querySelectorAll(".json-container").forEach(e => {
-      e.classList.add("dark");
-    });
-    rawCode.classList.add("dark");
-    isDark = true;
-    if (localStorage && window.localStorage) {
-      localStorage.setItem("JSON_FORMATTER_DARK_MODE", String(isDark));
+    if (isDark) {
+      document.querySelectorAll(".dark") && document.querySelectorAll(".dark").forEach(e => {
+        e.classList.remove("dark");
+      });
+      isDark = false;
+      if (!dontSave) {
+        if (localStorage && window.localStorage) {
+          localStorage.setItem("JSON_FORMATTER_DARK_MODE", isDark);
+        }
+      }
+    }
+    else {
+      document.body.classList.add("dark");
+      document.querySelectorAll(".json-container") && document.querySelectorAll(".json-container").forEach(e => {
+        e.classList.add("dark");
+      });
+      rawCode.classList.add("dark");
+      isDark = true;
+      if (!dontSave) {
+        if (localStorage && window.localStorage) {
+          localStorage.setItem("JSON_FORMATTER_DARK_MODE", isDark);
+        }
+      }
     }
   }
 }

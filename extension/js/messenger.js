@@ -1,1 +1,1 @@
-window.addEventListener("message", function (event) { if (event.data.type == "real_json") { window.json = event.data.msg; } }, false);
+window.addEventListener("message", function (event) { if (event.data.type == "real_json") { window.json = event.data.msg; console.log('JSON Formatter: Type "json" to access original JSON.'); } }, false);
