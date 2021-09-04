@@ -1,7 +1,7 @@
 {
   "name": "JSON Formatter",
   "short_name": "JSON Formatter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "version_name": "Version 1 Beta",
   "manifest_version": 3,
   "description": "Format JSON in chrome automatically. Available with both Dark and Light mode, with Auto Linker and Syntax Highlighting.",
