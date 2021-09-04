@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
  */
-var btn_parsed, btn_raw, parsedCode, rawCode, tree, isDark = true;
+var btn_parsed, btn_raw, parsedCode, rawCode, tree, isDark = true, hotkeys = { parsed: "ctrl+alt+p", raw: "ctrl+alt+r", dark: "ctrl+alt+d" };
 function formatJSON(str) {
   var obj, text = str;
   try {
@@ -35,47 +35,78 @@ function formatJSON(str) {
   if (typeof obj !== 'object' && typeof obj !== 'array') return;
   var formated = setupFormatter(JSON.stringify(obj));
   setTimeout(function () {
-    var script = document.createElement("script");
-    script.src = chrome.runtime.getURL("js/messenger.js");
-    document.head.appendChild(script);
-    setTimeout(() => {
-      postMessage({ type: "real_json", msg: JSON.parse(formated[1]) });
-    }, 100);
+    try {
+      var script = document.createElement("script");
+      script.src = chrome.runtime.getURL("js/messenger.js");
+      document.head.appendChild(script);
+      setTimeout(() => {
+        postMessage({ type: "real_json", msg: JSON.parse(formated[1]) });
+      }, 100);
+    }
+    catch (err) {
+      console.log("JSON Formatter: Sorry but you can't access original JSON in console in this page.")
+    }
   }, 100);
 }
 
 function _() {
-  if (!document && !document.body) return;
+  var preCode;
+  if (!document ||
+    !document.body ||
+    !document.body.childNodes ||
+    document.body === null ||
+    document.body === undefined ||
+    document.body.childNodes === null ||
+    document.body.childNodes === undefined) {
+    return false;
+  }
+  if (
+    document.body.childNodes.length !== 1
+  ) {
+    return false;
+  }
   var pre = document.body.childNodes[0];
   pre.hidden = true;
   codeTimeout = setTimeout(function () {
     pre.hidden = false;
   }, 1000);
-  var jsonLen = (pre && pre.innerText || "").length;
-  if (
-    document.body.childNodes.length !== 1 ||
-    pre.tagName !== 'PRE' ||
-    jsonLen > (30000000)) {
-    // JSON too big or the page doesn't contain code
-    pre.hidden = false;
+  if (pre.tagName === "PRE" && pre.nodeName === "PRE" && pre.nodeType === 1) {
+    preCode = pre.innerText;
+  }
+  else if (pre.tagName === "DIV" && pre.nodeName === "DIV" && pre.nodeType === 1) {
+    preCode = pre.innerText;
+  }
+  else if (pre.tagName === undefined && pre.nodeName === "#text" && pre.nodeType === 3) {
+    preCode = pre.nodeValue;
   }
   else {
-    var isJSON = false;
-    try {
-      var obj = JSON.parse(pre.innerText);
-      isJSON = true;
-      clearTimeout(codeTimeout);
-    }
-    catch (e) {
-      // Not JSON
-      pre.hidden = false;
-      // document.body.innerHTML = '<pre style="word-wrap: break-word; white-space: pre-wrap;">' + pre.innerText + '</pre>';
-      // document.body.classList.remove("dark");
-    }
-    if (isJSON) {
-      prepareBody();
-      formatJSON(pre.innerText);
-    }
+    pre.hidden = false;
+    return false;
+  }
+  var jsonLen = (preCode || "").length;
+  if (
+    jsonLen > (100000000) ||
+    jsonLen === 0
+  ) {
+    pre.hidden = false;
+    console.log("JSON Formatter: JSON too large to format!")
+    return false;
+  }
+  var isJSON = false, obj;
+  try {
+    obj = JSON.parse(preCode);
+    isJSON = true;
+    clearTimeout(codeTimeout);
+  }
+  catch (e) {
+    // Not JSON
+    pre.hidden = false;
+    // document.body.innerHTML = '<pre style="word-wrap: break-word; white-space: pre-wrap;">' + preCode + '</pre>';
+    // document.body.classList.remove("dark");
+  }
+  if (isJSON) {
+    prepareBody();
+    formatJSON(preCode);
   }
 }
 
@@ -393,18 +424,32 @@ function formatHTML(html) {
  */
 
 function prepareBody() {
-  document.body.innerHTML = `<div class="actions" id="actions">
-  <button id="toggle_dark" class="toggle_dark cr-button" aria-label="Toggle Dark Mode" title="Toggle Dark Mode"role="button">
+  document.body.innerHTML = `<svg class="defs_svg" xmlns="http://www.w3.org/2000/svg" height="0" width="0" aria-hidden="true">
+  <defs>
+    <clipPath fill-rule="evenodd" clip-rule="evenodd" id="chevron-down">
+      <path
+        d="M8.973 11.331L13.8746 6.42937L14.5721 7.12462L9.3195 12.375H8.62425L3.375 7.12462L4.07137 6.42937L8.973 11.331Z">
+      </path>
+    </clipPath>
+    <clipPath fill-rule="evenodd" clip-rule="evenodd" id="chevron-right">
+      <path
+        d="M11.331 9.027L6.42938 4.12538L7.12463 3.42788L12.375 8.6805V9.37575L7.12463 14.625L6.42938 13.9286L11.331 9.027V9.027Z">
+      </path>
+    </clipPath>
+  </defs>
+</svg>
+  <div class="actions notranslate" id="actions" translate="no">
+  <button id="toggle_dark" class="toggle_dark cr-button" aria-label="Toggle Dark Mode: D key" title="Toggle Dark Mode: D key"role="button">
     <img width="24px" height="24px"
       src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2224px%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224px%22%20fill%3D%22rgb(30,30,30)%22%3E%3Cpath%20d%3D%22M0%200h24v24H0z%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M20%2015.31L23.31%2012%2020%208.69V4h-4.69L12%20.69%208.69%204H4v4.69L.69%2012%204%2015.31V20h4.69L12%2023.31%2015.31%2020H20v-4.69zM12%2018V6c3.31%200%206%202.69%206%206s-2.69%206-6%206z%22%2F%3E%3C%2Fsvg%3E"
       alt="Toggle Dark mode" /></button>
   <div class="button-wrapper">
-    <button type="button" class="cr-button active" aria-label="Parsed" title="Toggle parsed format" id="open_parsed">Parsed</button>
-    <button type="button" class="cr-button" aria-label="Raw" title="Toggle raw format" id="open_raw">Raw</button>
+    <button type="button" class="cr-button active" aria-label="Toggle Parsed Format: P key" title="Toggle Parsed Format: P key" id="open_parsed">Parsed</button>
+    <button type="button" class="cr-button" aria-label="Toggle Raw Format: R key" title="Toggle Raw Format: R key" id="open_raw">Raw</button>
   </div>
 </div>
-<div class="parsed" id="parsed"></div>
-<pre class="raw dark" id="raw" hidden></pre>`;
+<div class="parsed notranslate" id="parsed" translate="no"></div>
+<pre class="raw dark notranslate" id="raw" translate="no" hidden></pre>`;
   btn_parsed = document.getElementById("open_parsed"),
     btn_raw = document.getElementById("open_raw"),
     parsedCode = document.getElementById("parsed"),
@@ -428,6 +473,33 @@ function prepareBody() {
     isDark = JSON.parse(localStorage.getItem("JSON_FORMATTER_DARK_MODE"));
     toggleDarkMode(isDark);
   }
+  window.addEventListener("keydown", (e) => {
+    var dark = hotkeys.dark.split("+")[2];
+    var parsed = hotkeys.parsed.split("+")[2];
+    var raw = hotkeys.raw.split("+")[2];
+    if (e.target.tagName === "INPUT" || e.target.isContentEditable) {
+      return false;
+    }
+    if (
+      !e.ctrlKey &&
+      !e.altKey &&
+      !e.metaKey &&
+      !e.shiftKey
+    ) {
+      if (e.key === dark || e.code === "Key" + dark.toUpperCase()) {
+        e.preventDefault();
+        toggleDarkMode();
+      }
+      if (e.key === parsed || e.code === "Key" + parsed.toUpperCase()) {
+        e.preventDefault();
+        openView("parsed");
+      }
+      if (e.key === raw || e.code === "Key" + raw.toUpperCase()) {
+        e.preventDefault();
+        openView("raw");
+      }
+    }
+  });
 }
 function setupFormatter(str) {
   var code;
