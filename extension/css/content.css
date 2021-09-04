@@ -71,19 +71,19 @@
 }
 
 .json-container .codicon-chevron-down {
-  background: url("chrome-extension://__MSG_@@extension_id__/images/chevron-down-light.svg");
   width: 18px;
   height: 18px;
-  background-repeat: no-repeat;
-  background-size: 18px;
+  background: #808080;
+  -webkit-clip-path: url(#chevron-down);
+  clip-path: url(#chevron-down);
 }
 
-.json-container .codicon-chevron-right {
-  background: url("chrome-extension://__MSG_@@extension_id__/images/chevron-right-light.svg");
+.codicon-chevron-right {
   width: 18px;
   height: 18px;
-  background-repeat: no-repeat;
-  background-size: 18px;
+  background: #808080;
+  -webkit-clip-path: url(#chevron-right);
+  clip-path: url(#chevron-right);
 }
 
 body.dark {
@@ -158,19 +158,19 @@ body.dark {
 }
 
 .json-container.dark .codicon-chevron-down {
-  background: url("chrome-extension://__MSG_@@extension_id__/images/chevron-down-dark.svg");
   width: 18px;
   height: 18px;
-  background-repeat: no-repeat;
-  background-size: 18px;
+  background: #d4d4d4;
+  -webkit-clip-path: url(#chevron-down);
+  clip-path: url(#chevron-down);
 }
 
-.json-container.dark .codicon-chevron-right {
-  background: url("chrome-extension://__MSG_@@extension_id__/images/chevron-right-dark.svg");
+.codicon-chevron-right {
   width: 18px;
   height: 18px;
-  background-repeat: no-repeat;
-  background-size: 18px;
+  background: #d4d4d4;
+  -webkit-clip-path: url(#chevron-right);
+  clip-path: url(#chevron-right);
 }
 
 body {
