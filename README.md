@@ -4,8 +4,6 @@
 
 ### A Chrome Extensions for formating and prettifying JSON automatically in the browser
 
-> ### Note: Currently this extension has not been published in the chrome web store once the review process completes, I will update the url to the webstore of the extension
-
 ## Features:
 * Dark Mode
 * Syntax Highlighting
@@ -16,6 +14,9 @@
 * Raw and Parsed Mode
 * Remembers Theme Preferences
 * Shortcut Keys
+
+
+[![Install From Chrome Web Store](https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/HRs9MPufa1J1h5glNhut.png)](https://chrome.google.com/webstore/detail/json-formatter/gpmodmeblccallcadopbcoeoejepgpnb)
 
 ## Screenshots:
 
@@ -31,7 +32,7 @@
 
 ## Installation
 
-**Method 1** - Install JSON Formatter from [Chrome Web Store]()
+**Method 1** - Install JSON Formatter from [Chrome Web Store](https://chrome.google.com/webstore/detail/json-formatter/gpmodmeblccallcadopbcoeoejepgpnb)
 
 **Method 2** - Install It locally
 * clone/download this repo,
