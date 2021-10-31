@@ -50,4 +50,3 @@
 
 [MIT Licence](LICENSE)
 
-> #### In Future we also plan to build extensions for other browsers, currectly its only for chrome
