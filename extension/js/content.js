@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
  */
-var btn_parsed, btn_raw, parsedCode, rawCode, tree, isDark = true, hotkeys = { parsed: "ctrl+alt+p", raw: "ctrl+alt+r", dark: "ctrl+alt+d" };
+var btn_parsed, btn_raw, btn_toolbar, toolbar, parsedCode, rawCode, tree, isDark = true, isToolbarOpen = true, hotkeys = { toolbar: "t", parsed: "p", raw: "r", dark: "d" };
 function formatJSON(str) {
   var obj, text = str;
   try {
@@ -30,7 +30,6 @@ function formatJSON(str) {
   }
   catch (e) {
     // Not JSON
-    pre.hidden = false;
   }
   if (typeof obj !== 'object' && typeof obj !== 'array') return;
   var formated = setupFormatter(JSON.stringify(obj));
@@ -95,6 +94,13 @@ function _() {
   var isJSON = false, obj;
   try {
     obj = JSON.parse(preCode);
+    while (typeof (obj) === "string") {
+      obj = JSON.parse(obj);
+    }
+    if (typeof (obj) === "number" || typeof (obj) === "boolean" || typeof (obj) === "null" || typeof (obj) === "undefined" || typeof (obj) === "NaN") {
+      pre.hidden = false;
+      return false;
+    }
     isJSON = true;
     clearTimeout(codeTimeout);
   }
@@ -106,7 +112,7 @@ function _() {
   }
   if (isJSON) {
     prepareBody();
-    formatJSON(preCode);
+    formatJSON(JSON.stringify(obj));
   }
 }
 
@@ -439,6 +445,7 @@ function prepareBody() {
   </defs>
 </svg>
   <div class="actions notranslate" id="actions" translate="no">
+  <div class="json_toolbar" id="json_toolbar">
   <button id="toggle_dark" class="toggle_dark cr-button" aria-label="Toggle Dark Mode: D key" title="Toggle Dark Mode: D key"role="button">
     <img width="24px" height="24px"
       src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2224px%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224px%22%20fill%3D%22rgb(30,30,30)%22%3E%3Cpath%20d%3D%22M0%200h24v24H0z%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M20%2015.31L23.31%2012%2020%208.69V4h-4.69L12%20.69%208.69%204H4v4.69L.69%2012%204%2015.31V20h4.69L12%2023.31%2015.31%2020H20v-4.69zM12%2018V6c3.31%200%206%202.69%206%206s-2.69%206-6%206z%22%2F%3E%3C%2Fsvg%3E"
@@ -447,18 +454,25 @@ function prepareBody() {
     <button type="button" class="cr-button active" aria-label="Toggle Parsed Format: P key" title="Toggle Parsed Format: P key" id="open_parsed">Parsed</button>
     <button type="button" class="cr-button" aria-label="Toggle Raw Format: R key" title="Toggle Raw Format: R key" id="open_raw">Raw</button>
   </div>
+  </div>
+  <button type="button" class="toggle_toolbar cr-button" aria-label="Toggle Toolbar: T key" title="Toggle Toolbar: T key" id="toggle_toolbar"><img width="24px" height="24px" alt="Toggle Toolbar" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224%22%3E%3Cpath%20d%3D%22M0%200h24v24H0V0z%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M19%206.41L17.59%205%2012%2010.59%206.41%205%205%206.41%2010.59%2012%205%2017.59%206.41%2019%2012%2013.41%2017.59%2019%2019%2017.59%2013.41%2012%2019%206.41z%22%2F%3E%3C%2Fsvg%3E"/></button>
 </div>
 <div class="parsed notranslate" id="parsed" translate="no"></div>
 <pre class="raw dark notranslate" id="raw" translate="no" hidden></pre>`;
   btn_parsed = document.getElementById("open_parsed"),
     btn_raw = document.getElementById("open_raw"),
     parsedCode = document.getElementById("parsed"),
-    rawCode = document.getElementById("raw");
+    rawCode = document.getElementById("raw"),
+    toolbar = document.getElementById("json_toolbar"),
+    btn_toolbar = document.getElementById("toggle_toolbar");
   btn_parsed.addEventListener("click", function () {
     openView("parsed");
   });
   btn_raw.addEventListener("click", function () {
     openView("raw");
+  });
+  btn_toolbar.addEventListener("click", function () {
+    toggleToolbar();
   });
   document.getElementById("toggle_dark").addEventListener("click", function () {
     toggleDarkMode();
@@ -474,9 +488,6 @@ function prepareBody() {
     toggleDarkMode(isDark);
   }
   window.addEventListener("keydown", (e) => {
-    var dark = hotkeys.dark.split("+")[2];
-    var parsed = hotkeys.parsed.split("+")[2];
-    var raw = hotkeys.raw.split("+")[2];
     if (e.target.tagName === "INPUT" || e.target.isContentEditable) {
       return false;
     }
@@ -486,15 +497,19 @@ function prepareBody() {
       !e.metaKey &&
       !e.shiftKey
     ) {
-      if (e.key === dark || e.code === "Key" + dark.toUpperCase()) {
+      if (e.key === hotkeys.toolbar || e.code === "Key" + hotkeys.toolbar.toUpperCase()) {
+        e.preventDefault();
+        toggleToolbar();
+      }
+      if (e.key === hotkeys.dark || e.code === "Key" + hotkeys.dark.toUpperCase()) {
         e.preventDefault();
         toggleDarkMode();
       }
-      if (e.key === parsed || e.code === "Key" + parsed.toUpperCase()) {
+      if (e.key === hotkeys.parsed || e.code === "Key" + hotkeys.parsed.toUpperCase()) {
         e.preventDefault();
         openView("parsed");
       }
-      if (e.key === raw || e.code === "Key" + raw.toUpperCase()) {
+      if (e.key === hotkeys.raw || e.code === "Key" + hotkeys.raw.toUpperCase()) {
         e.preventDefault();
         openView("raw");
       }
@@ -533,6 +548,44 @@ function openView(type) {
     parsedCode.hidden = true;
     btn_parsed.classList.remove("active");
     btn_raw.classList.add("active");
+  }
+}
+function toggleToolbar(bool) {
+  if (bool != undefined) {
+    if (bool == false) {
+      toolbar.style.opacity = "0";
+      setTimeout(() => {
+        toolbar.style.display = "none";
+      }, 170);
+      btn_toolbar.querySelector("img").src = "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224%22%3E%3Cpath%20d%3D%22M0%200h24v24H0V0z%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M4%2018h16c.55%200%201-.45%201-1s-.45-1-1-1H4c-.55%200-1%20.45-1%201s.45%201%201%201zm0-5h16c.55%200%201-.45%201-1s-.45-1-1-1H4c-.55%200-1%20.45-1%201s.45%201%201%201zM3%207c0%20.55.45%201%201%201h16c.55%200%201-.45%201-1s-.45-1-1-1H4c-.55%200-1%20.45-1%201z%22%2F%3E%3C%2Fsvg%3E";
+      isToolbarOpen = true;
+    }
+    else {
+      toolbar.style.display = "inline-flex";
+      setTimeout(() => {
+        toolbar.style.opacity = "1";
+      }, 30);
+      btn_toolbar.querySelector("img").src = "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224%22%3E%3Cpath%20d%3D%22M0%200h24v24H0V0z%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M19%206.41L17.59%205%2012%2010.59%206.41%205%205%206.41%2010.59%2012%205%2017.59%206.41%2019%2012%2013.41%2017.59%2019%2019%2017.59%2013.41%2012%2019%206.41z%22%2F%3E%3C%2Fsvg%3E";
+      isToolbarOpen = false;
+    }
+  }
+  else {
+    if (isToolbarOpen) {
+      toolbar.style.opacity = "0";
+      setTimeout(() => {
+        toolbar.style.display = "none";
+      }, 170);
+      btn_toolbar.querySelector("img").src = "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224%22%3E%3Cpath%20d%3D%22M0%200h24v24H0V0z%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M4%2018h16c.55%200%201-.45%201-1s-.45-1-1-1H4c-.55%200-1%20.45-1%201s.45%201%201%201zm0-5h16c.55%200%201-.45%201-1s-.45-1-1-1H4c-.55%200-1%20.45-1%201s.45%201%201%201zM3%207c0%20.55.45%201%201%201h16c.55%200%201-.45%201-1s-.45-1-1-1H4c-.55%200-1%20.45-1%201z%22%2F%3E%3C%2Fsvg%3E";
+      isToolbarOpen = false;
+    }
+    else {
+      toolbar.style.display = "inline-flex";
+      setTimeout(() => {
+        toolbar.style.opacity = "1";
+      }, 30);
+      btn_toolbar.querySelector("img").src = "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224%22%3E%3Cpath%20d%3D%22M0%200h24v24H0V0z%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M19%206.41L17.59%205%2012%2010.59%206.41%205%205%206.41%2010.59%2012%205%2017.59%206.41%2019%2012%2013.41%2017.59%2019%2019%2017.59%2013.41%2012%2019%206.41z%22%2F%3E%3C%2Fsvg%3E";
+      isToolbarOpen = true;
+    }
   }
 }
 function toggleDarkMode(bool, dontSave) {
