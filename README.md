@@ -14,6 +14,7 @@
 * Raw and Parsed Mode
 * Remembers Theme Preferences
 * Shortcut Keys
+* Collapsible Toolbar
 
 
 [![Install From Chrome Web Store](https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/HRs9MPufa1J1h5glNhut.png)](https://chrome.google.com/webstore/detail/json-formatter/gpmodmeblccallcadopbcoeoejepgpnb)
