@@ -101,6 +101,14 @@ function _() {
       pre.hidden = false;
       return false;
     }
+    if (Array.isArray(obj) && obj.length === 0) {
+      pre.hidden = false;
+      return false;
+    }
+    if (typeof (obj) === "object" && Object.keys(obj).length === 0) {
+      pre.hidden = false;
+      return false;
+    }
     isJSON = true;
     clearTimeout(codeTimeout);
   }
