@@ -22,6 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
  */
+
+var isLocalstorageAvailable = true;
+try {
+  localStorage.setItem("JSON_FORMATTER_TEST_VALUE_@#$%", "JSON_FORMATTER_TEST_VALUE_@#$%");
+  localStorage.getItem("JSON_FORMATTER_TEST_VALUE_@#$%");
+  localStorage.removeItem("JSON_FORMATTER_TEST_VALUE_@#$%");
+}
+catch (e) {
+  isLocalstorageAvailable = false;
+}
+
 var btn_parsed, btn_raw, btn_toolbar, toolbar, parsedCode, rawCode, tree, isDark = true, isToolbarOpen = true, hotkeys = { toolbar: "t", parsed: "p", raw: "r", dark: "d" };
 function formatJSON(str) {
   var obj, text = str;
@@ -491,9 +502,11 @@ function prepareBody() {
   else {
     toggleDarkMode(true, true);
   }
-  if (localStorage && window.localStorage && localStorage.getItem("JSON_FORMATTER_DARK_MODE")) {
-    isDark = JSON.parse(localStorage.getItem("JSON_FORMATTER_DARK_MODE"));
-    toggleDarkMode(isDark);
+  if (isLocalstorageAvailable) {
+    if (localStorage.getItem("JSON_FORMATTER_DARK_MODE")) {
+      isDark = JSON.parse(localStorage.getItem("JSON_FORMATTER_DARK_MODE"));
+      toggleDarkMode(isDark);
+    }
   }
   window.addEventListener("keydown", (e) => {
     if (e.target.tagName === "INPUT" || e.target.isContentEditable) {
@@ -606,7 +619,7 @@ function toggleDarkMode(bool, dontSave) {
       rawCode.classList.add("dark");
       isDark = true;
       if (!dontSave) {
-        if (localStorage && window.localStorage) {
+        if (isLocalstorageAvailable) {
           localStorage.setItem("JSON_FORMATTER_DARK_MODE", isDark);
         }
       }
@@ -617,7 +630,7 @@ function toggleDarkMode(bool, dontSave) {
       });
       isDark = false;
       if (!dontSave) {
-        if (localStorage && window.localStorage) {
+        if (isLocalstorageAvailable) {
           localStorage.setItem("JSON_FORMATTER_DARK_MODE", isDark);
         }
       }
@@ -630,7 +643,7 @@ function toggleDarkMode(bool, dontSave) {
       });
       isDark = false;
       if (!dontSave) {
-        if (localStorage && window.localStorage) {
+        if (isLocalstorageAvailable) {
           localStorage.setItem("JSON_FORMATTER_DARK_MODE", isDark);
         }
       }
@@ -643,7 +656,7 @@ function toggleDarkMode(bool, dontSave) {
       rawCode.classList.add("dark");
       isDark = true;
       if (!dontSave) {
-        if (localStorage && window.localStorage) {
+        if (isLocalstorageAvailable) {
           localStorage.setItem("JSON_FORMATTER_DARK_MODE", isDark);
         }
       }
