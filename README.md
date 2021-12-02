@@ -44,7 +44,7 @@
 
 ### Credits
 
-* [Arnav](https://githb.com/arnav-kr)
+* [Arnav](https://github.com/arnav-kr)
 * Extracts from [pgrabovets/json-view](https://github.com/pgrabovets/json-view)
 
 ### License:
