@@ -4,6 +4,15 @@
 
 ### A Chrome Extensions for formating and prettifying JSON automatically in the browser
 
+## Change Log
+* ⚡ `Formatted Raw` and `Raw` are now Separate Modes
+* ⚡ Now Extension Settings and Preferences can be managed Directly from `Extension Settings` and `Extension Options`
+* ⚡ More Consistent Styling over Pages
+* ⚡ Now You can also set your `Default Format` whether its `Parsed`, `Formatted Raw` or `Raw` (Do it from `Extension Settings`)
+* ⚡ Now you can also choose to keep The `System Default Theme` or your `Custom Theme Choice` (Need to be set in `Extension Settings`. Its `System Default` by default)
+* ⚡ Added Support for more sites
+* ⚡ Performance Improvements
+
 ## Features:
 * Dark Mode
 * Syntax Highlighting
@@ -11,7 +20,7 @@
 * Works with any JSON Webpage
 * Automatically Linkify Links
 * Formats JSON automatically
-* Raw and Parsed Mode
+* `Raw`, `Formatted Raw` and `Parsed` Mode
 * Remembers Theme Preferences
 * Shortcut Keys
 * Collapsible Toolbar
@@ -25,11 +34,11 @@
 
 ![Parsed Mode Dark](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/parsed-dark.png?raw=true)
 
-![Raw Mode Dark](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/raw-dark.png?raw=true)
+![Raw Mode Dark](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/formatted-raw-dark.png?raw=true)
 
 ![Parsed Mode Light](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/parsed-light.png?raw=true)
 
-![Raw Mode Light](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/raw-light.png?raw=true)
+![Raw Mode Light](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/formatted-raw-light.png?raw=true)
 
 ## Installation
 
