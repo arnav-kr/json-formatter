@@ -23,17 +23,42 @@ SOFTWARE.
 
  */
 
-var isLocalstorageAvailable = true;
-try {
-  localStorage.setItem("JSON_FORMATTER_TEST_VALUE_@#$%", "JSON_FORMATTER_TEST_VALUE_@#$%");
-  localStorage.getItem("JSON_FORMATTER_TEST_VALUE_@#$%");
-  localStorage.removeItem("JSON_FORMATTER_TEST_VALUE_@#$%");
-}
-catch (e) {
-  isLocalstorageAvailable = false;
+var btn_parsed, btn_parsed_raw, btn_raw, btn_toolbar, toolbar, parsedCode, rawCode, tree, isDark = true, isToolbarOpen = true, options = { defaultTab: "parsed", themeMode: "auto", currentTheme: "dark" }, bucket = "JSON_FORMATTER_OPTIONS", hotkeys = { toolbar: "t", parsed: "p", parsed_raw: "r", raw: "r", dark: "d" };
+
+chrome.storage.local.get(bucket, (data) => {
+  Object.assign(options, data[bucket]);
+  if (Object.keys(options).length === 0) {
+    options = {
+      defaultTab: "parsed",
+      themeMode: "auto",
+      currentTheme: "dark"
+    };
+    chrome.storage.local.set({ [bucket]: options });
+  }
+});
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area === 'local' && changes[bucket]?.newValue) {
+    Object.assign(options, changes[bucket].newValue);
+    if (options.themeMode == "manual") {
+      let darkbool = options.currentTheme == "dark" ? true : false;
+      toggleDarkMode(darkbool);
+    }
+    if (options.themeMode == "auto") {
+      let darkbool = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      toggleDarkMode(darkbool);
+    }
+  }
+});
+
+// Garbage Cleaner for old versions
+if (window.localStorage && localStorage) {
+  try {
+    if (localStorage.getItem("JSON_FORMATTER_DARK_MODE") !== null) {
+      localStorage.removeItem("JSON_FORMATTER_DARK_MODE");
+    }
+  } catch (err) { }
 }
 
-var btn_parsed, btn_raw, btn_toolbar, toolbar, parsedCode, rawCode, tree, isDark = true, isToolbarOpen = true, hotkeys = { toolbar: "t", parsed: "p", raw: "r", dark: "d" };
 function formatJSON(str) {
   var obj, text = str;
   try {
@@ -73,7 +98,16 @@ function _() {
   if (
     document.body.childNodes.length !== 1
   ) {
-    return false;
+    let tb = false;
+    try {
+      JSON.parse(document.body.innerText);
+    }
+    catch (e) {
+      tb = true;
+    }
+    if (tb) {
+      return false;
+    }
   }
   var pre = document.body.childNodes[0];
   pre.hidden = true;
@@ -84,6 +118,9 @@ function _() {
     preCode = pre.innerText;
   }
   else if (pre.tagName === "DIV" && pre.nodeName === "DIV" && pre.nodeType === 1) {
+    preCode = pre.innerText;
+  }
+  else if (pre.tagName === "CODE" && pre.nodeName === "CODE" && pre.nodeType === 1) {
     preCode = pre.innerText;
   }
   else if (pre.tagName === undefined && pre.nodeName === "#text" && pre.nodeType === 3) {
@@ -393,14 +430,14 @@ function renderJSON(jsonData, targetElement) {
  * @param {object} tree
  * @param {htmlElement} targetElement
  */
-function render(tree, targetElement, options = { theme: "dark", string: false }) {
-  if (options.theme != "dark" && options.theme != "light") {
+function render(tree, targetElement, option = { theme: "dark", string: false }) {
+  if (option.theme != "dark" && option.theme != "light") {
     throw new TypeError("Not a valid theme name!");
   }
-  if (options.string === undefined || typeof (options.string !== "boolean")) {
-    options.string = false;
+  if (option.string === undefined || typeof (option.string !== "boolean")) {
+    option.string = false;
   }
-  var isDark = options.theme == "dark" ? true : false;
+  var isDark = option.theme == "dark" ? true : false;
   const containerEl = createContainerElement(isDark);
 
   traverseTree(tree, function (node) {
@@ -409,7 +446,7 @@ function render(tree, targetElement, options = { theme: "dark", string: false })
   });
 
   targetElement.appendChild(containerEl);
-  if (options.string == true) {
+  if (option.string == true) {
     return containerEl.outerHTML;
   }
   else {
@@ -470,22 +507,29 @@ function prepareBody() {
       src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2224px%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224px%22%20fill%3D%22rgb(30,30,30)%22%3E%3Cpath%20d%3D%22M0%200h24v24H0z%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M20%2015.31L23.31%2012%2020%208.69V4h-4.69L12%20.69%208.69%204H4v4.69L.69%2012%204%2015.31V20h4.69L12%2023.31%2015.31%2020H20v-4.69zM12%2018V6c3.31%200%206%202.69%206%206s-2.69%206-6%206z%22%2F%3E%3C%2Fsvg%3E"
       alt="Toggle Dark mode" /></button>
   <div class="button-wrapper">
-    <button type="button" class="cr-button active" aria-label="Toggle Parsed Format: P key" title="Toggle Parsed Format: P key" id="open_parsed">Parsed</button>
-    <button type="button" class="cr-button" aria-label="Toggle Raw Format: R key" title="Toggle Raw Format: R key" id="open_raw">Raw</button>
+    <button type="button" class="cr-button ${options.defaultTab == "parsed" ? "active" : ""}" aria-label="Toggle Parsed Format: P key" title="Toggle Parsed Format: P key" id="open_parsed">Parsed</button>
+    <button type="button" class="cr-button ${options.defaultTab == "parsed_raw" ? "active" : ""}" aria-label="Toggle Formatted Raw Format: Shift + R key" title="Toggle Formatted Raw Format: Shift + R key" id="open_parsed_raw">Formatted Raw</button>
+    <button type="button" class="cr-button ${options.defaultTab == "raw" ? "active" : ""}" aria-label="Toggle Raw Format: R key" title="Toggle Raw Format: R key" id="open_raw">Raw</button>
   </div>
   </div>
   <button type="button" class="toggle_toolbar cr-button" aria-label="Toggle Toolbar: T key" title="Toggle Toolbar: T key" id="toggle_toolbar"><img width="24px" height="24px" alt="Toggle Toolbar" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224%22%3E%3Cpath%20d%3D%22M0%200h24v24H0V0z%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M19%206.41L17.59%205%2012%2010.59%206.41%205%205%206.41%2010.59%2012%205%2017.59%206.41%2019%2012%2013.41%2017.59%2019%2019%2017.59%2013.41%2012%2019%206.41z%22%2F%3E%3C%2Fsvg%3E"/></button>
 </div>
-<div class="parsed notranslate" id="parsed" translate="no"></div>
-<pre class="raw dark notranslate" id="raw" translate="no" hidden></pre>`;
+<div class="parsed notranslate" id="parsed" translate="no" ${options.defaultTab == "parsed" ? "" : "hidden"}></div>
+<pre class="raw dark notranslate" id="parsed_raw" translate="no" ${options.defaultTab == "parsed_raw" ? "" : "hidden"}></pre>
+<pre class="raw dark notranslate" id="raw" translate="no" ${options.defaultTab == "raw" ? "" : "hidden"}></pre>`;
   btn_parsed = document.getElementById("open_parsed"),
+    btn_parsed_raw = document.getElementById("open_parsed_raw"),
     btn_raw = document.getElementById("open_raw"),
     parsedCode = document.getElementById("parsed"),
+    parsedRawCode = document.getElementById("parsed_raw"),
     rawCode = document.getElementById("raw"),
     toolbar = document.getElementById("json_toolbar"),
     btn_toolbar = document.getElementById("toggle_toolbar");
   btn_parsed.addEventListener("click", function () {
     openView("parsed");
+  });
+  btn_parsed_raw.addEventListener("click", function () {
+    openView("parsed_raw");
   });
   btn_raw.addEventListener("click", function () {
     openView("raw");
@@ -496,21 +540,41 @@ function prepareBody() {
   document.getElementById("toggle_dark").addEventListener("click", function () {
     toggleDarkMode();
   });
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-    toggleDarkMode(false, true);
-  }
-  else {
-    toggleDarkMode(true, true);
-  }
-  if (isLocalstorageAvailable) {
-    if (localStorage.getItem("JSON_FORMATTER_DARK_MODE")) {
-      isDark = JSON.parse(localStorage.getItem("JSON_FORMATTER_DARK_MODE"));
-      toggleDarkMode(isDark);
+
+  if (options.themeMode == "auto") {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      toggleDarkMode(false);
     }
+    else {
+      toggleDarkMode(true);
+    }
+    window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').addEventListener("change", function (e) {
+      if (options.themeMode == "auto") {
+        if (e.matches) {
+          toggleDarkMode(false);
+        }
+        else {
+          toggleDarkMode(true);
+        }
+      }
+    });
+  }
+  if (options.themeMode == "manual") {
+    darkbool = options.currentTheme == "dark" ? true : false;
+    toggleDarkMode(darkbool);
   }
   window.addEventListener("keydown", (e) => {
     if (e.target.tagName === "INPUT" || e.target.isContentEditable) {
       return false;
+    }
+    if (!e.ctrlKey &&
+      !e.altKey &&
+      !e.metaKey &&
+      e.shiftKey) {
+      if (e.key === hotkeys.parsed_raw || e.code === "Key" + hotkeys.parsed_raw.toUpperCase()) {
+        e.preventDefault();
+        openView("parsed_raw");
+      }
     }
     if (
       !e.ctrlKey &&
@@ -546,7 +610,8 @@ function setupFormatter(str) {
   if (typeof (str) == "string") {
     code = JSON.stringify(JSON.parse(formatHTML(str)));
   }
-  rawCode.innerHTML = JSON.stringify(JSON.parse(code), undefined, 2);
+  parsedRawCode.innerHTML = JSON.stringify(JSON.parse(code), undefined, 2);
+  rawCode.innerHTML = JSON.stringify(JSON.parse(code));
   tree = createTree(code);
   var thme = isDark ? "dark" : "light";
   var renderedCode = render(tree, parsedCode, { theme: thme, string: true });
@@ -555,20 +620,32 @@ function setupFormatter(str) {
 }
 
 function openView(type) {
-  if (type != "parsed" && type != "raw") {
+  if (type != "parsed" && type != "raw" && type != "parsed_raw") {
     throw new TypeError(type + " is not a valid type!");
   }
   if (type == "parsed") {
+    parsedRawCode.hidden = true;
     rawCode.hidden = true;
     parsedCode.hidden = false;
     btn_parsed.classList.add("active");
+    btn_parsed_raw.classList.remove("active");
     btn_raw.classList.remove("active");
   }
-  else {
-    rawCode.hidden = false;
+  else if (type == "raw") {
+    parsedRawCode.hidden = true;
     parsedCode.hidden = true;
+    rawCode.hidden = false;
     btn_parsed.classList.remove("active");
+    btn_parsed_raw.classList.remove("active");
     btn_raw.classList.add("active");
+  }
+  else if (type == "parsed_raw") {
+    rawCode.hidden = true;
+    parsedCode.hidden = true;
+    parsedRawCode.hidden = false;
+    btn_parsed.classList.remove("active");
+    btn_raw.classList.remove("active");
+    btn_parsed_raw.classList.add("active");
   }
 }
 function toggleToolbar(bool) {
@@ -609,19 +686,21 @@ function toggleToolbar(bool) {
     }
   }
 }
-function toggleDarkMode(bool, dontSave) {
+function toggleDarkMode(bool) {
+  dontSave = options.themeMode == "auto" ? true : false;
   if (bool != undefined) {
     if (bool == true) {
       document.body.classList.add("dark");
       document.querySelectorAll(".json-container") && document.querySelectorAll(".json-container").forEach(e => {
         e.classList.add("dark");
       });
-      rawCode.classList.add("dark");
+      document.querySelectorAll(".raw") && document.querySelectorAll(".raw").forEach(e => {
+        e.classList.add("dark");
+      });
       isDark = true;
       if (!dontSave) {
-        if (isLocalstorageAvailable) {
-          localStorage.setItem("JSON_FORMATTER_DARK_MODE", isDark);
-        }
+        options.currentTheme = isDark ? "dark" : "light";
+        chrome.storage.local.set({ [bucket]: options });
       }
     }
     else {
@@ -630,9 +709,8 @@ function toggleDarkMode(bool, dontSave) {
       });
       isDark = false;
       if (!dontSave) {
-        if (isLocalstorageAvailable) {
-          localStorage.setItem("JSON_FORMATTER_DARK_MODE", isDark);
-        }
+        options.currentTheme = isDark ? "dark" : "light";
+        chrome.storage.local.set({ [bucket]: options });
       }
     }
   }
@@ -643,9 +721,8 @@ function toggleDarkMode(bool, dontSave) {
       });
       isDark = false;
       if (!dontSave) {
-        if (isLocalstorageAvailable) {
-          localStorage.setItem("JSON_FORMATTER_DARK_MODE", isDark);
-        }
+        options.currentTheme = isDark ? "dark" : "light";
+        chrome.storage.local.set({ [bucket]: options });
       }
     }
     else {
@@ -653,12 +730,13 @@ function toggleDarkMode(bool, dontSave) {
       document.querySelectorAll(".json-container") && document.querySelectorAll(".json-container").forEach(e => {
         e.classList.add("dark");
       });
-      rawCode.classList.add("dark");
+      document.querySelectorAll(".raw") && document.querySelectorAll(".raw").forEach(e => {
+        e.classList.add("dark");
+      });
       isDark = true;
       if (!dontSave) {
-        if (isLocalstorageAvailable) {
-          localStorage.setItem("JSON_FORMATTER_DARK_MODE", isDark);
-        }
+        options.currentTheme = isDark ? "dark" : "light";
+        chrome.storage.local.set({ [bucket]: options });
       }
     }
   }

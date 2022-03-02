@@ -213,11 +213,20 @@ body.dark {
   justify-content: center;
 }
 
-.button-wrapper>button:first-child {
+.button-wrapper > button:first-child {
   border-radius: 4px 0 0 4px;
+  left: 1px;
 }
 
-.button-wrapper>button:last-child {
+.button-wrapper > button:nth-child(2) {
+  border-radius: 0;
+  border-width: 0 1px;
+  border-style: solid;
+  border-color: #dadce0;
+  margin: 0;
+}
+
+.button-wrapper > button:last-child {
   border-radius: 0 4px 4px 0;
 }
 
@@ -252,8 +261,8 @@ body.dark {
   height: 36px;
   border-radius: 4px;
   font-family: "Google Sans", Roboto, Arial, sans-serif;
-  font-size: .875rem;
-  letter-spacing: .0107142857em;
+  font-size: 0.875rem;
+  letter-spacing: 0.0107142857em;
   font-weight: 500;
   text-transform: none;
   transition: 280ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -280,7 +289,7 @@ body.dark {
   width: 36px;
   height: 36px;
   margin-left: 8px;
-  opacity: .7;
+  opacity: 0.7;
   z-index: 3;
 }
 
@@ -314,7 +323,7 @@ body.dark {
   text-decoration: underline;
 }
 
-.json_toolbar{
+.json_toolbar {
   display: inline-flex;
-  transition: opacity .2s ease;
+  transition: opacity 0.2s ease;
 }
