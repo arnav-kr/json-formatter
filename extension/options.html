@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#29292c">
+  <title>Options - JSON Formatter</title>
+  <meta name="description" content="Customize the JSON Formatter.">
+  <link rel="shortcut icon" href="./images/icons/icon_round_1024.png" type="image/png">
+  <link rel="apple-touch-icon" href="./images/icons/icon_round_1024.png">
+  <style>
+    :root {
+      min-width: 300px;
+      min-height: 400px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      color: rgb(232, 234, 237);
+      font-family: Roboto, 'Segoe UI', Tahoma, sans-serif;
+      font-size: 14px;
+      padding: 16px;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+
+    }
+
+    #header,
+    .title {
+      color: #202124;
+      font-size: 108%;
+      font-weight: 400;
+      letter-spacing: .25px;
+      margin-bottom: 12px;
+      margin-top: 0px;
+      outline: none;
+      padding-bottom: 4px;
+      padding-top: 8px;
+      max-width: 680px;
+      box-sizing: border-box;
+      margin-left: 4px;
+    }
+
+    .root {
+      width: 100%;
+      height: 100%;
+      max-width: 680px;
+    }
+
+    div.container {
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: inherit;
+      border-radius: 4px;
+      max-width: 680px;
+      min-width: 350px;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    }
+
+    div.item {
+      padding: 0 20px;
+      color: #202124;
+    }
+
+    div.item-inner {
+      padding: 12px 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .hr {
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .md-select {
+      align-items: center;
+      appearance: none;
+      background-attachment: scroll;
+      background-clip: border-box;
+      background-color: rgb(241, 243, 244);
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIxMiIgZmlsbD0iIzVGNjM2OCI+PHBhdGggZD0iTTAgMGgyNEwxMiAxMnoiLz48L3N2Zz4=);
+      background-origin: padding-box;
+      background-position: calc(100% - 8px) 50%;
+      background-repeat: no-repeat;
+      background-size: 10px;
+      border-color: rgb(32, 33, 36);
+      border-radius: 4px;
+      border-style: none;
+      border-width: 0;
+      box-sizing: border-box;
+      color: rgb(32, 33, 36);
+      cursor: pointer;
+      display: block;
+      font-family: Roboto, "Segoe UI", Tahoma, sans-serif;
+      font-size: 13px;
+      font-stretch: 100%;
+      font-style: normal;
+      font-weight: 400;
+      height: 32.0104px;
+      letter-spacing: normal;
+      line-height: 20.02px;
+      margin-bottom: 0;
+      max-width: 100%;
+      outline-color: rgb(32, 33, 36);
+      outline-style: none;
+      outline-width: 0px;
+      overflow-x: visible;
+      overflow-y: visible;
+      padding-bottom: 6px;
+      padding-inline-end: 21px;
+      padding-inline-start: 8px;
+      padding-top: 6px;
+      text-align: start;
+      text-indent: 0px;
+      text-rendering: auto;
+      text-shadow: none;
+      text-transform: none;
+      user-select: text;
+      visibility: visible;
+      white-space: pre;
+      width: 200px;
+      word-spacing: 0px;
+      writing-mode: horizontal-tb;
+      -webkit-rtl-ordering: logical;
+      -webkit-border-image: none;
+    }
+
+    .md-select:focus {
+      box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.4);
+    }
+
+    .md-select:active {
+      box-shadow: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .md-select {
+        background-color: rgba(0, 0, 0, 0.3);
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIxMiIgZmlsbD0iIzlhYTBhNiI+PHBhdGggZD0iTTAgMGgyNEwxMiAxMnoiLz48L3N2Zz4=);
+        border-color: rgb(232, 234, 237);
+        color: rgb(232, 234, 237);
+        outline-color: rgb(232, 234, 237);
+      }
+
+      body {
+        background-color: #202124;
+        color: rgb(232, 234, 237);
+      }
+
+      div.container {
+        background-color: #292a2d;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+      }
+
+      #header,
+      .title {
+        color: rgb(232, 234, 237);
+      }
+
+      .hr {
+        border-top: 1px solid rgba(255, 255, 255, .1);
+      }
+
+      div.item {
+        padding: 0 20px;
+        color: #e8eaed;
+      }
+
+      .md-select:focus {
+        box-shadow: 0 0 0 2px rgba(138, 180, 248, 0.5);
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+  <script src="./js/options.js"></script>
+</head>
+
+<body>
+  <div class="root">
+    <h2 id="header" class="title">Settings</h2>
+    <div class="container">
+      <div class="item">
+        <div class="item-inner">
+          <div class="label">
+            <span>Default Tab</span>
+          </div>
+          <select class="md-select" id="default_tab" aria-label="Default Tab" title="Default Tab">
+            <option value="parsed">Parsed</option>
+            <option value="parsed_raw">Formatted Raw</option>
+            <option value="raw">Raw</option>
+          </select>
+        </div>
+      </div>
+      <div class="hr"></div>
+      <div class="item">
+        <div class="item-inner">
+          <div class="label">
+            <span>Theme Mode</span>
+          </div>
+          <select class="md-select" id="theme_mode" aria-label="Theme Mode" title="Theme Mode">
+            <option value="auto">System Default</option>
+            <option value="manual">My Choice</option>
+          </select>
+        </div>
+      </div>
+      <div id="current_theme_wrapper">
+        <div class="hr"></div>
+        <div class="item">
+          <div class="item-inner">
+            <div class="label">
+              <span>Current Theme</span>
+            </div>
+            <select class="md-select" id="current_theme" aria-label="Current Theme" title="Current Theme">
+              <option value="dark">Dark</option>
+              <option value="light">Light</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
