@@ -2,7 +2,6 @@ name: 🐞 Bug report
 description: File a bug/issue
 title: "[Bug] <title>"
 labels: bug
-assignees: 'arnav-kr'
 
 body:
 - type: checkboxes
