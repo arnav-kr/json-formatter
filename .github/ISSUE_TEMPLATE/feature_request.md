@@ -1,8 +1,8 @@
 ---
 name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
+about: Suggest an feature or idea for the json formatter
+title: "[Feature Request]"
+labels: enhancement
 assignees: ''
 
 ---
