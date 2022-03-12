@@ -1,6 +1,6 @@
 name: 🐞 Bug report
 description: File a bug/issue
-title: "[Bug] <title>"
+title: "Bug: "
 labels: bug
 
 body:
