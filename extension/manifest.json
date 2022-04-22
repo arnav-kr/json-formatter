@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "version_name": "Version 2.0 Beta",
   "manifest_version": 3,
-  "description": "Format JSON in chrome automatically. Available with both Dark and Light mode, with Auto Linker and Syntax Highlighting.",
+  "description": "Formats JSON automatically! Open Source, Available with Dark and Light mode, Syntax Highlighting, and automatically linkifies hyperlinks.",
   "author": "Arnav",
   "homepage_url": "https://github.com/arnav-kr/json-formatter",
   "minimum_chrome_version": "88",
