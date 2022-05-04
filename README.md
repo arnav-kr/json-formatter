@@ -5,6 +5,7 @@
 ### A Chrome Extensions for formating and prettifying JSON automatically in the browser
 
 ## Change Log
+* ⚒️ **Bug Fix:** UI Breaks in some NPM webpages
 * ⚡ `Formatted Raw` and `Raw` are now Separate Modes
 * ⚡ Now Extension Settings and Preferences can be managed Directly from `Extension Settings` and `Extension Options`
 * ⚡ More Consistent Styling over Pages
