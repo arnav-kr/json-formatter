@@ -51,13 +51,13 @@ chrome.storage.onChanged.addListener((changes, area) => {
 });
 
 // Garbage Cleaner for old versions
-if (window.localStorage && localStorage) {
-  try {
-    if (localStorage.getItem("JSON_FORMATTER_DARK_MODE") !== null) {
-      localStorage.removeItem("JSON_FORMATTER_DARK_MODE");
-    }
-  } catch (err) { }
-}
+// if (window.localStorage && localStorage) {
+//   try {
+//     if (localStorage.getItem("JSON_FORMATTER_DARK_MODE") !== null) {
+//       localStorage.removeItem("JSON_FORMATTER_DARK_MODE");
+//     }
+//   } catch (err) { }
+// }
 
 function formatJSON(str) {
   var obj, text = str;
@@ -164,7 +164,7 @@ function _() {
     // Not JSON
     pre.hidden = false;
     // document.body.innerHTML = '<pre style="word-wrap: break-word; white-space: pre-wrap;">' + preCode + '</pre>';
-    // document.body.classList.remove("dark");
+    // document.body.classList.remove("dark", "JF_");
   }
   if (isJSON) {
     prepareBody();
@@ -254,7 +254,7 @@ function toggleNode(node) {
 
 function createContainerElement(dark) {
   const el = document.createElement('div');
-  el.className = dark ? 'json-container dark' : 'json-container';
+  el.className = dark ? 'JF_json-container JF_dark' : 'JF_json-container';
   return el;
 }
 
@@ -500,23 +500,23 @@ function prepareBody() {
     </clipPath>
   </defs>
 </svg>
-  <div class="actions notranslate" id="actions" translate="no">
-  <div class="json_toolbar" id="json_toolbar">
-  <button id="toggle_dark" class="toggle_dark cr-button" aria-label="Toggle Dark Mode: D key" title="Toggle Dark Mode: D key"role="button">
+  <div class="JF_actions notranslate" id="actions" translate="no">
+  <div class="JF_json_toolbar" id="json_toolbar">
+  <button id="toggle_dark" class="JF_toggle_dark JF_cr-button" aria-label="Toggle Dark Mode: D key" title="Toggle Dark Mode: D key"role="button">
     <img width="24px" height="24px"
       src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2224px%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224px%22%20fill%3D%22rgb(30,30,30)%22%3E%3Cpath%20d%3D%22M0%200h24v24H0z%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M20%2015.31L23.31%2012%2020%208.69V4h-4.69L12%20.69%208.69%204H4v4.69L.69%2012%204%2015.31V20h4.69L12%2023.31%2015.31%2020H20v-4.69zM12%2018V6c3.31%200%206%202.69%206%206s-2.69%206-6%206z%22%2F%3E%3C%2Fsvg%3E"
       alt="Toggle Dark mode" /></button>
-  <div class="button-wrapper">
-    <button type="button" class="cr-button ${options.defaultTab == "parsed" ? "active" : ""}" aria-label="Toggle Parsed Format: P key" title="Toggle Parsed Format: P key" id="open_parsed">Parsed</button>
-    <button type="button" class="cr-button ${options.defaultTab == "parsed_raw" ? "active" : ""}" aria-label="Toggle Formatted Raw Format: Shift + R key" title="Toggle Formatted Raw Format: Shift + R key" id="open_parsed_raw">Formatted Raw</button>
-    <button type="button" class="cr-button ${options.defaultTab == "raw" ? "active" : ""}" aria-label="Toggle Raw Format: R key" title="Toggle Raw Format: R key" id="open_raw">Raw</button>
+  <div class="JF_button-wrapper">
+    <button type="button" class="JF_cr-button ${options.defaultTab == "parsed" ? "active" : ""}" aria-label="Toggle Parsed Format: P key" title="Toggle Parsed Format: P key" id="open_parsed">Parsed</button>
+    <button type="button" class="JF_cr-button ${options.defaultTab == "parsed_raw" ? "active" : ""}" aria-label="Toggle Formatted Raw Format: Shift + R key" title="Toggle Formatted Raw Format: Shift + R key" id="open_parsed_raw">Formatted Raw</button>
+    <button type="button" class="JF_cr-button ${options.defaultTab == "raw" ? "active" : ""}" aria-label="Toggle Raw Format: R key" title="Toggle Raw Format: R key" id="open_raw">Raw</button>
   </div>
   </div>
-  <button type="button" class="toggle_toolbar cr-button" aria-label="Toggle Toolbar: T key" title="Toggle Toolbar: T key" id="toggle_toolbar"><img width="24px" height="24px" alt="Toggle Toolbar" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224%22%3E%3Cpath%20d%3D%22M0%200h24v24H0V0z%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M19%206.41L17.59%205%2012%2010.59%206.41%205%205%206.41%2010.59%2012%205%2017.59%206.41%2019%2012%2013.41%2017.59%2019%2019%2017.59%2013.41%2012%2019%206.41z%22%2F%3E%3C%2Fsvg%3E"/></button>
+  <button type="button" class="JF_toggle_toolbar JF_cr-button" aria-label="Toggle Toolbar: T key" title="Toggle Toolbar: T key" id="toggle_toolbar"><img width="24px" height="24px" alt="Toggle Toolbar" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224%22%3E%3Cpath%20d%3D%22M0%200h24v24H0V0z%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M19%206.41L17.59%205%2012%2010.59%206.41%205%205%206.41%2010.59%2012%205%2017.59%206.41%2019%2012%2013.41%2017.59%2019%2019%2017.59%2013.41%2012%2019%206.41z%22%2F%3E%3C%2Fsvg%3E"/></button>
 </div>
-<div class="parsed notranslate" id="parsed" translate="no" ${options.defaultTab == "parsed" ? "" : "hidden"}></div>
-<pre class="raw dark notranslate" id="parsed_raw" translate="no" ${options.defaultTab == "parsed_raw" ? "" : "hidden"}></pre>
-<pre class="raw dark notranslate" id="raw" translate="no" ${options.defaultTab == "raw" ? "" : "hidden"}></pre>`;
+<div class="JF_parsed notranslate" id="parsed" translate="no" ${options.defaultTab == "parsed" ? "" : "hidden"}></div>
+<pre class="JF_raw JF_dark notranslate" id="parsed_raw" translate="no" ${options.defaultTab == "parsed_raw" ? "" : "hidden"}></pre>
+<pre class="JF_raw JF_dark notranslate" id="raw" translate="no" ${options.defaultTab == "raw" ? "" : "hidden"}></pre>`;
   btn_parsed = document.getElementById("open_parsed"),
     btn_parsed_raw = document.getElementById("open_parsed_raw"),
     btn_raw = document.getElementById("open_raw"),
@@ -690,12 +690,12 @@ function toggleDarkMode(bool) {
   dontSave = options.themeMode == "auto" ? true : false;
   if (bool != undefined) {
     if (bool == true) {
-      document.body.classList.add("dark");
-      document.querySelectorAll(".json-container") && document.querySelectorAll(".json-container").forEach(e => {
-        e.classList.add("dark");
+      document.body.classList.add("JF_dark", "JF_");
+      document.querySelectorAll(".JF_json-container") && document.querySelectorAll(".JF_json-container").forEach(e => {
+        e.classList.add("JF_dark");
       });
-      document.querySelectorAll(".raw") && document.querySelectorAll(".raw").forEach(e => {
-        e.classList.add("dark");
+      document.querySelectorAll(".JF_raw") && document.querySelectorAll(".JF_raw").forEach(e => {
+        e.classList.add("JF_dark");
       });
       isDark = true;
       if (!dontSave) {
@@ -704,8 +704,8 @@ function toggleDarkMode(bool) {
       }
     }
     else {
-      document.querySelectorAll(".dark") && document.querySelectorAll(".dark").forEach(e => {
-        e.classList.remove("dark");
+      document.querySelectorAll(".JF_dark") && document.querySelectorAll(".JF_dark").forEach(e => {
+        e.classList.remove("JF_dark");
       });
       isDark = false;
       if (!dontSave) {
@@ -716,8 +716,8 @@ function toggleDarkMode(bool) {
   }
   else {
     if (isDark) {
-      document.querySelectorAll(".dark") && document.querySelectorAll(".dark").forEach(e => {
-        e.classList.remove("dark");
+      document.querySelectorAll(".JF_dark") && document.querySelectorAll(".JF_dark").forEach(e => {
+        e.classList.remove("JF_dark");
       });
       isDark = false;
       if (!dontSave) {
@@ -726,12 +726,12 @@ function toggleDarkMode(bool) {
       }
     }
     else {
-      document.body.classList.add("dark");
-      document.querySelectorAll(".json-container") && document.querySelectorAll(".json-container").forEach(e => {
-        e.classList.add("dark");
+      document.body.classList.add("JF_dark", "JF_");
+      document.querySelectorAll(".JF_json-container") && document.querySelectorAll(".JF_json-container").forEach(e => {
+        e.classList.add("JF_dark");
       });
-      document.querySelectorAll(".raw") && document.querySelectorAll(".raw").forEach(e => {
-        e.classList.add("dark");
+      document.querySelectorAll(".JF_raw") && document.querySelectorAll(".JF_raw").forEach(e => {
+        e.classList.add("JF_dark");
       });
       isDark = true;
       if (!dontSave) {
@@ -749,8 +749,8 @@ function linkify(inputText) {
     P2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim,
     //Change email addresses to mailto:: links.
     P3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim,
-    text = inputText.replace(P1, '<a class="linkify-link" href="$1" target="_blank">$1</a>');
-  text = text.replace(P2, '$1<a class="linkify-link" href="http://$2" target="_blank">$2</a>');
-  text = text.replace(P3, '<a class="linkify-link" href="mailto:$1">$1</a>');
+    text = inputText.replace(P1, '<a class="JF_linkify-link" href="$1" target="_blank">$1</a>');
+  text = text.replace(P2, '$1<a class="JF_linkify-link" href="http://$2" target="_blank">$2</a>');
+  text = text.replace(P3, '<a class="JF_linkify-link" href="mailto:$1">$1</a>');
   return text;
 }

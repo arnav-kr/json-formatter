@@ -1,4 +1,4 @@
-.json-container {
+.JF_json-container {
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   font-size: 13px;
   background-color: #fff;
@@ -10,13 +10,13 @@
   height: 100%;
 }
 
-.json-container .line {
+.JF_json-container .line {
   margin: 4px 0;
   display: flex;
   justify-content: flex-start;
 }
 
-.json-container .caret-icon {
+.JF_json-container .caret-icon {
   width: 18px;
   text-align: center;
   cursor: pointer;
@@ -25,52 +25,52 @@
   justify-content: center;
 }
 
-.json-container .empty-icon {
+.JF_json-container .empty-icon {
   width: 18px;
 }
 
-.json-container .json-type {
+.JF_json-container .json-type {
   margin-right: 4px;
   margin-left: 4px;
 }
 
-.json-container .json-key {
+.JF_json-container .json-key {
   color: #444;
   margin-right: 4px;
   margin-left: 4px;
 }
 
-.json-container .json-index {
+.JF_json-container .json-index {
   margin-right: 4px;
   margin-left: 4px;
 }
 
-.json-container .json-value {
+.JF_json-container .json-value {
   margin-left: 8px;
 }
 
-.json-container .json-number {
+.JF_json-container .json-number {
   color: #f9ae58;
 }
 
-.json-container .json-boolean {
+.JF_json-container .json-boolean {
   color: #ec5f66;
 }
 
-.json-container .json-string {
+.JF_json-container .json-string {
   color: #86b25c;
 }
 
-.json-container .json-size {
+.JF_json-container .json-size {
   margin-right: 4px;
   margin-left: 4px;
 }
 
-.json-container .hide {
+.JF_json-container .hide {
   display: none;
 }
 
-.json-container .codicon-chevron-down {
+.JF_json-container .codicon-chevron-down {
   width: 18px;
   height: 18px;
   background: #808080;
@@ -78,7 +78,7 @@
   clip-path: url(#chevron-down);
 }
 
-.json-container .codicon-chevron-right {
+.JF_json-container .codicon-chevron-right {
   width: 18px;
   height: 18px;
   background: #808080;
@@ -86,24 +86,24 @@
   clip-path: url(#chevron-right);
 }
 
-body.dark {
+body.JF_.JF_dark {
   background-color: #1e1e1e;
 }
 
-.json-container.dark {
+.JF_json-container.JF_dark {
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   background-color: #1e1e1e;
   color: #d4d4d4;
   box-sizing: border-box;
 }
 
-.json-container.dark .line {
+.JF_json-container.JF_dark .line {
   margin: 4px 0;
   display: flex;
   justify-content: flex-start;
 }
 
-.json-container.dark .caret-icon {
+.JF_json-container.JF_dark .caret-icon {
   width: 18px;
   text-align: center;
   cursor: pointer;
@@ -112,52 +112,52 @@ body.dark {
   justify-content: center;
 }
 
-.json-container.dark .empty-icon {
+.JF_json-container.JF_dark .empty-icon {
   width: 18px;
 }
 
-.json-container.dark .json-type {
+.JF_json-container.JF_dark .json-type {
   margin-right: 4px;
   margin-left: 4px;
 }
 
-.json-container.dark .json-key {
+.JF_json-container.JF_dark .json-key {
   color: #9cdcfe;
   margin-right: 4px;
   margin-left: 4px;
 }
 
-.json-container.dark .json-index {
+.JF_json-container.JF_dark .json-index {
   margin-right: 4px;
   margin-left: 4px;
 }
 
-.json-container.dark .json-value {
+.JF_json-container.JF_dark .json-value {
   margin-left: 8px;
 }
 
-.json-container.dark .json-number {
+.JF_json-container.JF_dark .json-number {
   color: #b5cea8;
 }
 
-.json-container.dark .json-boolean {
+.JF_json-container.JF_dark .json-boolean {
   color: #569cd6;
 }
 
-.json-container.dark .json-string {
+.JF_json-container.JF_dark .json-string {
   color: #ce9178;
 }
 
-.json-container.dark .json-size {
+.JF_json-container.JF_dark .json-size {
   margin-right: 4px;
   margin-left: 4px;
 }
 
-.json-container.dark .hide {
+.JF_json-container.JF_dark .hide {
   display: none;
 }
 
-.json-container.dark .codicon-chevron-down {
+.JF_json-container.JF_dark .codicon-chevron-down {
   width: 18px;
   height: 18px;
   background: #d4d4d4;
@@ -165,7 +165,7 @@ body.dark {
   clip-path: url(#chevron-down);
 }
 
-.json-container.dark .codicon-chevron-right {
+.JF_json-container.JF_dark .codicon-chevron-right {
   width: 18px;
   height: 18px;
   background: #d4d4d4;
@@ -173,11 +173,11 @@ body.dark {
   clip-path: url(#chevron-right);
 }
 
-/* body {
+/* body.JF_ {
   margin: 0;
 } */
 
-.raw {
+.JF_raw {
   padding: 8px;
   overflow: auto;
   width: auto;
@@ -192,7 +192,7 @@ body.dark {
   right: 0;
 }
 
-.parsed {
+.JF_parsed {
   width: 100%;
   height: 100%;
   position: fixed;
@@ -202,23 +202,23 @@ body.dark {
   right: 0;
 }
 
-.raw.dark {
+.JF_raw.JF_dark {
   background-color: rgb(30, 30, 30);
   color: #d4d4d4;
 }
 
-.button-wrapper {
+.JF_button-wrapper {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-.button-wrapper > button:first-child {
+.JF_button-wrapper > button:first-child {
   border-radius: 4px 0 0 4px;
   left: 1px;
 }
 
-.button-wrapper > button:nth-child(2) {
+.JF_button-wrapper > button:nth-child(2) {
   border-radius: 0;
   border-width: 0 1px;
   border-style: solid;
@@ -226,11 +226,11 @@ body.dark {
   margin: 0;
 }
 
-.button-wrapper > button:last-child {
+.JF_button-wrapper > button:last-child {
   border-radius: 0 4px 4px 0;
 }
 
-.actions {
+.JF_actions {
   position: fixed;
   right: 24px;
   top: 16px;
@@ -238,7 +238,7 @@ body.dark {
   z-index: 10;
 }
 
-.cr-button {
+.JF_cr-button {
   text-size-adjust: 100%;
   visibility: visible;
   position: relative;
@@ -273,7 +273,7 @@ body.dark {
   cursor: pointer;
 }
 
-.toggle_dark {
+.JF_toggle_dark {
   padding: 0;
   border-radius: 50%;
   min-width: 36px;
@@ -282,7 +282,7 @@ body.dark {
   margin-right: 8px;
 }
 
-.toggle_toolbar {
+.JF_toggle_toolbar {
   padding: 0;
   border-radius: 50%;
   min-width: 36px;
@@ -293,37 +293,37 @@ body.dark {
   z-index: 3;
 }
 
-.toggle_toolbar:hover {
+.JF_toggle_toolbar:hover {
   opacity: 1;
 }
 
-.toggle_dark:hover img {
+.JF_toggle_dark:hover img {
   filter: invert(20%);
 }
 
-.cr-button:hover {
+.JF_cr-button:hover {
   background-color: #e5e7e8;
 }
 
-.cr-button:active {
+.JF_cr-button:active {
   background-color: #dadce0;
 }
 
-.cr-button.active {
+.JF_cr-button.active {
   background-color: #1a73e8 !important;
   color: #fff !important;
 }
 
-.linkify-link {
+.JF_linkify-link {
   text-decoration: none;
   color: inherit;
 }
 
-.linkify-link:hover {
+.JF_linkify-link:hover {
   text-decoration: underline;
 }
 
-.json_toolbar {
+.JF_json_toolbar {
   display: inline-flex;
   transition: opacity 0.2s ease;
 }
