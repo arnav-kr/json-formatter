@@ -25,15 +25,15 @@
 
 ## Screenshots:
 
-![Automatic Linkified](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/linkified-dark.png?raw=true)
+![Selecting Theme](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/selecting-theme.png?raw=true)
 
-![Parsed Mode Dark](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/parsed-dark.png?raw=true)
+![Clickable Links](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/clickable-links.png?raw=true)
 
-![Raw Mode Dark](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/formatted-raw-dark.png?raw=true)
+![Themes Preview](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/themes-preview.png?raw=true)
 
-![Parsed Mode Light](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/parsed-light.png?raw=true)
+![Different Formatting Options](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/different-formatting-modes.png?raw=true)
 
-![Raw Mode Light](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/formatted-raw-light.png?raw=true)
+![Light Theme](https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/light-theme.png?raw=true)
 
 ## Installation
 
