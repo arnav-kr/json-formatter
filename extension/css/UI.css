@@ -1,0 +1,296 @@
+:root {
+  min-width: 400px;
+  min-height: 400px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f8f9fa;
+  color: #202124;
+  font-family: Roboto, "Segoe UI", Tahoma, sans-serif;
+  font-size: 14px;
+  padding: 16px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#header,
+.title {
+  color: #202124;
+  font-size: 108%;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  margin-bottom: 12px;
+  margin-top: 0px;
+  outline: none;
+  padding-bottom: 4px;
+  padding-top: 8px;
+  max-width: 680px;
+  box-sizing: border-box;
+  margin-left: 4px;
+}
+
+.root {
+  width: 100%;
+  height: 100%;
+  max-width: 680px;
+}
+
+div.container {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: inherit;
+  border-radius: 4px;
+  overflow: hidden;
+  max-width: 680px;
+  min-width: 380px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+div.item {
+  padding: 0 20px;
+  color: #202124;
+  background-color: #ffffff;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+div.icon-actions {
+  display: flex;
+  gap: 8px;
+  margin-right: 4px;
+}
+
+div.item.clickable:hover {
+  background-color: rgba(32, 33, 36, 0.1);
+}
+
+div.item.clickable > a:focus-visible {
+  box-shadow: none;
+  outline: none;
+}
+
+div.item.clickable:focus-within {
+  background-color: rgba(32, 33, 36, 0.1);
+}
+
+a,
+a:link,
+a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+div.item-inner {
+  padding: 12px 0;
+  min-height: 56px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon {
+  fill: rgb(95, 99, 104);
+}
+
+.hr {
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.md-select {
+  align-items: center;
+  appearance: none;
+  background-attachment: scroll;
+  background-clip: border-box;
+  -webkit-background-clip: border-box;
+  background-color: rgb(241, 243, 244);
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIxMiIgZmlsbD0iIzVGNjM2OCI+PHBhdGggZD0iTTAgMGgyNEwxMiAxMnoiLz48L3N2Zz4=);
+  background-origin: padding-box;
+  background-position: calc(100% - 8px) 50%;
+  background-repeat: no-repeat;
+  background-size: 10px;
+  border-color: rgb(32, 33, 36);
+  border-radius: 4px;
+  border-style: none;
+  border-width: 0;
+  box-sizing: border-box;
+  color: rgb(32, 33, 36);
+  cursor: pointer;
+  display: block;
+  font-family: Roboto, "Segoe UI", Tahoma, sans-serif;
+  font-size: 13px;
+  font-stretch: 100%;
+  font-style: normal;
+  font-weight: 400;
+  height: 32.0104px;
+  letter-spacing: normal;
+  line-height: 20.02px;
+  margin-bottom: 0;
+  max-width: 100%;
+  outline-color: rgb(32, 33, 36);
+  outline-style: none;
+  outline-width: 0px;
+  overflow-x: visible;
+  overflow-y: visible;
+  padding-bottom: 6px;
+  padding-inline-end: 21px;
+  padding-inline-start: 8px;
+  padding-top: 6px;
+  text-align: start;
+  text-indent: 0px;
+  text-rendering: auto;
+  text-shadow: none;
+  text-transform: none;
+  user-select: text;
+  -webkit-user-select: text;
+  visibility: visible;
+  white-space: pre;
+  width: 200px;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
+  -webkit-rtl-ordering: logical;
+  border-image: none;
+  -webkit-border-image: none;
+}
+
+.cr-button {
+  text-size-adjust: 100%;
+  visibility: visible;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 64px;
+  border: none;
+  outline: none;
+  line-height: inherit;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-appearance: none;
+  overflow: visible;
+  vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+  text-decoration: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  will-change: transform, opacity;
+  height: 36px;
+  border-radius: 4px;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.0107142857em;
+  font-weight: 500;
+  text-transform: none;
+  transition: 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: none;
+  padding: 0 12px 0 12px;
+  background-color: #1a73e8;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cr-button-icon {
+  fill: #ffffff;
+}
+
+.cr-button:hover {
+  background-color: #0a65db;
+}
+
+.cr-button:active {
+  background-color: #0157c7;
+}
+
+.cr-button:focus-visible {
+  box-shadow: 0 0 0 2px #000000;
+}
+
+.md-select:focus {
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.4);
+}
+
+.md-select:active {
+  box-shadow: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .md-select {
+    background-color: rgba(0, 0, 0, 0.3);
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIxMiIgZmlsbD0iIzlhYTBhNiI+PHBhdGggZD0iTTAgMGgyNEwxMiAxMnoiLz48L3N2Zz4=);
+    border-color: rgb(232, 234, 237);
+    color: rgb(232, 234, 237);
+    outline-color: rgb(232, 234, 237);
+  }
+
+  body {
+    background-color: #202124;
+    color: rgb(232, 234, 237);
+  }
+
+  div.container {
+    background-color: #292a2d;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+      0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  }
+
+  #header,
+  .title {
+    color: rgb(232, 234, 237);
+  }
+
+  .hr {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  div.item {
+    padding: 0 20px;
+    color: #e8eaed;
+    background-color: #292a2d;
+  }
+
+  .icon {
+    fill: rgb(154, 160, 166);
+  }
+
+  div.item.clickable:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  div.item.clickable > a:focus-visible {
+    box-shadow: none;
+    outline: none;
+  }
+
+  div.item.clickable:focus-within {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .cr-button:focus-visible {
+    box-shadow: 0 0 0 2px #ffffff;
+  }
+
+  .md-select:focus {
+    box-shadow: 0 0 0 2px rgba(138, 180, 248, 0.5);
+  }
+  .md-select option {
+    background-color: #202124;
+  }
+}
+
+.hidden {
+  display: none;
+}

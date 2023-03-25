@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#29292c">
+  <title>Manage Themes - JSON Formatter</title>
+  <meta name="description" content="Customize the JSON Formatter.">
+  <link rel="shortcut icon" href="./images/icons/icon_round_1024.png" type="image/png">
+  <link rel="apple-touch-icon" href="./images/icons/icon_round_1024.png">
+  <link rel="stylesheet" href="./css/UI.css">
+  <link rel="stylesheet" href="./css/themes.css">
+  <script src="./js/globals.js"></script>
+  <!-- <script src="./js/utils.js"></script> -->
+  <script src="./js/themes.js" type="module"></script>
+</head>
+
+<body>
+  <!-- Chevron Icons -->
+  <svg xmlns="http://www.w3.org/2000/svg" height="1" width="1" aria-hidden="true" class="icon-defs">
+    <defs>
+      <clipPath fill-rule="evenodd" clip-rule="evenodd" id="chevron-down">
+        <path
+          d="M8.973 11.331L13.8746 6.42937L14.5721 7.12462L9.3195 12.375H8.62425L3.375 7.12462L4.07137 6.42937L8.973 11.331Z">
+        </path>
+      </clipPath>
+      <clipPath fill-rule="evenodd" clip-rule="evenodd" id="chevron-right">
+        <path
+          d="M11.331 9.027L6.42938 4.12538L7.12463 3.42788L12.375 8.6805V9.37575L7.12463 14.625L6.42938 13.9286L11.331 9.027V9.027Z">
+        </path>
+      </clipPath>
+    </defs>
+  </svg>
+
+  <div class="root">
+    <h2 id="header">
+      <div class="title">
+        <a class="icon-button" type="button" role="navigation" aria-label="Go Back" title="Go Back"
+          href="./options.html">
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="24">
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+          </svg>
+        </a>
+        <span>Themes</span>
+      </div>
+      <!-- NOT IMPLIMENTED -->
+      <!-- <div>
+        <button id="import" aria-label="Import Theme" title="Import Theme" role="button" class="cr-button" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 24 24" width="24" class="cr-button-icon">
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+          </svg>
+          <span>Import Theme</span>
+        </button>
+      </div> -->
+    </h2>
+    <div class="container" id="themes-container"><!-- Themes Would Be Inserted Here via JS --></div>
+  </div>
+</body>
+
+</html>

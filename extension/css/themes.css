@@ -1,0 +1,213 @@
+:root {
+  --background: #1e1e1e;
+  --textPrimary: #d4d4d4;
+  --textSecondary: #d4d4d4;
+  --key: #9cdcfe;
+  --numberValue: #b5cea8;
+  --booleanValue: #569cd6;
+  --stringValue: #ce9178;
+  --icons: #d4d4d4;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+div.container {
+  min-width: 380px;
+}
+
+.item {
+  cursor: default;
+}
+
+.item-inner label {
+  line-height: 18px;
+}
+
+.icon-button {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background-color: transparent;
+  transition: 150ms ease;
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  background-color: rgba(32, 33, 36, 0.1);
+}
+
+.icon-button:active {
+  background-color: rgba(32, 33, 36, 0.2);
+}
+
+.icon-button:focus-visible {
+  box-shadow: 0 0 0 2px #000000;
+  outline: none;
+}
+
+/* .button-danger svg {} */
+
+.button-danger:hover svg path {
+  fill: #f44336;
+}
+
+.button-danger:hover {
+  background-color: rgba(244, 67, 54, 0.1) !important;
+}
+
+.button-danger:active {
+  background-color: rgba(244, 67, 54, 0.2) !important;
+}
+
+.color_badge {
+  display: inline-flex;
+  color: white;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 16px;
+  margin-left: 4px;
+  text-transform: uppercase;
+  background-color: #1a73e8;
+  margin-block-start: 4px;
+}
+
+.default_badge {
+  background-color: #5f6368 !important;
+}
+
+.code-preview {
+  font-family: "Consolas", Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-weight: normal;
+  font-size: 13px;
+  box-sizing: border-box;
+  overflow: auto;
+  font-feature-settings: "liga" 0, "calt" 0;
+  background-color: var(--background);
+  color: var(--textPrimary);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.caret-icon {
+  width: 18px;
+  text-align: center;
+  cursor: default;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-icon {
+  width: 18px;
+}
+
+.line {
+  margin: 4px 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.sp-sm {
+  margin-left: 18px;
+}
+
+.sp-lg {
+  margin-left: 36px;
+}
+
+.json-type {
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
+.json-key {
+  color: var(--key);
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
+.json-value {
+  margin-left: 8px;
+}
+
+.json-number {
+  color: var(--numberValue);
+}
+
+.json-boolean {
+  color: var(--booleanValue);
+}
+
+.json-string {
+  color: var(--stringValue);
+}
+
+.json-size {
+  margin-right: 4px;
+  margin-left: 4px;
+  color: var(--textSecondary);
+}
+
+.json-separator {
+  color: var(--textSecondary);
+}
+
+.json-index {
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
+.chevron-down {
+  width: 18px;
+  height: 18px;
+  background: var(--icons);
+  clip-path: url("#chevron-down");
+}
+
+.chevron-right {
+  width: 18px;
+  height: 18px;
+  background: var(--icons);
+  clip-path: url("#chevron-right");
+}
+
+.icon-defs {
+  position: fixed;
+  left: -9999999999px;
+  top: -9999999999px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .icon-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .icon-button:active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .icon-button:focus-visible {
+    box-shadow: 0 0 0 2px #ffffff;
+    outline: none;
+  }
+
+  .default_badge {
+    background-color: #575961 !important;
+  }
+}

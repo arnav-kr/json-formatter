@@ -1,8 +1,8 @@
 {
   "name": "JSON Formatter",
   "short_name": "JSON Formatter",
-  "version": "2.0.2",
-  "version_name": "Version 2.0.2 Beta",
+  "version": "2.0.3",
+  "version_name": "Version 2.0.3 Beta",
   "manifest_version": 3,
   "description": "Formats JSON automatically! Open Source, Available with Dark and Light mode, Syntax Highlighting, and automatically linkifies links.",
   "author": "Arnav",
@@ -47,6 +47,8 @@
         "<all_urls>"
       ],
       "js": [
+        "js/globals.js",
+        "js/utils.js",
         "js/content.js"
       ],
       "css": [
@@ -60,14 +62,16 @@
     "<all_urls>"
   ],
   "permissions": [
-    "storage"
+    "storage",
+    "unlimitedStorage"
   ],
   "web_accessible_resources": [
     {
       "resources": [
         "images/*",
-        "js/messenger.js",
-        "js/*"
+        "js/*",
+        "css/*",
+        "*.html"
       ],
       "matches": [
         "<all_urls>"

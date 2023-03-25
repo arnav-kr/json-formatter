@@ -1,8 +1,8 @@
 .JF_json-container {
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   font-size: 13px;
-  background-color: #fff;
-  color: #808080;
+  /* background-color: #fff; */
+  /* color: #808080; */
   box-sizing: border-box;
   padding: 4px;
   overflow: auto;
@@ -35,7 +35,7 @@
 }
 
 .JF_json-container .json-key {
-  color: #444;
+  /* color: #444; */
   margin-right: 4px;
   margin-left: 4px;
 }
@@ -50,15 +50,15 @@
 }
 
 .JF_json-container .json-number {
-  color: #f9ae58;
+  /* color: #f9ae58; */
 }
 
 .JF_json-container .json-boolean {
-  color: #ec5f66;
+  /* color: #ec5f66; */
 }
 
 .JF_json-container .json-string {
-  color: #86b25c;
+  /* color: #86b25c; */
 }
 
 .JF_json-container .json-size {
@@ -73,7 +73,7 @@
 .JF_json-container .codicon-chevron-down {
   width: 18px;
   height: 18px;
-  background: #808080;
+  /* background: #808080; */
   -webkit-clip-path: url(#chevron-down);
   clip-path: url(#chevron-down);
 }
@@ -81,19 +81,19 @@
 .JF_json-container .codicon-chevron-right {
   width: 18px;
   height: 18px;
-  background: #808080;
+  /* background: #808080; */
   -webkit-clip-path: url(#chevron-right);
   clip-path: url(#chevron-right);
 }
 
 body.JF_.JF_dark {
-  background-color: #1e1e1e;
+  /* background-color: #1e1e1e; */
 }
 
 .JF_json-container.JF_dark {
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-  background-color: #1e1e1e;
-  color: #d4d4d4;
+  /* background-color: #1e1e1e; */
+  /* color: #d4d4d4; */
   box-sizing: border-box;
 }
 
@@ -122,7 +122,7 @@ body.JF_.JF_dark {
 }
 
 .JF_json-container.JF_dark .json-key {
-  color: #9cdcfe;
+  /* color: #9cdcfe; */
   margin-right: 4px;
   margin-left: 4px;
 }
@@ -137,15 +137,15 @@ body.JF_.JF_dark {
 }
 
 .JF_json-container.JF_dark .json-number {
-  color: #b5cea8;
+  /* color: #b5cea8; */
 }
 
 .JF_json-container.JF_dark .json-boolean {
-  color: #569cd6;
+  /* color: #569cd6; */
 }
 
 .JF_json-container.JF_dark .json-string {
-  color: #ce9178;
+  /* color: #ce9178; */
 }
 
 .JF_json-container.JF_dark .json-size {
@@ -160,7 +160,7 @@ body.JF_.JF_dark {
 .JF_json-container.JF_dark .codicon-chevron-down {
   width: 18px;
   height: 18px;
-  background: #d4d4d4;
+  /* background: #d4d4d4; */
   -webkit-clip-path: url(#chevron-down);
   clip-path: url(#chevron-down);
 }
@@ -168,7 +168,7 @@ body.JF_.JF_dark {
 .JF_json-container.JF_dark .codicon-chevron-right {
   width: 18px;
   height: 18px;
-  background: #d4d4d4;
+  /* background: #d4d4d4; */
   -webkit-clip-path: url(#chevron-right);
   clip-path: url(#chevron-right);
 }
@@ -203,8 +203,8 @@ body.JF_.JF_dark {
 }
 
 .JF_raw.JF_dark {
-  background-color: rgb(30, 30, 30);
-  color: #d4d4d4;
+  /* background-color: rgb(30, 30, 30); */
+  /* color: #d4d4d4; */
 }
 
 .JF_button-wrapper {
@@ -326,4 +326,19 @@ body.JF_.JF_dark {
 .JF_json_toolbar {
   display: inline-flex;
   transition: opacity 0.2s ease;
+}
+.JF_word-wrap {
+  /* enable wrapping like in vs code, break anywhere */
+  white-space: pre-wrap;
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+.JF_invisible-toolbar {
+  opacity: 0;
+}
+
+.JF_hidden-toolbar {
+  pointer-events: none;
+  display: none;
 }
