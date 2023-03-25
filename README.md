@@ -2,28 +2,22 @@
 
 # JSON Formatter
 
-### A Chrome Extensions for formating and prettifying JSON automatically in the browser
+### A Browser Extensions for formating and prettifying JSON but better.
 
-## Change Log
-* ⚒️ **Bug Fix:** UI Breaks in some NPM webpages
-* ⚡ `Formatted Raw` and `Raw` are now Separate Modes
-* ⚡ Now Extension Settings and Preferences can be managed Directly from `Extension Settings` and `Extension Options`
-* ⚡ More Consistent Styling over Pages
-* ⚡ Now You can also set your `Default Format` whether its `Parsed`, `Formatted Raw` or `Raw` (Do it from `Extension Settings`)
-* ⚡ Now you can also choose to keep The `System Default Theme` or your `Custom Theme Choice` (Need to be set in `Extension Settings`. Its `System Default` by default)
-* ⚡ Added Support for more sites
-* ⚡ Performance Improvements
+**[V2.0.3.0 CHANGELOG](CHANGELOG.md)**
 
 ## Features:
-* Dark Mode
+* 60+ Themes for both Light and Dark Mode
 * Syntax Highlighting
 * Works Offline
+* No tracking or analytics
+* Word Wrapping and Sorting Order to stay organized
 * Works with any JSON Webpage
 * Automatically Linkify Links
 * Formats JSON automatically
 * `Raw`, `Formatted Raw` and `Parsed` Mode
 * Remembers Theme Preferences
-* Shortcut Keys
+* Shortcut Keys for ease of use
 * Collapsible Toolbar
 
 
