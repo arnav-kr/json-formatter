@@ -5,7 +5,7 @@ var tabEl,
   wordWrapEl,
   sortingOrderEl,
   options = {},
-  bucket = "JSON_FORMATTER_OPTIONS_BETA";
+  bucket = "JSON_FORMATTER_OPTIONS";
 
 window.addEventListener("load", async () => {
   // Getting Elements
@@ -69,14 +69,16 @@ window.addEventListener("load", async () => {
           }
         }
         newDataFormat.tab = data[bucket].defaultTab;
+
+        Object.assign(options, newDataFormat);
         await chrome.storage.local.set({ [bucket]: newDataFormat });
       }
       else {
         // update our local copy
         Object.assign(options, data[bucket]);
-        // update inputs with new data
-        updateInputs();
       }
+      // update inputs with new data
+      updateInputs();
     }
 
     // Syncing Options
@@ -84,8 +86,8 @@ window.addEventListener("load", async () => {
       if (area === 'local' && changes[bucket]?.newValue) {
         // No Options set, setting them
         if (Object.keys(changes[bucket].newValue || {}).length === 0) {
-          await chrome.storage.local.set({ [bucket]: globalThis.sharedData.defaultOptions });
           Object.assign(options, globalThis.sharedData.defaultOptions);
+          await chrome.storage.local.set({ [bucket]: globalThis.sharedData.defaultOptions });
         }
         else {
           // update our local copy

@@ -37,7 +37,7 @@ SOFTWARE.
     isDark = true,
     isToolbarOpen = false,
     options = Object.assign({}, globalThis.sharedData.defaultOptions),
-    bucket = "JSON_FORMATTER_OPTIONS_BETA",
+    bucket = "JSON_FORMATTER_OPTIONS",
     hotkeys = {
       toolbar: "t",
       parsed: "p",
@@ -91,6 +91,8 @@ SOFTWARE.
           }
         }
         newDataFormat.tab = data[bucket].defaultTab;
+        
+        Object.assign(options, newDataFormat);
         await chrome.storage.local.set({ [bucket]: newDataFormat });
       }
       else {

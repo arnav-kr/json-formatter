@@ -1,7 +1,7 @@
 // const { getThemeById, parseThemeId } = globalThis.sharedData.utils;
 let
   options = {},
-  bucket = "JSON_FORMATTER_OPTIONS_BETA",
+  bucket = "JSON_FORMATTER_OPTIONS",
   DISABLE_INCOMPLETE_FEATURES = true;
 
 function HR() {
@@ -176,6 +176,8 @@ window.addEventListener("load", () => {
           }
         }
         newDataFormat.tab = data[bucket].defaultTab;
+        
+        Object.assign(options, newDataFormat);
         await chrome.storage.local.set({ [bucket]: newDataFormat });
       }
       else {
