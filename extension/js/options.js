@@ -102,39 +102,39 @@ window.addEventListener("load", async () => {
   }
 
   // Input Updates
-  tabEl.addEventListener("input", (e) => {
+  tabEl.addEventListener("input", async (e) => {
     if (options.tab == e.target.value) return;
     options.tab = e.target.value;
-    chrome.storage.local.set({ [bucket]: options });
+    await chrome.storage.local.set({ [bucket]: options });
   });
 
-  colorSchemeEl.addEventListener("input", (e) => {
+  colorSchemeEl.addEventListener("input", async (e) => {
     if (options.colorScheme == e.target.value) return;
     options.colorScheme = e.target.value;
-    chrome.storage.local.set({ [bucket]: options });
+    await chrome.storage.local.set({ [bucket]: options });
   });
 
-  lightThemeEl.addEventListener("input", (e) => {
+  lightThemeEl.addEventListener("input", async (e) => {
     if (options.themes.current.light.id == e.target.value) return;
     options.themes.current.light = [...options.themes.store.dark, ...options.themes.store.light].filter(t => t.id == e.target.value)[0];
-    chrome.storage.local.set({ [bucket]: options });
+    await chrome.storage.local.set({ [bucket]: options });
   });
 
-  darkThemeEl.addEventListener("input", (e) => {
+  darkThemeEl.addEventListener("input", async (e) => {
     if (options.themes.current.dark.id == e.target.value) return;
     options.themes.current.dark = [...options.themes.store.dark, ...options.themes.store.light].filter(t => t.id == e.target.value)[0];
-    chrome.storage.local.set({ [bucket]: options });
+    await chrome.storage.local.set({ [bucket]: options });
   });
 
-  wordWrapEl.addEventListener("input", (e) => {
+  wordWrapEl.addEventListener("input", async (e) => {
     if (options.wordWrap == (e.target.value == "true" ? true : false)) return;
     options.wordWrap = e.target.value == "true" ? true : false;
-    chrome.storage.local.set({ [bucket]: options });
+    await chrome.storage.local.set({ [bucket]: options });
   });
 
-  sortingOrderEl.addEventListener("input", (e) => {
+  sortingOrderEl.addEventListener("input", async (e) => {
     if (options.sortingOrder == e.target.value) return;
     options.sortingOrder = e.target.value;
-    chrome.storage.local.set({ [bucket]: options });
+    await chrome.storage.local.set({ [bucket]: options });
   });
 });
