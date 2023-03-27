@@ -3,7 +3,7 @@
   "short_name": "JSON Formatter",
   "version": "2.0.3.0",
   "manifest_version": 2,
-  "description": "Formats JSON automatically! Open Source, Available with Dark and Light mode, Syntax Highlighting, and automatically linkifies links.",
+  "description": "Formats JSON automatically! Open Source, Available with 60+ Themes, Syntax Highlighting, automatically linkifies links and more.",
   "author": "json-formatter.js.org",
   "homepage_url": "https://github.com/arnav-kr/json-formatter",
   "options_ui": {
