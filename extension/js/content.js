@@ -91,7 +91,7 @@ SOFTWARE.
           }
         }
         newDataFormat.tab = data[bucket].defaultTab;
-        
+
         Object.assign(options, newDataFormat);
         await chrome.storage.local.set({ [bucket]: newDataFormat });
       }
@@ -571,6 +571,10 @@ SOFTWARE.
   </defs>
 </svg>
 <style id="JF_theme"></style>
+${options.whats_new_screen_shown ? '' :
+        `<iframe id="JF_whats_new" src="${chrome.runtime.getURL("whats-new.html") + `?theme=${options.colorScheme}`}" >
+    <p>Your browser does not support iframes.</p>
+</iframe>`}
 <div class="JF_actions notranslate" id="actions" translate="no">
   <div class="JF_json_toolbar JF_invisible-toolbar JF_hidden-toolbar" id="json_toolbar">
     <button id="toggle_dark" class="JF_toggle_dark JF_cr-button" aria-label="Toggle Dark Mode: D key"
@@ -639,6 +643,15 @@ SOFTWARE.
     if (options.colorScheme == "dark") await toggleDarkMode(true);
     if (options.colorScheme == "light") await toggleDarkMode(false);
     toggleWordWrap();
+
+    window.addEventListener("message", async function (m) {
+      if (m.data.type == "JF-close-whats-new") {
+        document.getElementById("JF_whats_new").remove();
+        options.whats_new_screen_shown = true;
+        await chrome.storage.local.set({ [bucket]: options });
+      }
+    });
+
 
     window.addEventListener("keydown", async (e) => {
       if (e.target.tagName === "INPUT" || e.target.isContentEditable) {
@@ -825,7 +838,7 @@ SOFTWARE.
         });
         isDark = true;
         // if (!dontSave) {
-        //   chrome.storage.local.set({ [bucket]: options });
+        //   await chrome.storage.local.set({ [bucket]: options });
         // }
       }
       else {
@@ -835,7 +848,7 @@ SOFTWARE.
         });
         isDark = false;
         // if (!dontSave) {
-        //   chrome.storage.local.set({ [bucket]: options });
+        //   await chrome.storage.local.set({ [bucket]: options });
         // }
       }
     }

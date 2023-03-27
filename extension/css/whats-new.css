@@ -1,0 +1,116 @@
+:root {
+  position: fixed;
+}
+
+.container {
+  min-width: 200px !important;
+  max-width: 480px !important;
+}
+
+p {
+  font-size: medium;
+}
+
+.link {
+  color: #0a65db !important;
+  font-weight: 500;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+h2 {
+  margin-top: 0px;
+}
+
+p:last-child {
+  margin-bottom: 0px;
+}
+
+.close-button {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 0 0 0 8px;
+  padding: 8px;
+  background: #fff;
+  color: rgb(95, 99, 104);
+  cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  transition: all 150ms ease-in-out;
+}
+
+.close-button:hover {
+  background-color: #f5f5f5;
+}
+
+.close-button:active {
+  background-color: #e5e5e5;
+}
+
+body.dark {
+  background-color: #202124;
+  color: rgb(232, 234, 237);
+}
+
+body.dark .close-button {
+  background-color: #2f3136;
+  color: rgb(232, 234, 237);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+body.dark .close-button:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+body.dark .close-button:active {
+  background-color: rgba(255, 255, 255, 0.24);
+}
+
+body.dark .cr-button:focus-visible {
+  box-shadow: 0 0 0 2px #ffffff;
+}
+
+body.dark .link {
+  color: #4a96f9 !important;
+}
+
+/* only dark when prefer dark and body has dark class */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #f8f9fa;
+    color: #202124;
+  }
+
+  body.auto {
+    background-color: #202124 !important;
+    color: rgb(232, 234, 237) !important;
+  }
+
+  body.auto .close-button {
+    background-color: #2f3136;
+    color: rgb(232, 234, 237);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  body.auto .close-button:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+
+  body.auto .close-button:active {
+    background-color: rgba(255, 255, 255, 0.24);
+  }
+
+  body.auto .cr-button:focus-visible {
+    box-shadow: 0 0 0 2px #ffffff;
+  }
+
+  body.auto .link {
+    color: #4a96f9 !important;
+  }
+}

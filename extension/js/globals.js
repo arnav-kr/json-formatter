@@ -1,4 +1,5 @@
 const defaultOptions = {
+  "whats_new_screen_shown": false,
   "tab": "parsed",
   "colorScheme": "auto",
   "wordWrap": false,
