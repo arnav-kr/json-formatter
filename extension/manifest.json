@@ -1,19 +1,17 @@
 {
   "name": "JSON Formatter",
   "short_name": "JSON Formatter",
-  "version": "2.0.3",
-  "version_name": "Version 2.0.3 Beta",
-  "manifest_version": 3,
-  "description": "Formats JSON automatically! Open Source, Available with 60+ Themes, Syntax Highlighting, automatically linkifies links and more.",
-  "author": "Arnav",
+  "version": "2.0.3.0",
+  "manifest_version": 2,
+  "description": "Formats JSON automatically! Open Source, Available with Dark and Light mode, Syntax Highlighting, and automatically linkifies links.",
+  "author": "json-formatter.js.org",
   "homepage_url": "https://github.com/arnav-kr/json-formatter",
-  "minimum_chrome_version": "88",
-  "offline_enabled": true,
   "options_ui": {
     "page": "options.html",
     "open_in_tab": false
   },
-  "action": {
+  "browser_action": {
+    "default_area": "navbar",
     "default_icon": {
       "16": "images/icons/icon_round_16.png",
       "32": "images/icons/icon_round_32.png",
@@ -57,25 +55,16 @@
       "run_at": "document_start"
     }
   ],
-  "host_permissions": [
-    "*://*/*",
-    "<all_urls>"
-  ],
   "permissions": [
+    "*://*/*",
+    "<all_urls>",
     "storage",
     "unlimitedStorage"
   ],
   "web_accessible_resources": [
-    {
-      "resources": [
-        "images/*",
-        "js/*",
-        "css/*",
-        "*.html"
-      ],
-      "matches": [
-        "<all_urls>"
-      ]
-    }
+    "images/*",
+    "js/*",
+    "css/*",
+    "*.html"
   ]
 }
