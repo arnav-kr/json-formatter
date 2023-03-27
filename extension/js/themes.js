@@ -131,7 +131,7 @@ function ThemeItem(ThemeData, isCurrent) {
 //     }
 //     if (themeToBeDeleted.immortal) return alert("Sorry, You cannot delete Default Themes!")
 //     options.themes.store[type] = options.themes.store[type].filter((theme) => theme.id !== id);
-//     await chrome.storage.local.set({ [bucket]: options });
+//     await browser.storage.local.set({ [bucket]: options });
 //     document.getElementById(id).remove();
 //   }
 // }
@@ -154,10 +154,10 @@ function updateThemes() {
 
 window.addEventListener("load", () => {
   // Get Options
-  chrome.storage.local.get(bucket, async (data) => {
+  browser.storage.local.get(bucket, async (data) => {
     // No Options set, setting them
     if (Object.keys(data[bucket] || {}).length === 0) {
-      await chrome.storage.local.set({ [bucket]: globalThis.sharedData.defaultOptions });
+      await browser.storage.local.set({ [bucket]: globalThis.sharedData.defaultOptions });
       Object.assign(options, globalThis.sharedData.defaultOptions);
     }
     else {
@@ -178,7 +178,7 @@ window.addEventListener("load", () => {
         newDataFormat.tab = data[bucket].defaultTab;
         
         Object.assign(options, newDataFormat);
-        await chrome.storage.local.set({ [bucket]: newDataFormat });
+        await browser.storage.local.set({ [bucket]: newDataFormat });
       }
       else {
         // update our local copy
@@ -189,11 +189,11 @@ window.addEventListener("load", () => {
   });
 
   // Syncing Options
-  chrome.storage.onChanged.addListener(async (changes, area) => {
+  browser.storage.onChanged.addListener(async (changes, area) => {
     if (area === 'local' && changes[bucket]?.newValue) {
       // No Options set, setting them
       if (Object.keys(changes[bucket].newValue || {}).length === 0) {
-        await chrome.storage.local.set({ [bucket]: globalThis.sharedData.defaultOptions });
+        await browser.storage.local.set({ [bucket]: globalThis.sharedData.defaultOptions });
         Object.assign(options, globalThis.sharedData.defaultOptions);
       }
       else {

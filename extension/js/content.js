@@ -67,11 +67,11 @@ SOFTWARE.
 
   async function fetchExtensionSettings() {
     // Get Options
-    let data = await chrome.storage.local.get(bucket);
+    let data = await browser.storage.local.get(bucket);
 
     // No Options set, setting them
     if (Object.keys(data[bucket] || {}).length === 0) {
-      await chrome.storage.local.set({ [bucket]: globalThis.sharedData.defaultOptions });
+      await browser.storage.local.set({ [bucket]: globalThis.sharedData.defaultOptions });
       Object.assign(options, globalThis.sharedData.defaultOptions);
     }
     else {
@@ -93,7 +93,7 @@ SOFTWARE.
         newDataFormat.tab = data[bucket].defaultTab;
         
         Object.assign(options, newDataFormat);
-        await chrome.storage.local.set({ [bucket]: newDataFormat });
+        await browser.storage.local.set({ [bucket]: newDataFormat });
       }
       else {
         // update our local copy
@@ -102,11 +102,11 @@ SOFTWARE.
     }
 
     // Syncing Options
-    chrome.storage.onChanged.addListener(async (changes, area) => {
+    browser.storage.onChanged.addListener(async (changes, area) => {
       if (area === 'local' && changes[bucket]?.newValue) {
         // No Options set, setting them
         if (Object.keys(changes[bucket].newValue || {}).length === 0) {
-          await chrome.storage.local.set({ [bucket]: globalThis.sharedData.defaultOptions });
+          await browser.storage.local.set({ [bucket]: globalThis.sharedData.defaultOptions });
           Object.assign(options, globalThis.sharedData.defaultOptions);
         }
         else {
@@ -144,7 +144,7 @@ SOFTWARE.
     setTimeout(function () {
       try {
         var script = document.createElement("script");
-        script.src = chrome.runtime.getURL("js/messenger.js");
+        script.src = browser.runtime.getURL("js/messenger.js");
         document.head.appendChild(script);
         setTimeout(() => {
           postMessage({ type: "real_json", msg: JSON.parse(formated[1]) });
@@ -825,7 +825,7 @@ SOFTWARE.
         });
         isDark = true;
         // if (!dontSave) {
-        //   chrome.storage.local.set({ [bucket]: options });
+        //   browser.storage.local.set({ [bucket]: options });
         // }
       }
       else {
@@ -835,7 +835,7 @@ SOFTWARE.
         });
         isDark = false;
         // if (!dontSave) {
-        //   chrome.storage.local.set({ [bucket]: options });
+        //   browser.storage.local.set({ [bucket]: options });
         // }
       }
     }
@@ -847,7 +847,7 @@ SOFTWARE.
         });
         isDark = false;
         // if (!dontSave) {
-        //   chrome.storage.local.set({ [bucket]: options });
+        //   browser.storage.local.set({ [bucket]: options });
         // }
       }
       else {
@@ -861,7 +861,7 @@ SOFTWARE.
         });
         isDark = true;
         // if (!dontSave) {
-        //   chrome.storage.local.set({ [bucket]: options });
+        //   browser.storage.local.set({ [bucket]: options });
         // }
       }
     }

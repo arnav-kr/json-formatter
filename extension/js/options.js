@@ -46,11 +46,11 @@ window.addEventListener("load", async () => {
   }
   async function fetchExtensionSettings() {
     // Get Options
-    let data = await chrome.storage.local.get(bucket);
+    let data = await browser.storage.local.get(bucket);
     // No Options set, setting them
     if (Object.keys(data[bucket] || {}).length === 0) {
       console.log(options);
-      await chrome.storage.local.set({ [bucket]: globalThis.sharedData.defaultOptions });
+      await browser.storage.local.set({ [bucket]: globalThis.sharedData.defaultOptions });
       Object.assign(options, globalThis.sharedData.defaultOptions);
     }
     else {
@@ -71,7 +71,7 @@ window.addEventListener("load", async () => {
         newDataFormat.tab = data[bucket].defaultTab;
 
         Object.assign(options, newDataFormat);
-        await chrome.storage.local.set({ [bucket]: newDataFormat });
+        await browser.storage.local.set({ [bucket]: newDataFormat });
       }
       else {
         // update our local copy
@@ -82,12 +82,12 @@ window.addEventListener("load", async () => {
     }
 
     // Syncing Options
-    chrome.storage.onChanged.addListener(async (changes, area) => {
+    browser.storage.onChanged.addListener(async (changes, area) => {
       if (area === 'local' && changes[bucket]?.newValue) {
         // No Options set, setting them
         if (Object.keys(changes[bucket].newValue || {}).length === 0) {
           Object.assign(options, globalThis.sharedData.defaultOptions);
-          await chrome.storage.local.set({ [bucket]: globalThis.sharedData.defaultOptions });
+          await browser.storage.local.set({ [bucket]: globalThis.sharedData.defaultOptions });
         }
         else {
           // update our local copy
@@ -105,36 +105,36 @@ window.addEventListener("load", async () => {
   tabEl.addEventListener("input", async (e) => {
     if (options.tab == e.target.value) return;
     options.tab = e.target.value;
-    await chrome.storage.local.set({ [bucket]: options });
+    await browser.storage.local.set({ [bucket]: options });
   });
 
   colorSchemeEl.addEventListener("input", async (e) => {
     if (options.colorScheme == e.target.value) return;
     options.colorScheme = e.target.value;
-    await chrome.storage.local.set({ [bucket]: options });
+    await browser.storage.local.set({ [bucket]: options });
   });
 
   lightThemeEl.addEventListener("input", async (e) => {
     if (options.themes.current.light.id == e.target.value) return;
     options.themes.current.light = [...options.themes.store.dark, ...options.themes.store.light].filter(t => t.id == e.target.value)[0];
-    await chrome.storage.local.set({ [bucket]: options });
+    await browser.storage.local.set({ [bucket]: options });
   });
 
   darkThemeEl.addEventListener("input", async (e) => {
     if (options.themes.current.dark.id == e.target.value) return;
     options.themes.current.dark = [...options.themes.store.dark, ...options.themes.store.light].filter(t => t.id == e.target.value)[0];
-    await chrome.storage.local.set({ [bucket]: options });
+    await browser.storage.local.set({ [bucket]: options });
   });
 
   wordWrapEl.addEventListener("input", async (e) => {
     if (options.wordWrap == (e.target.value == "true" ? true : false)) return;
     options.wordWrap = e.target.value == "true" ? true : false;
-    await chrome.storage.local.set({ [bucket]: options });
+    await browser.storage.local.set({ [bucket]: options });
   });
 
   sortingOrderEl.addEventListener("input", async (e) => {
     if (options.sortingOrder == e.target.value) return;
     options.sortingOrder = e.target.value;
-    await chrome.storage.local.set({ [bucket]: options });
+    await browser.storage.local.set({ [bucket]: options });
   });
 });
