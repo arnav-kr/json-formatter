@@ -20,8 +20,13 @@
 * Shortcut Keys for ease of use
 * Collapsible Toolbar
 
+<a href="https://chrome.google.com/webstore/detail/json-formatter/gpmodmeblccallcadopbcoeoejepgpnb"><img src="https://user-images.githubusercontent.com/72879799/229783871-ec49dba0-5c17-411b-892a-6ba0abee3fe7.svg" alt="Add to Chrome" height="64px"/></a>
 
-[![Install From Chrome Web Store](https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/HRs9MPufa1J1h5glNhut.png)](https://chrome.google.com/webstore/detail/json-formatter/gpmodmeblccallcadopbcoeoejepgpnb)
+<a href="https://addons.mozilla.org//firefox/addon/json_formatter/"><img src="https://user-images.githubusercontent.com/72879799/229780855-df16725a-f232-478d-99c2-052344601626.svg" alt="Add to Firefox" height="64px"/></a>
+
+<a href="https://microsoftedge.microsoft.com/addons/detail/json-formatter/hdebmbedhflilekbidmmdiaiilaegkjl"><img src="https://user-images.githubusercontent.com/72879799/229780863-e60a44cd-a768-47d8-9755-c46075c3751b.svg" alt="Add to Microsoft Edge" height="64px"/></a>
+
+
 
 ## Screenshots:
 
