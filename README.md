@@ -4,7 +4,13 @@
 
 ### A Browser Extensions for formating and prettifying JSON but better.
 
-**[V2.0.3.0 CHANGELOG](CHANGELOG.md)**
+![Chrome Web Store Version](https://img.shields.io/chrome-web-store/v/gpmodmeblccallcadopbcoeoejepgpnb?style=flat-square&logo=googlechrome&logoColor=%23fff&label=%20&color=%234285F4&labelColor=%233d3d3d)
+![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/gpmodmeblccallcadopbcoeoejepgpnb?style=flat-square&logo=googlechrome&label=Webstore%20Rating&logoColor=%23fff&color=%234285F4&labelColor=%233d3d3d&link=https%3A%2F%2Fchrome.google.com%2Fwebstore%2Fdetail%2Fjson-formatter%2Fgpmodmeblccallcadopbcoeoejepgpnb)
+![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/gpmodmeblccallcadopbcoeoejepgpnb?style=flat-square&logo=googlechrome&label=Webstore%20Users&logoColor=%23fff&color=%234285F4&labelColor=%233d3d3d&link=https%3A%2F%2Fchrome.google.com%2Fwebstore%2Fdetail%2Fjson-formatter%2Fgpmodmeblccallcadopbcoeoejepgpnb)
+![GitHub](https://img.shields.io/github/license/arnav-kr/json-formatter?style=flat-square&logo=github&logoColor=white&label=GitHub&labelColor=%233d3d3d&color=%234285F4)
+
+
+**[V2.0.4.0 CHANGELOG](CHANGELOG.md)**
 
 ## Features:
 * 60+ Themes for both Light and Dark Mode
