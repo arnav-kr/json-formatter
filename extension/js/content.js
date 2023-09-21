@@ -38,6 +38,7 @@ SOFTWARE.
     isToolbarOpen = false,
     options = Object.assign({}, globalThis.sharedData.defaultOptions),
     bucket = "JSON_FORMATTER_OPTIONS",
+    wordWrap = false,
     hotkeys = {
       toolbar: "t",
       parsed: "p",
@@ -190,7 +191,14 @@ SOFTWARE.
       preCode = pre.innerText;
     }
     else if (pre.tagName === "DIV" && pre.nodeName === "DIV" && pre.nodeType === 1) {
-      preCode = pre.innerText;
+
+      // preventing chrome native UI
+      if (pre.innerText.length == 0) {
+        preCode = document.getElementsByTagName("pre")[0].innerText
+      }
+      else {
+        preCode = pre.innerText;
+      }
     }
     else if (pre.tagName === "CODE" && pre.nodeName === "CODE" && pre.nodeType === 1) {
       preCode = pre.innerText;
@@ -264,7 +272,7 @@ SOFTWARE.
       <div class="empty-icon"></div>
       <div class="json-key">${key}</div>
       <div class="json-separator">:</div>
-      <div class="json-value json-${type}">${value}</div>
+      <div class="${wordWrap ? "JF_word-wrap": ""} json-value json-${type}">${value}</div>
     </div>
   `
   }
@@ -354,7 +362,7 @@ SOFTWARE.
         val = '"' + node.value + '"';
         val = linkify(formatHTML(val));
       }
-      if (typeof (node.value) == "object" && !Array.isArray(node.value) && node.vale != null && Object.keys(node.value).length === 0) {
+      if (typeof (node.value) == "object" && !Array.isArray(node.value) && node.value != null && Object.keys(node.value).length === 0) {
         val = "{}";
       }
       if (Array.isArray(node.value) && node.value.length === 0) {
@@ -572,7 +580,7 @@ SOFTWARE.
 </svg>
 <style id="JF_theme"></style>
 ${options.whats_new_screen_shown ? '' :
-        `<iframe id="JF_whats_new" src="${chrome.runtime.getURL("whats-new.html") + `?theme=${options.colorScheme}`}" >
+        `<iframe id="JF_whats_new" src="${chrome.runtime.getURL("whats-new.html") + `?theme=${options.colorScheme}`}" sadbox="allow-scripts allow-forms">
     <p>Your browser does not support iframes.</p>
 </iframe>`}
 <div class="JF_actions notranslate" id="actions" translate="no">
@@ -815,12 +823,20 @@ ${options.whats_new_screen_shown ? '' :
 
   function toggleWordWrap() {
     if (options.wordWrap == false) {
+      wordWrap = false;
       document.getElementById("formatted_raw").classList.remove("JF_word-wrap");
       document.getElementById("raw").classList.remove("JF_word-wrap");
+      document.querySelectorAll(".json-value") && document.querySelectorAll(".json-value").forEach(e => {
+        e.classList.remove("JF_word-wrap");
+      });
     }
     else {
+      wordWrap = true;
       document.getElementById("formatted_raw").classList.add("JF_word-wrap");
       document.getElementById("raw").classList.add("JF_word-wrap");
+      document.querySelectorAll(".json-value") && document.querySelectorAll(".json-value").forEach(e => {
+        e.classList.add("JF_word-wrap");
+      });
     }
   }
 

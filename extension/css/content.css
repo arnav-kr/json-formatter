@@ -36,6 +36,7 @@
 
 .JF_json-container .json-key {
   /* color: #444; */
+  flex-shrink: 0;
   margin-right: 4px;
   margin-left: 4px;
 }
@@ -123,6 +124,7 @@ body.JF_.JF_dark {
 
 .JF_json-container.JF_dark .json-key {
   /* color: #9cdcfe; */
+  flex-shrink: 0;
   margin-right: 4px;
   margin-left: 4px;
 }
@@ -346,7 +348,7 @@ body.JF_.JF_dark {
 #JF_whats_new {
   position: fixed;
   width: 460px;
-  height: 360px;
+  height: 280px;
   right: 24px;
   top: 64px;
   appearance: none;

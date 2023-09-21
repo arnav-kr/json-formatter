@@ -138,6 +138,7 @@ div.container {
 
 .json-key {
   color: var(--key);
+  flex-shrink: 0;
   margin-right: 4px;
   margin-left: 4px;
 }
