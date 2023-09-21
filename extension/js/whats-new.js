@@ -11,12 +11,7 @@ else if (theme == "light") {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  let exploreThemesButton = document.getElementById("explore-themes");
   let closeButton = document.getElementById("close-whats-new");
-
-  exploreThemesButton.addEventListener("click", () => {
-    chrome.runtime.openOptionsPage();
-  });
 
   closeButton.addEventListener("click", () => {
     window.parent.postMessage({
