@@ -168,20 +168,20 @@ SOFTWARE.
       document.body.childNodes === undefined) {
       return false;
     }
-    if (
-      document.body.childNodes.length !== 1
-    ) {
-      let tb = false;
-      try {
-        JSON.parse(document.body.innerText);
-      }
-      catch (e) {
-        tb = true;
-      }
-      if (tb) {
-        return false;
-      }
-    }
+    // if (
+    //   document.body.childNodes.length !== 1
+    // ) {
+    //   let tb = false;
+    //   try {
+    //     JSON.parse(document.body.innerText);
+    //   }
+    //   catch (e) {
+    //     tb = true;
+    //   }
+    //   if (tb) {
+    //     return false;
+    //   }
+    // }
     var pre = document.body.childNodes[0];
     pre.hidden = true;
     codeTimeout = setTimeout(function () {
@@ -194,7 +194,7 @@ SOFTWARE.
 
       // preventing chrome native UI
       if (pre.innerText.length == 0) {
-        preCode = document.getElementsByTagName("pre")[0].innerText
+        preCode = document.getElementsByTagName("pre")[0].innerText || document
       }
       else {
         preCode = pre.innerText;
