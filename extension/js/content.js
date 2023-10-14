@@ -168,46 +168,46 @@ SOFTWARE.
       document.body.childNodes === undefined) {
       return false;
     }
-    // if (
-    //   document.body.childNodes.length !== 1
-    // ) {
-    //   let tb = false;
-    //   try {
-    //     JSON.parse(document.body.innerText);
-    //   }
-    //   catch (e) {
-    //     tb = true;
-    //   }
-    //   if (tb) {
-    //     return false;
-    //   }
-    // }
-    var pre = document.body.childNodes[0];
-    pre.hidden = true;
-    codeTimeout = setTimeout(function () {
-      pre.hidden = false;
-    }, 1000);
-    if (pre.tagName === "PRE" && pre.nodeName === "PRE" && pre.nodeType === 1) {
-      preCode = pre.innerText;
+    if (
+      document.body.childNodes.length !== 1
+    ) {
+      let tb = false;
+      try {
+        JSON.parse(document.body.innerText);
+      }
+      catch (e) {
+        tb = true;
+      }
+      if (tb && !isBrowserNativeUIShown(document)) {
+        return false;
+      }
     }
-    else if (pre.tagName === "DIV" && pre.nodeName === "DIV" && pre.nodeType === 1) {
+    var firstEl = document.body.childNodes[0];
+    firstEl.hidden = true;
+    codeTimeout = setTimeout(function () {
+      firstEl.hidden = false;
+    }, 1000);
+    if (firstEl.tagName === "PRE" && firstEl.nodeName === "PRE" && firstEl.nodeType === 1) {
+      preCode = firstEl.innerText;
+    }
+    else if (firstEl.tagName === "DIV" && firstEl.nodeName === "DIV" && firstEl.nodeType === 1) {
 
       // preventing chrome native UI
-      if (pre.innerText.length == 0) {
-        preCode = document.getElementsByTagName("pre")[0].innerText || document
+      if (firstEl.innerText.length == 0) {
+        preCode = document.getElementsByTagName("pre")[0].innerText
       }
       else {
-        preCode = pre.innerText;
+        preCode = firstEl.innerText;
       }
     }
-    else if (pre.tagName === "CODE" && pre.nodeName === "CODE" && pre.nodeType === 1) {
-      preCode = pre.innerText;
+    else if (firstEl.tagName === "CODE" && firstEl.nodeName === "CODE" && firstEl.nodeType === 1) {
+      preCode = firstEl.innerText;
     }
-    else if (pre.tagName === undefined && pre.nodeName === "#text" && pre.nodeType === 3) {
-      preCode = pre.nodeValue;
+    else if (firstEl.tagName === undefined && firstEl.nodeName === "#text" && firstEl.nodeType === 3) {
+      preCode = firstEl.nodeValue;
     }
     else {
-      pre.hidden = false;
+      firstEl.hidden = false;
       return false;
     }
     var jsonLen = (preCode || "").length;
@@ -215,7 +215,7 @@ SOFTWARE.
       jsonLen > (100000000) ||
       jsonLen === 0
     ) {
-      pre.hidden = false;
+      firstEl.hidden = false;
       console.log("JSON Formatter: JSON too large to format!")
       return false;
     }
@@ -226,15 +226,15 @@ SOFTWARE.
         obj = JSON.parse(obj);
       }
       if (typeof (obj) === "number" || typeof (obj) === "boolean" || typeof (obj) === "null" || typeof (obj) === "undefined" || typeof (obj) === "NaN") {
-        pre.hidden = false;
+        firstEl.hidden = false;
         return false;
       }
       if (Array.isArray(obj) && obj.length === 0) {
-        pre.hidden = false;
+        firstEl.hidden = false;
         return false;
       }
       if (typeof (obj) === "object" && Object.keys(obj).length === 0) {
-        pre.hidden = false;
+        firstEl.hidden = false;
         return false;
       }
       isJSON = true;
@@ -242,7 +242,7 @@ SOFTWARE.
     }
     catch (e) {
       // Not JSON
-      pre.hidden = false;
+      firstEl.hidden = false;
       // document.body.innerHTML = '<pre style="word-wrap: break-word; white-space: pre-wrap;">' + preCode + '</pre>';
       // document.body.classList.remove("dark", "JF_");
     }
@@ -272,7 +272,7 @@ SOFTWARE.
       <div class="empty-icon"></div>
       <div class="json-key">${key}</div>
       <div class="json-separator">:</div>
-      <div class="${wordWrap ? "JF_word-wrap": ""} json-value json-${type}">${value}</div>
+      <div class="${wordWrap ? "JF_word-wrap" : ""} json-value json-${type}">${value}</div>
     </div>
   `
   }
@@ -894,6 +894,28 @@ ${options.whats_new_screen_shown ? '' :
         // }
       }
     }
+  }
+
+  function isBrowserNativeUIShown(document) {
+    let flag = false;
+    let hasAHiddenDIVContainingValidJSON = false;
+    let bodyHasReadonlyDataset = document.body.dataset.codeMirror == "Readonly code editor.";
+    let hasSettingsButton = document.querySelector("#settings_button") !== null;
+    let hasCMEditor = document.querySelector(".cm-editor") !== null;
+    let firstEl = document.body.childNodes[0];
+    if (firstEl.tagName === "DIV" && firstEl.nodeName === "DIV" && firstEl.nodeType === 1 && firstEl.hidden) {
+      try {
+        JSON.parse(firstEl.innerText);
+        hasAHiddenDIVContainingValidJSON = true;
+      }
+      catch (e) {
+        hasAHiddenDIVContainingValidJSON = false;
+      }
+    }
+    if (hasAHiddenDIVContainingValidJSON && bodyHasReadonlyDataset && hasSettingsButton && hasCMEditor) {
+      flag = true;
+    }
+    return flag;
   }
 
   function linkify(inputText) {

@@ -1,114 +1,208 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en-US" }}">
-  <head prefix="og: https://ogp.me/ns# 
+<html lang="{{ page.lang | default: site.lang | default: " en-US" }}">
+
+<head prefix="og: https://ogp.me/ns# 
               https://ogp.me/ns/website#">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Analytics -->
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-82CR1NRGWR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Analytics -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-82CR1NRGWR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-  gtag('config', 'G-82CR1NRGWR');
-</script>
-    
-<!-- Primary Meta Tags -->
-<title>JSON Formatter - Beautify Your JSON Code in the Browser</title>
-<meta name="title" content="JSON Formatter - Beautify Your JSON Code in the Browser">
-<meta name="description" content="A Chrome Extension to automatically format JSON in the browser. Available with both Dark and Light mode, with Auto-Linker and Syntax Highlighting.">
-<meta name="keywords"
-    content="json-formatter.js.org, jsonformatter.org, jsonformatter org, json com, json formatter com, json_formatter, json-formatter, js.org, js-org, JSON Formatter, json, json formatter, json prettifier, formatting, chrome, edge, edge extension, mozilla, firefox, chrome extension, best chrome extension, json chrome extension, free, developer, developer tools, web,javascript, code, programming, npm, sololearn, sl, arnav-kr, arnav, github, Arnav Kumar">
+    gtag('config', 'G-82CR1NRGWR');
+  </script>
 
-<!-- Structured JSON Data -->
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "url": "https://json-formatter.js.org/",
-    "name": "JSON Formatter",
-    "description": "A Chrome Extension to format JSON in the browser automatically. Available with both Dark and Light mode, with Auto-Linker and Syntax Highlighting.",
-    "image": "https://raw.githubusercontent.com/arnav-kr/json-formatter/main/images/banners/promo_tile_lg.png",
-    "author": {
-      "@type": "Organization",
-      "name": "Arnav Kumar",
-      "url": "https://github.com/arnav-kr/",
-      "sameAs": [
-        "https://www.linkedin.com/in/arnav-kr/",
-        "https://twitter.com/arnavkr_",
-        "https://www.instagram.com/its.arnavkr/",
-        "https://www.facebook.com/its.arnavkr/",
-        "https://www.youtube.com/@ArnavOfficial"
-      ]
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "JSON Formatter",
+  <!-- Primary Meta Tags -->
+  <title>JSON Formatter - Beautify Your JSON Code in the Browser</title>
+  <meta name="title" content="JSON Formatter - Beautify Your JSON Code in the Browser">
+  <meta name="description"
+    content="A Browser Extension to format JSON in the browser automatically. Available with 60+ Themes, Syntax Highlighting, automatically linkifies links and more.">
+  <meta name="keywords"
+    content="json formatter, json formatter chrome, json formatter chrome extension, json beautifier chrome, json formatter extension, chrome json formatter, edge json formatter, firefox json formatter, json formatter for edge, json formatter for firefox, json beautifier extension, json formatter for chrome, json formatter extension chrome, chrome extension json formatter, json formatter plugin, arnav-kr, by arnav">
+
+  <!-- Structured JSON Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
       "url": "https://json-formatter.js.org/",
-      "logo": {
+      "name": "JSON Formatter",
+      "alternateName": "JSON Formatter",
+      "description": "A Chrome Extension to format JSON in the browser automatically. Available with both Dark and Light mode, with Auto-Linker and Syntax Highlighting.",
+      "keywords": "json formatter, json formatter chrome, json formatter chrome extension, json beautifier chrome, json formatter extension, chrome json formatter, edge json formatter, firefox json formatter, json formatter for edge, json formatter for firefox, json beautifier extension, json formatter for chrome, json formatter extension chrome, chrome extension json formatter, json formatter plugin, arnav-kr, by arnav",
+      "image": {
         "@type": "ImageObject",
-        "url": "https://raw.githubusercontent.com/arnav-kr/json-formatter/main/images/extension/icon_round_1024.png",
-        "width": 1024,
-        "height": 1024
+        "url": "https://raw.githubusercontent.com/arnav-kr/json-formatter/main/images/banners/promo_tile_lg.png",
+        "representativeOfPage": true,
+        "embeddedTextCaption": "JSON Formatter"
       },
-      "sameAs": [
-        "https://twitter.com/JSONFormatter_",
+      "softwareVersion": "V2.0.5 Beta",
+      "fileSize": "92.31KiB",
+      "operatingSystem": "Windows, Mac, Linux",
+      "releaseNotes": "https://github.com/arnav-kr/json-formatter/blob/main/CHANGELOG.md",
+      "applicationCategory": [
+        "DeveloperApplication",
+        "UtilityApplication",
+        "BrowserApplication",
+        "DesktopEnhancementApplication"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "0"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingCount": "19",
+        "ratingValue": "4.3",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "installUrl": [
         "https://chrome.google.com/webstore/detail/json-formatter/gpmodmeblccallcadopbcoeoejepgpnb",
-        "https://addons.mozilla.org/en-US/firefox/addon/json_formatter/"
-      ]
-
-    },
-    "keywords": "json-formatter.js.org, jsonformatter.org, jsonformatter org, json com, json formatter com, json_formatter, json-formatter, js.org, js-org, JSON Formatter, json, json formatter, json prettifier, formatting, chrome, edge, edge extension, mozilla, firefox, chrome extension, best chrome extension, json chrome extension, free, developer, developer tools, web,javascript, code, programming, npm, sololearn, sl, arnav-kr, arnav, github, Arnav Kumar"
-  }
+        "https://microsoftedge.microsoft.com/addons/detail/json-formatter/hdebmbedhflilekbidmmdiaiilaegkjl",
+        "https://addons.mozilla.org/firefox/addon/json_formatter/"
+      ],
+      "screenshot": [
+        "https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/selecting-theme.png?raw=true",
+        "https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/clickable-links.png?raw=true",
+        "https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/themes-preview.png?raw=true",
+        "https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/different-formatting-modes.png?raw=true",
+        "https://github.com/arnav-kr/json-formatter/blob/main/images/screenshots/light-theme.png?raw=true"
+      ],
+      "sameAs": [
+        "https://json-formatter.js.org",
+        "https://github.com/arnav-kr/json-formatter",
+        "https://chrome.google.com/webstore/detail/json-formatter/gpmodmeblccallcadopbcoeoejepgpnb",
+        "https://microsoftedge.microsoft.com/addons/detail/json-formatter/hdebmbedhflilekbidmmdiaiilaegkjl",
+        "https://addons.mozilla.org/firefox/addon/json_formatter/"
+      ],
+      "maintainer": {
+        "@type": "Person",
+        "name": "Arnav Kumar",
+        "alternateName": "Arnav",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://avatars.githubusercontent.com/u/72879799?v=4",
+          "width": 371,
+          "height": 371
+        },
+        "url": "https://github.com/arnav-kr/",
+        "sameAs": [
+          "https://github.com/arnav-kr",
+          "https://www.linkedin.com/in/arnav-kr/",
+          "https://twitter.com/arnavkr_",
+          "https://x.com/arnav-kr/",
+          "https://www.reddit.com/u/arnav-kr/",
+          "https://www.instagram.com/its.arnavkr/",
+          "https://www.facebook.com/its.arnavkr/",
+          "https://www.youtube.com/@ArnavOfficial"
+        ]
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Arnav Kumar",
+        "alternateName": "Arnav",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://avatars.githubusercontent.com/u/72879799?v=4",
+          "width": 371,
+          "height": 371
+        },
+        "url": "https://github.com/arnav-kr/",
+        "sameAs": [
+          "https://github.com/arnav-kr",
+          "https://www.linkedin.com/in/arnav-kr/",
+          "https://twitter.com/arnavkr_",
+          "https://x.com/arnav-kr/",
+          "https://www.reddit.com/u/arnav-kr/",
+          "https://www.instagram.com/its.arnavkr/",
+          "https://www.facebook.com/its.arnavkr/",
+          "https://www.youtube.com/@ArnavOfficial"
+        ]
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "JSON Formatter",
+        "url": "https://json-formatter.js.org/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://raw.githubusercontent.com/arnav-kr/json-formatter/main/images/extension/icon_round_1024.png",
+          "width": 1024,
+          "height": 1024
+        },
+        "sameAs": [
+          "https://json-formatter.js.org/",
+          "https://github.com/arnav-kr/json-formatter",
+          "https://twitter.com/JSONFormatter_",
+          "https://chrome.google.com/webstore/detail/json-formatter/gpmodmeblccallcadopbcoeoejepgpnb",
+          "https://microsoftedge.microsoft.com/addons/detail/json-formatter/hdebmbedhflilekbidmmdiaiilaegkjl",
+          "https://addons.mozilla.org/en-US/firefox/addon/json_formatter/"
+        ]
+      }
+    }
 </script>
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://json-formatter.js.org/">
-<meta property="og:title" content="JSON Formatter - Beautify Your JSON Code in the Browser">
-<meta property="og:description" content="A Chrome Extension to automatically format JSON in the browser. Available with both Dark and Light mode, with Auto-Linker and Syntax Highlighting.">
-<meta property="og:image" content="https://raw.githubusercontent.com/arnav-kr/json-formatter/main/images/banners/promo_tile_lg.png">
-<meta property="og:image:secure_url" content="https://raw.githubusercontent.com/arnav-kr/json-formatter/main/images/banners/promo_tile_lg.png" />
-<meta property="og:image:type" content="image/png" />
-<meta property="og:image:width" content="920" />
-<meta property="og:image:height" content="680" />
-<meta property="og:image:alt" content="JSON Formatter" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://json-formatter.js.org/">
+  <meta property="og:title" content="JSON Formatter - Beautify Your JSON Code in the Browser">
+  <meta property="og:description"
+    content="A Chrome Extension to automatically format JSON in the browser. Available with both Dark and Light mode, with Auto-Linker and Syntax Highlighting.">
+  <meta property="og:image"
+    content="https://raw.githubusercontent.com/arnav-kr/json-formatter/main/images/banners/promo_tile_lg.png">
+  <meta property="og:image:secure_url"
+    content="https://raw.githubusercontent.com/arnav-kr/json-formatter/main/images/banners/promo_tile_lg.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="920" />
+  <meta property="og:image:height" content="680" />
+  <meta property="og:image:alt" content="JSON Formatter" />
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://json-formatter.js.org/">
-<meta property="twitter:title" content="JSON Formatter - Beautify Your JSON Code in the Browser">
-<meta property="twitter:description" content="A Chrome Extension to automatically format JSON in the browser. Available with both Dark and Light mode, with Auto-Linker and Syntax Highlighting.">
-<meta property="twitter:image" content="https://raw.githubusercontent.com/arnav-kr/json-formatter/main/images/banners/promo_tile_lg.png">
-    
-<!-- Icons -->
-<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/arnav-kr/json-formatter/main/images/extension/icon_round_512.png"/>
-<link rel="shortcut icon" href="https://raw.githubusercontent.com/arnav-kr/json-formatter/main/images/extension/icon_round_512.png" />
-<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/arnav-kr/json-formatter/main/images/extension/icon_round_512.png" />
-    
-    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
-    {% include head-custom.html %}
-<!--   Ads   -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6290792326682212"
-     crossorigin="anonymous"></script>
-  </head>
-  <body>
-    <div class="container-lg px-3 my-5 markdown-body">
-      
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://json-formatter.js.org/">
+  <meta property="twitter:title" content="JSON Formatter - Beautify Your JSON Code in the Browser">
+  <meta property="twitter:description"
+    content="A Chrome Extension to automatically format JSON in the browser. Available with both Dark and Light mode, with Auto-Linker and Syntax Highlighting.">
+  <meta property="twitter:image"
+    content="https://raw.githubusercontent.com/arnav-kr/json-formatter/main/images/banners/promo_tile_lg.png">
 
-      {{ content }}
-<!-- 
+  <!-- Icons -->
+  <link rel="icon" type="image/png"
+    href="https://raw.githubusercontent.com/arnav-kr/json-formatter/main/images/extension/icon_round_512.png" />
+  <link rel="shortcut icon"
+    href="https://raw.githubusercontent.com/arnav-kr/json-formatter/main/images/extension/icon_round_512.png" />
+  <link rel="apple-touch-icon"
+    href="https://raw.githubusercontent.com/arnav-kr/json-formatter/main/images/extension/icon_round_512.png" />
+
+  <link rel="stylesheet" href="{{ " /assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
+  {% include head-custom.html %}
+  <!--   Ads   -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6290792326682212"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="container-lg px-3 my-5 markdown-body">
+
+
+    {{ content }}
+    <!-- 
       {% if site.github.private != true and site.github.license %}
       <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
         This site is open source. {% github_edit_link "Improve this page" %}.
       </div>
       {% endif %} -->
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
-    <script>anchors.add();</script>
-  </body>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"
+    integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+  <script>anchors.add();</script>
+</body>
+
 </html>
