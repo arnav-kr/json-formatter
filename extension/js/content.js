@@ -578,12 +578,13 @@ SOFTWARE.
     <path id="close_icon" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
   </defs>
 </svg>
-<style id="JF_theme"></style>
-${options.whats_new_screen_shown ? '' :
-        `<iframe id="JF_whats_new" src="${chrome.runtime.getURL("whats-new.html") + `?theme=${options.colorScheme}`}" sadbox="allow-scripts allow-forms">
-    <p>Your browser does not support iframes.</p>
-</iframe>`}
-<div class="JF_actions notranslate" id="actions" translate="no">
+<style id="JF_theme"></style>` +
+// Disable What's New Popup
+// ${options.whats_new_screen_shown ? '' :
+//         `<iframe id="JF_whats_new" src="${chrome.runtime.getURL("whats-new.html") + `?theme=${options.colorScheme}`}" sadbox="allow-scripts allow-forms">
+//     <p>Your browser does not support iframes.</p>
+// </iframe>`}
+`<div class="JF_actions notranslate" id="actions" translate="no">
   <div class="JF_json_toolbar JF_invisible-toolbar JF_hidden-toolbar" id="json_toolbar">
     <button id="toggle_dark" class="JF_toggle_dark JF_cr-button" aria-label="Toggle Dark Mode: D key"
       title="Toggle Dark Mode: D key" role="button">
@@ -652,13 +653,14 @@ ${options.whats_new_screen_shown ? '' :
     if (options.colorScheme == "light") await toggleDarkMode(false);
     toggleWordWrap();
 
-    window.addEventListener("message", async function (m) {
-      if (m.data.type == "JF-close-whats-new") {
-        document.getElementById("JF_whats_new").remove();
-        options.whats_new_screen_shown = true;
-        await chrome.storage.local.set({ [bucket]: options });
-      }
-    });
+    // Disable What's New Popup
+    // window.addEventListener("message", async function (m) {
+    //   if (m.data.type == "JF-close-whats-new") {
+    //     document.getElementById("JF_whats_new").remove();
+    //     options.whats_new_screen_shown = true;
+    //     await chrome.storage.local.set({ [bucket]: options });
+    //   }
+    // });
 
 
     window.addEventListener("keydown", async (e) => {
