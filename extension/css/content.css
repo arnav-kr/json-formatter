@@ -39,6 +39,7 @@
   flex-shrink: 0;
   margin-right: 4px;
   margin-left: 4px;
+  white-space: pre;
 }
 
 .JF_json-container .json-index {
@@ -48,6 +49,7 @@
 
 .JF_json-container .json-value {
   margin-left: 8px;
+  white-space: pre;
 }
 
 .JF_json-container .json-number {
@@ -215,12 +217,12 @@ body.JF_.JF_dark {
   justify-content: center;
 }
 
-.JF_button-wrapper > button:first-child {
+.JF_button-wrapper>button:first-child {
   border-radius: 4px 0 0 4px;
   left: 1px;
 }
 
-.JF_button-wrapper > button:nth-child(2) {
+.JF_button-wrapper>button:nth-child(2) {
   border-radius: 0;
   border-width: 0 1px;
   border-style: solid;
@@ -228,7 +230,7 @@ body.JF_.JF_dark {
   margin: 0;
 }
 
-.JF_button-wrapper > button:last-child {
+.JF_button-wrapper>button:last-child {
   border-radius: 0 4px 4px 0;
 }
 
@@ -329,6 +331,7 @@ body.JF_.JF_dark {
   display: inline-flex;
   transition: opacity 0.2s ease;
 }
+
 .JF_word-wrap {
   /* enable wrapping like in vs code, break anywhere */
   white-space: pre-wrap;
@@ -344,6 +347,63 @@ body.JF_.JF_dark {
   pointer-events: none;
   display: none;
 }
+
+.JF_context_menu {
+  background-color: #fff !important;
+  padding: 6px 0;
+  color: #202124;
+  font-size: 0.8rem;
+  position: fixed;
+  visibility: hidden;
+  left: -9999px;
+  top: -9999px;
+  appearance: none;
+  border: none;
+  background: none;
+  z-index: 100;
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12), 0 12px 24px 0 rgba(0, 0, 0, 0.24);
+}
+
+body.JF_dark .JF_context_menu {
+  background-color: #202124 !important;
+  color: rgb(232, 234, 237);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 19px 38px 0 rgba(0, 0, 0, 0.24);
+}
+
+.JF_context_menu .JF_context_menu_item {
+  padding: 8px 24px;
+  cursor: pointer;
+  transition: background-color 100ms ease;
+}
+
+.JF_context_menu .JF_context_menu_item:hover {
+  background-color: #f1f3f4;
+}
+
+body.JF_dark #JF_context_menu .JF_context_menu_item:hover {
+  background-color: #2d2f31;
+}
+
+.JF_context_menu .JF_context_menu_item .JF_context_menu_item_shortcut {
+  font-size: 0.7rem;
+  background-color: #f1f3f4;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+}
+
+body.JF_dark #JF_context_menu .JF_context_menu_item .JF_context_menu_item_shortcut {
+  background-color: #202124;
+  color: rgb(232, 234, 237);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
 /* Disable what's new popup */
 /* #JF_whats_new {
   position: fixed;

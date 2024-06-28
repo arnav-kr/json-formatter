@@ -33,6 +33,8 @@ SOFTWARE.
     parsedCode,
     formattedRawCode,
     rawCode,
+    currentView,
+    contextMenu,
     tree,
     isDark = true,
     isToolbarOpen = false,
@@ -44,7 +46,9 @@ SOFTWARE.
       parsed: "p",
       formatted_raw: "r",
       raw: "r",
-      dark: "d"
+      dark: "d",
+      collapse_all: "[",
+      expand_all: "]",
     };
 
   let IS_PREPARE_SCRIPT_RUN = false;
@@ -132,16 +136,77 @@ SOFTWARE.
 
   }
 
+  function setupContextMenu() {
+    window.addEventListener("contextmenu", function (e) {
+      if (window.getComputedStyle(contextMenu).visibility === "visible") return false;
+      e.preventDefault();
+      let dimensions = contextMenu.getBoundingClientRect();
+      if (e.pageX <= window.innerWidth / 2) {
+        if (e.pageY <= window.innerHeight / 2) {
+          contextMenu.style.left = e.pageX + "px";
+          contextMenu.style.top = e.pageY + "px";
+        }
+        if (e.pageY > window.innerHeight / 2) {
+          contextMenu.style.left = e.pageX + "px";
+          contextMenu.style.top = (e.pageY - dimensions.height) + "px";
+        }
+      }
+      if (e.pageX > window.innerWidth / 2) {
+        if (e.pageY < window.innerHeight / 2) {
+          contextMenu.style.left = (e.pageX - dimensions.width) + "px";
+          contextMenu.style.top = e.pageY + "px";
+        }
+        if (e.pageY > window.innerHeight / 2) {
+          contextMenu.style.left = (e.pageX - dimensions.width) + "px";
+          contextMenu.style.top = (e.pageY - dimensions.height) + "px";
+        }
+      }
+      toggleContextMenu(true);
+    });
+    window.addEventListener("click", function () {
+      toggleContextMenu(false);
+    });
+  }
+
+  function setupFormatter(str) {
+    var code = formatHTML(str);
+    let sortingFuncton = null
+    if (options.sortingOrder == "alphabetical") {
+      // alphabet sorting
+      sortingFuncton = normalize();
+    }
+    formattedRawCode.innerHTML =
+      JSON.stringify(JSON.parse(code.replace(/\\u/g, "&bsol;u")), sortingFuncton, 2);
+
+    globalThis.code = code;
+
+    let leadingLine = document.createElement('div');
+    leadingLine.className = 'line emptyLine';
+    leadingLine.textContent = '';
+    leadingLine.style = 'margin-left: 0px; height: 18px;';
+    formattedRawCode.appendChild(leadingLine);
+
+    rawCode.innerHTML = JSON.stringify(JSON.parse(code.replace(/\\u/g, "&bsol;u")), sortingFuncton);
+
+    let leadingLine1 = document.createElement('div');
+    leadingLine1.className = 'line emptyLine';
+    leadingLine1.textContent = '';
+    leadingLine1.style = 'margin-left: 0px; height: 18px;';
+    rawCode.appendChild(leadingLine1);
+
+    tree = createTree(JSON.parse(code
+      .replace(/\\/g, "\\\\")
+      .replace(/\\\\\"/g, "\\\\\\\""),
+      sortingFuncton));
+    var thme = isDark ? "dark" : "light";
+    var renderedCode = render(tree, parsedCode, { theme: thme, string: true });
+    expandChildren(tree);
+    return [renderedCode, JSON.stringify(JSON.parse(code), undefined, 2)];
+  }
+
   function formatJSON(str) {
-    var obj, text = str;
-    try {
-      obj = JSON.parse(text);
-    }
-    catch (e) {
-      // Not JSON
-    }
-    if (typeof obj !== 'object' && typeof obj !== 'array') return;
-    var formated = setupFormatter(JSON.stringify(obj));
+    // JSON Check already done in _() function
+    var formated = setupFormatter(str);
     setTimeout(function () {
       try {
         var script = document.createElement("script");
@@ -152,9 +217,188 @@ SOFTWARE.
         }, 100);
       }
       catch (err) {
-        console.log("JSON Formatter: Sorry but you can't access original JSON in console in this page.")
+        prettyLog("Sorry but you can't access original JSON in console in this page.")
       }
     }, 100);
+  }
+
+  /**
+   * DOM manipulation Functions
+   */
+  async function prepareBody() {
+    document.body.innerHTML = `<svg class="defs_svg" xmlns="http://www.w3.org/2000/svg" height="0" width="0" aria-hidden="true">
+    <defs>
+      <clipPath fill-rule="evenodd" clip-rule="evenodd" id="chevron-down">
+        <path
+          d="M8.973 11.331L13.8746 6.42937L14.5721 7.12462L9.3195 12.375H8.62425L3.375 7.12462L4.07137 6.42937L8.973 11.331Z">
+        </path>
+      </clipPath>
+      <clipPath fill-rule="evenodd" clip-rule="evenodd" id="chevron-right">
+        <path
+          d="M11.331 9.027L6.42938 4.12538L7.12463 3.42788L12.375 8.6805V9.37575L7.12463 14.625L6.42938 13.9286L11.331 9.027V9.027Z">
+        </path>
+      </clipPath>
+      <path fill="rgb(30,30,30)" id="toggle_color_scheme"
+      d="M20 15.31L23.31 12 20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69zM12 18V6c3.31 0 6 2.69 6 6s-2.69 6-6 6z" />
+      <path id="menu_icon" d="M4 18h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zm0-5h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zM3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1z"/>
+      <path id="close_icon" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+    </defs>
+  </svg>
+  <style id="JF_theme"></style>` +
+      // Disable What's New Popup
+      // ${options.whats_new_screen_shown ? '' :
+      //         `<iframe id="JF_whats_new" src="${chrome.runtime.getURL("whats-new.html") + `?theme=${options.colorScheme}`}" sadbox="allow-scripts allow-forms">
+      //     <p>Your browser does not support iframes.</p>
+      // </iframe>`}
+      `<div class="JF_actions notranslate" id="actions" translate="no">
+    <div class="JF_json_toolbar JF_invisible-toolbar JF_hidden-toolbar" id="json_toolbar">
+      <button id="toggle_dark" class="JF_toggle_dark JF_cr-button" aria-label="Toggle Dark Mode: D key"
+        title="Toggle Dark Mode: D key" role="button">
+        <svg class="JF_svg-icon" viewBox="0 0 24 24" width="24px" height="24px">
+          <use xlink:href="#toggle_color_scheme"></use>
+        </svg></button>
+      <div class="JF_button-wrapper">
+        <button type="button" class="JF_cr-button ${options.tab == "parsed" ? "active" : ""}"
+          aria-label="Toggle Parsed Format: P key" title="Toggle Parsed Format: P key" id="open_parsed">Parsed</button>
+        <button type="button" class="JF_cr-button ${options.tab == "formatted_raw" ? "active" : ""}"
+          aria-label="Toggle Formatted Raw Format: Shift + R key" title="Toggle Formatted Raw Format: Shift + R key"
+          id="open_formatted_raw">Formatted Raw</button>
+        <button type="button" class="JF_cr-button ${options.tab == "raw" ? "active" : ""}"
+          aria-label="Toggle Raw Format: R key" title="Toggle Raw Format: R key" id="open_raw">Raw</button>
+      </div>
+    </div>
+    <button type="button" class="JF_toggle_toolbar JF_cr-button" aria-label="Toggle Toolbar: T key"
+      title="Toggle Toolbar: T key" id="toggle_toolbar">
+      <svg class="JF_svg-icon" viewBox="0 0 24 24" width="24px" height="24px">
+        <use xlink:href="#menu_icon"></use>
+      </svg>
+    </button>
+  </div>
+  <div class="JF_parsed notranslate" id="parsed" translate="no" ${options.tab == "parsed" ? "" : "hidden"}></div>
+  <pre class="JF_raw JF_dark notranslate" id="formatted_raw" translate="no" ${options.tab == "formatted_raw" ? "" : "hidden"}></pre>
+  <pre class="JF_raw JF_dark notranslate" id="raw" translate="no" ${options.tab == "raw" ? "" : "hidden"}></pre>
+  <div id="JF_context_menu" class="JF_context_menu">
+    <div id="JF_context_menu_collapse_all" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Collapse All</span><span class="JF_context_menu_item_shortcut">[</span></div>
+    <div id="JF_context_menu_expand_all" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Expand All</span><span class="JF_context_menu_item_shortcut">]</span></div>
+    <div id="JF_context_menu_dark" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Toggle Dark Mode</span><span class="JF_context_menu_item_shortcut">D</span></div>
+    <div id="JF_context_menu_parsed" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Open Parsed View</span><span class="JF_context_menu_item_shortcut">P</span></div>
+    <div id="JF_context_menu_formatted_raw" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Open Formatted Raw View</span><span class="JF_context_menu_item_shortcut">shift + R</span></div>
+    <div id="JF_context_menu_raw" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Open Raw View</span><span class="JF_context_menu_item_shortcut">R</span></div>
+    <div id="JF_context_menu_toolbar" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Toggle Toolbar</span><span class="JF_context_menu_item_shortcut">T</span></div>
+  </div>
+  `;
+    currentView = options.tab;
+
+    btn_parsed = document.getElementById("open_parsed");
+    btn_formatted_raw = document.getElementById("open_formatted_raw");
+    btn_raw = document.getElementById("open_raw");
+    parsedCode = document.getElementById("parsed");
+    formattedRawCode = document.getElementById("formatted_raw");
+    rawCode = document.getElementById("raw");
+    toolbar = document.getElementById("json_toolbar");
+    btn_toolbar = document.getElementById("toggle_toolbar");
+    theme_css = document.getElementById("JF_theme");
+    contextMenu = document.getElementById("JF_context_menu");
+
+    // Add Event Listeners to context menu
+    document.getElementById("JF_context_menu_collapse_all").addEventListener("click", function () { collapseChildren(tree); });
+    document.getElementById("JF_context_menu_expand_all").addEventListener("click", function () { expandChildren(tree); });
+    document.getElementById("JF_context_menu_dark").addEventListener("click", async function () { await toggleDarkMode(); });
+    document.getElementById("JF_context_menu_parsed").addEventListener("click", function () { openView("parsed"); });
+    document.getElementById("JF_context_menu_formatted_raw").addEventListener("click", function () { openView("formatted_raw"); });
+    document.getElementById("JF_context_menu_raw").addEventListener("click", function () { openView("raw"); });
+    document.getElementById("JF_context_menu_toolbar").addEventListener("click", function () { toggleToolbar(); });
+
+    // Add event listeners to toolbar buttons
+    btn_parsed.addEventListener("click", function () {
+      openView("parsed");
+    });
+    btn_formatted_raw.addEventListener("click", function () {
+      openView("formatted_raw");
+    });
+    btn_raw.addEventListener("click", function () {
+      openView("raw");
+    });
+    btn_toolbar.addEventListener("click", function () {
+      toggleToolbar();
+    });
+    document.getElementById("toggle_dark").addEventListener("click", async function () {
+      await toggleDarkMode();
+    });
+
+    if (options.colorScheme == "auto") {
+      let darkbool = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      await toggleDarkMode(darkbool);
+
+      window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').addEventListener("change", async function (e) {
+        if (options.colorScheme == "auto") {
+          let bool = e.matches;
+          await toggleDarkMode(bool);
+        }
+      });
+    }
+    if (options.colorScheme == "dark") await toggleDarkMode(true);
+    if (options.colorScheme == "light") await toggleDarkMode(false);
+    toggleWordWrap();
+
+    // Disable What's New Popup
+    // window.addEventListener("message", async function (m) {
+    //   if (m.data.type == "JF-close-whats-new") {
+    //     document.getElementById("JF_whats_new").remove();
+    //     options.whats_new_screen_shown = true;
+    //     await chrome.storage.local.set({ [bucket]: options });
+    //   }
+    // });
+
+
+    window.addEventListener("keydown", async (e) => {
+      if (e.target.tagName === "INPUT" || e.target.isContentEditable) {
+        return false;
+      }
+      if (
+        !e.ctrlKey &&
+        !e.altKey &&
+        !e.metaKey &&
+        e.shiftKey
+      ) {
+        if (e.key === hotkeys.formatted_raw || e.code === "Key" + hotkeys.formatted_raw.toUpperCase()) {
+          e.preventDefault();
+          openView("formatted_raw");
+        }
+      }
+
+      if (
+        !e.ctrlKey &&
+        !e.altKey &&
+        !e.metaKey &&
+        !e.shiftKey
+      ) {
+        if (e.key === hotkeys.toolbar || e.code === "Key" + hotkeys.toolbar.toUpperCase()) {
+          e.preventDefault();
+          toggleToolbar();
+        }
+        if (e.key === hotkeys.dark || e.code === "Key" + hotkeys.dark.toUpperCase()) {
+          e.preventDefault();
+          await toggleDarkMode();
+        }
+        if (e.key === hotkeys.parsed || e.code === "Key" + hotkeys.parsed.toUpperCase()) {
+          e.preventDefault();
+          openView("parsed");
+        }
+        if (e.key === hotkeys.raw || e.code === "Key" + hotkeys.raw.toUpperCase()) {
+          e.preventDefault();
+          openView("raw");
+        }
+        if (e.key === hotkeys.collapse_all || e.code === "Key" + hotkeys.collapse_all.toUpperCase()) {
+          e.preventDefault();
+          collapseChildren(tree);
+        }
+        if (e.key === hotkeys.expand_all || e.code === "Key" + hotkeys.expand_all.toUpperCase()) {
+          e.preventDefault();
+          expandChildren(tree);
+        }
+      }
+    });
   }
 
   async function _() {
@@ -162,6 +406,7 @@ SOFTWARE.
     if (!document ||
       !document.body ||
       !document.body.childNodes ||
+      !document.body.childNodes.length ||
       document.body === null ||
       document.body === undefined ||
       document.body.childNodes === null ||
@@ -173,7 +418,7 @@ SOFTWARE.
     ) {
       let tb = false;
       try {
-        JSON.parse(document.body.innerText);
+        JSON.parse(document.body.textContent);
       }
       catch (e) {
         tb = true;
@@ -188,20 +433,20 @@ SOFTWARE.
       firstEl.hidden = false;
     }, 1000);
     if (firstEl.tagName === "PRE" && firstEl.nodeName === "PRE" && firstEl.nodeType === 1) {
-      preCode = firstEl.innerText;
+      preCode = firstEl.textContent;
     }
     else if (firstEl.tagName === "DIV" && firstEl.nodeName === "DIV" && firstEl.nodeType === 1) {
 
       // preventing chrome native UI
-      if (firstEl.innerText.length == 0) {
-        preCode = document.getElementsByTagName("pre")[0].innerText
+      if (firstEl.textContent.length == 0) {
+        preCode = document.getElementsByTagName("pre")[0].textContent
       }
       else {
-        preCode = firstEl.innerText;
+        preCode = firstEl.textContent;
       }
     }
     else if (firstEl.tagName === "CODE" && firstEl.nodeName === "CODE" && firstEl.nodeType === 1) {
-      preCode = firstEl.innerText;
+      preCode = firstEl.textContent;
     }
     else if (firstEl.tagName === undefined && firstEl.nodeName === "#text" && firstEl.nodeType === 3) {
       preCode = firstEl.nodeValue;
@@ -216,14 +461,20 @@ SOFTWARE.
       jsonLen === 0
     ) {
       firstEl.hidden = false;
-      console.log("JSON Formatter: JSON too large to format!")
+      prettyLog("JSON too large to format!")
       return false;
     }
-    var isJSON = false, obj;
+    var isJSON = false;
     try {
-      obj = JSON.parse(preCode);
+      let obj = JSON.parse(preCode);
+      let increment = 0;
       while (typeof (obj) === "string") {
         obj = JSON.parse(obj);
+        increment++;
+      }
+      // if it can be parsed 2nd time, then original object was wrapped in quotes, some API devs do that for no reason
+      if (increment > 1) {
+        preCode = JSON.parse(preCode);
       }
       if (typeof (obj) === "number" || typeof (obj) === "boolean" || typeof (obj) === "null" || typeof (obj) === "undefined" || typeof (obj) === "NaN") {
         firstEl.hidden = false;
@@ -249,7 +500,8 @@ SOFTWARE.
     if (isJSON) {
       await fetchExtensionSettings();
       await prepareBody();
-      formatJSON(JSON.stringify(obj));
+      setupContextMenu();
+      formatJSON(preCode);
       globalThis.validJSON = true;
     }
   }
@@ -555,155 +807,30 @@ SOFTWARE.
     str = str.replace(/</gm, "&lt;").replace(/>/gm, "&gt;")
     return str;
   }
-
-  /**
-   * DOM manipulation Functions
+  /*
+   escape the following to make then visible and not treated as special char 
+  \"
+  \\
+  \/
+  \b
+  \f
+  \n
+  \r
+  \t
+  \u
    */
-  async function prepareBody() {
-    document.body.innerHTML = `<svg class="defs_svg" xmlns="http://www.w3.org/2000/svg" height="0" width="0" aria-hidden="true">
-  <defs>
-    <clipPath fill-rule="evenodd" clip-rule="evenodd" id="chevron-down">
-      <path
-        d="M8.973 11.331L13.8746 6.42937L14.5721 7.12462L9.3195 12.375H8.62425L3.375 7.12462L4.07137 6.42937L8.973 11.331Z">
-      </path>
-    </clipPath>
-    <clipPath fill-rule="evenodd" clip-rule="evenodd" id="chevron-right">
-      <path
-        d="M11.331 9.027L6.42938 4.12538L7.12463 3.42788L12.375 8.6805V9.37575L7.12463 14.625L6.42938 13.9286L11.331 9.027V9.027Z">
-      </path>
-    </clipPath>
-    <path fill="rgb(30,30,30)" id="toggle_color_scheme"
-    d="M20 15.31L23.31 12 20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69zM12 18V6c3.31 0 6 2.69 6 6s-2.69 6-6 6z" />
-    <path id="menu_icon" d="M4 18h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zm0-5h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zM3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1z"/>
-    <path id="close_icon" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
-  </defs>
-</svg>
-<style id="JF_theme"></style>` +
-// Disable What's New Popup
-// ${options.whats_new_screen_shown ? '' :
-//         `<iframe id="JF_whats_new" src="${chrome.runtime.getURL("whats-new.html") + `?theme=${options.colorScheme}`}" sadbox="allow-scripts allow-forms">
-//     <p>Your browser does not support iframes.</p>
-// </iframe>`}
-`<div class="JF_actions notranslate" id="actions" translate="no">
-  <div class="JF_json_toolbar JF_invisible-toolbar JF_hidden-toolbar" id="json_toolbar">
-    <button id="toggle_dark" class="JF_toggle_dark JF_cr-button" aria-label="Toggle Dark Mode: D key"
-      title="Toggle Dark Mode: D key" role="button">
-      <svg class="JF_svg-icon" viewBox="0 0 24 24" width="24px" height="24px">
-        <use xlink:href="#toggle_color_scheme"></use>
-      </svg></button>
-    <div class="JF_button-wrapper">
-      <button type="button" class="JF_cr-button ${options.tab == "parsed" ? "active" : ""}"
-        aria-label="Toggle Parsed Format: P key" title="Toggle Parsed Format: P key" id="open_parsed">Parsed</button>
-      <button type="button" class="JF_cr-button ${options.tab == "formatted_raw" ? "active" : ""}"
-        aria-label="Toggle Formatted Raw Format: Shift + R key" title="Toggle Formatted Raw Format: Shift + R key"
-        id="open_formatted_raw">Formatted Raw</button>
-      <button type="button" class="JF_cr-button ${options.tab == "raw" ? "active" : ""}"
-        aria-label="Toggle Raw Format: R key" title="Toggle Raw Format: R key" id="open_raw">Raw</button>
-    </div>
-  </div>
-  <button type="button" class="JF_toggle_toolbar JF_cr-button" aria-label="Toggle Toolbar: T key"
-    title="Toggle Toolbar: T key" id="toggle_toolbar">
-    <svg class="JF_svg-icon" viewBox="0 0 24 24" width="24px" height="24px">
-      <use xlink:href="#menu_icon"></use>
-    </svg>
-  </button>
-</div>
-<div class="JF_parsed notranslate" id="parsed" translate="no" ${options.tab == "parsed" ? "" : "hidden"}></div>
-<pre class="JF_raw JF_dark notranslate" id="formatted_raw" translate="no" ${options.tab == "formatted_raw" ? "" : "hidden"}></pre>
-<pre class="JF_raw JF_dark notranslate" id="raw" translate="no" ${options.tab == "raw" ? "" : "hidden"}></pre>`;
-
-    btn_parsed = document.getElementById("open_parsed");
-    btn_formatted_raw = document.getElementById("open_formatted_raw");
-    btn_raw = document.getElementById("open_raw");
-    parsedCode = document.getElementById("parsed");
-    formattedRawCode = document.getElementById("formatted_raw");
-    rawCode = document.getElementById("raw");
-    toolbar = document.getElementById("json_toolbar");
-    btn_toolbar = document.getElementById("toggle_toolbar");
-    theme_css = document.getElementById("JF_theme");
-
-    btn_parsed.addEventListener("click", function () {
-      openView("parsed");
-    });
-    btn_formatted_raw.addEventListener("click", function () {
-      openView("formatted_raw");
-    });
-    btn_raw.addEventListener("click", function () {
-      openView("raw");
-    });
-    btn_toolbar.addEventListener("click", function () {
-      toggleToolbar();
-    });
-    document.getElementById("toggle_dark").addEventListener("click", async function () {
-      await toggleDarkMode();
-    });
-
-    if (options.colorScheme == "auto") {
-      let darkbool = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      await toggleDarkMode(darkbool);
-
-      window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').addEventListener("change", async function (e) {
-        if (options.colorScheme == "auto") {
-          let bool = e.matches;
-          await toggleDarkMode(bool);
-        }
-      });
-    }
-    if (options.colorScheme == "dark") await toggleDarkMode(true);
-    if (options.colorScheme == "light") await toggleDarkMode(false);
-    toggleWordWrap();
-
-    // Disable What's New Popup
-    // window.addEventListener("message", async function (m) {
-    //   if (m.data.type == "JF-close-whats-new") {
-    //     document.getElementById("JF_whats_new").remove();
-    //     options.whats_new_screen_shown = true;
-    //     await chrome.storage.local.set({ [bucket]: options });
-    //   }
-    // });
-
-
-    window.addEventListener("keydown", async (e) => {
-      if (e.target.tagName === "INPUT" || e.target.isContentEditable) {
-        return false;
-      }
-      if (
-        !e.ctrlKey &&
-        !e.altKey &&
-        !e.metaKey &&
-        e.shiftKey
-      ) {
-        if (e.key === hotkeys.formatted_raw || e.code === "Key" + hotkeys.formatted_raw.toUpperCase()) {
-          e.preventDefault();
-          openView("formatted_raw");
-        }
-      }
-
-      if (
-        !e.ctrlKey &&
-        !e.altKey &&
-        !e.metaKey &&
-        !e.shiftKey
-      ) {
-        if (e.key === hotkeys.toolbar || e.code === "Key" + hotkeys.toolbar.toUpperCase()) {
-          e.preventDefault();
-          toggleToolbar();
-        }
-        if (e.key === hotkeys.dark || e.code === "Key" + hotkeys.dark.toUpperCase()) {
-          e.preventDefault();
-          await toggleDarkMode();
-        }
-        if (e.key === hotkeys.parsed || e.code === "Key" + hotkeys.parsed.toUpperCase()) {
-          e.preventDefault();
-          openView("parsed");
-        }
-        if (e.key === hotkeys.raw || e.code === "Key" + hotkeys.raw.toUpperCase()) {
-          e.preventDefault();
-          openView("raw");
-        }
-      }
-    });
+  function jsonEscape(json) {
+    return json
+      .replaceAll(/\\/g, "\\\\")
+      .replaceAll(/\\n/g, "\\n")
+      .replaceAll(/\\r/g, "\\r")
+      .replaceAll(/\\t/g, "\\t")
+      .replaceAll(/\\f/g, "\\f")
+      .replaceAll(/\\b/g, "\\b")
+      .replaceAll(/\\u/g, "\\u")
+      .replaceAll(/\\\//g, "\\/");
   }
+
   function normalize(sortingFunction) {
     return function (key, value) {
       if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
@@ -718,47 +845,12 @@ SOFTWARE.
       return value;
     }
   }
-  function setupFormatter(str) {
-    var code;
-    if (typeof (str) == "object") {
-      code = JSON.stringify(str);
-      code = JSON.stringify(JSON.parse(formatHTML(JSON.stringify(code))));
-    }
-    if (typeof (str) == "string") {
-      code = JSON.stringify(JSON.parse(formatHTML(str)));
-    }
-    let sortingFuncton = null
-    if (options.sortingOrder == "alphabetical") {
-      // alphabet sorting
-      sortingFuncton = normalize();
-    }
-    formattedRawCode.innerHTML = JSON.stringify(JSON.parse(code), sortingFuncton, 2);
-
-    let leadingLine = document.createElement('div');
-    leadingLine.className = 'line emptyLine';
-    leadingLine.textContent = '';
-    leadingLine.style = 'margin-left: 0px; height: 18px;';
-    formattedRawCode.appendChild(leadingLine);
-
-    rawCode.innerHTML = JSON.stringify(JSON.parse(code, sortingFuncton));
-
-    let leadingLine1 = document.createElement('div');
-    leadingLine1.className = 'line emptyLine';
-    leadingLine1.textContent = '';
-    leadingLine1.style = 'margin-left: 0px; height: 18px;';
-    rawCode.appendChild(leadingLine1);
-
-    tree = createTree(JSON.parse(code, sortingFuncton));
-    var thme = isDark ? "dark" : "light";
-    var renderedCode = render(tree, parsedCode, { theme: thme, string: true });
-    expandChildren(tree);
-    return [renderedCode, JSON.stringify(JSON.parse(code), undefined, 2)];
-  }
 
   function openView(type) {
     if (type != "parsed" && type != "raw" && type != "formatted_raw") {
       throw new TypeError(type + " is not a valid type!");
     }
+    currentView = type;
     if (type == "parsed") {
       formattedRawCode.hidden = true;
       rawCode.hidden = true;
@@ -784,6 +876,7 @@ SOFTWARE.
       btn_formatted_raw.classList.add("active");
     }
   }
+
   function toggleToolbar(bool) {
     if (bool != undefined) {
       if (bool == false) {
@@ -898,6 +991,45 @@ SOFTWARE.
     }
   }
 
+  function toggleContextMenu(bool, event) {
+    if (bool != undefined) {
+      if (bool == false) {
+        contextMenu.style.left = "-9999px";
+        contextMenu.style.top = "-9999px";
+        contextMenu.style.visibility = "hidden";
+      }
+      else {
+        if (currentView !== "parsed") {
+          document.getElementById("JF_context_menu_collapse_all").hidden = true;
+          document.getElementById("JF_context_menu_expand_all").hidden = true;
+        }
+        else {
+          document.getElementById("JF_context_menu_collapse_all").hidden = false;
+          document.getElementById("JF_context_menu_expand_all").hidden = false;
+        }
+        contextMenu.style.visibility = "visible";
+      }
+    }
+    else {
+      if (contextMenu.hidden) {
+        if (currentView !== "parsed") {
+          document.getElementById("JF_context_menu_collapse_all").hidden = true;
+          document.getElementById("JF_context_menu_expand_all").hidden = true;
+        }
+        else {
+          document.getElementById("JF_context_menu_collapse_all").hidden = false;
+          document.getElementById("JF_context_menu_expand_all").hidden = false;
+        }
+        contextMenu.style.visibility = "visible";
+      }
+      else {
+        contextMenu.style.left = "-9999px";
+        contextMenu.style.top = "-9999px";
+        contextMenu.style.visibility = "hidden";
+      }
+    }
+  }
+
   function isBrowserNativeUIShown(document) {
     let flag = false;
     let hasAHiddenDIVContainingValidJSON = false;
@@ -907,7 +1039,7 @@ SOFTWARE.
     let firstEl = document.body.childNodes[0];
     if (firstEl.tagName === "DIV" && firstEl.nodeName === "DIV" && firstEl.nodeType === 1 && firstEl.hidden) {
       try {
-        JSON.parse(firstEl.innerText);
+        JSON.parse(firstEl.textContent);
         hasAHiddenDIVContainingValidJSON = true;
       }
       catch (e) {
@@ -931,6 +1063,10 @@ SOFTWARE.
     text = text.replace(P2, '$1<a class="JF_linkify-link" href="http://$2" target="_blank">$2</a>');
     text = text.replace(P3, '<a class="JF_linkify-link" href="mailto:$1">$1</a>');
     return text;
+  }
+
+  function prettyLog(str) {
+    console.log(`%c[JSON Formatter] %c${str}`, "color:purple;font-weight:bold;", "");
   }
 
 })();
