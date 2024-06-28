@@ -65,8 +65,7 @@
   ],
   "permissions": [
     "storage",
-    "unlimitedStorage",
-    "contextMenus"
+    "unlimitedStorage"
   ],
   "web_accessible_resources": [
     {
