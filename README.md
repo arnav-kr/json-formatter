@@ -10,7 +10,7 @@
 [![GitHub](https://img.shields.io/github/license/arnav-kr/json-formatter?style=flat-square&logo=github&logoColor=white&label=GitHub&labelColor=%233d3d3d&color=%234285F4)](https://github.com/arnav-kr/json-formatter)
 
 
-**[V2.0.5.0 CHANGELOG](CHANGELOG.md)**
+**[V2.0.6.0 CHANGELOG](CHANGELOG.md)**
 
 ## Features:
 * 60+ Themes for both Light and Dark Mode
@@ -22,6 +22,7 @@
 * Automatically Linkify Links
 * Formats JSON automatically
 * `Raw`, `Formatted Raw` and `Parsed` Mode
+* Collapse/Expand All option
 * Remembers Theme Preferences
 * Shortcut Keys for ease of use
 * Collapsible Toolbar
@@ -32,6 +33,14 @@
 
 <a href="https://microsoftedge.microsoft.com/addons/detail/json-formatter/hdebmbedhflilekbidmmdiaiilaegkjl"><img src="https://user-images.githubusercontent.com/72879799/229780863-e60a44cd-a768-47d8-9755-c46075c3751b.svg" alt="Add to Microsoft Edge" height="64px"/></a>
 
+### Shortcut Keys Reference:
+* `P` - Parsed View
+* `R` - Raw View
+* `Shift + R` - Formatted Raw View
+* `D` - Toggle Dark Mode
+* `[` - Collapse All
+* `]` - Expand All
+* `T` - Toggle Toolbar
 
 
 ## Screenshots:
