@@ -211,6 +211,14 @@ div.item-inner {
   cursor: pointer;
 }
 
+.cr-button:disabled {
+  opacity: 0.38;
+}
+
+.cr-button:disabled:hover {
+  background-color: #1a73e8;
+}
+
 .cr-button-icon {
   fill: #ffffff;
 }
@@ -233,6 +241,19 @@ div.item-inner {
 
 .md-select:active {
   box-shadow: none;
+}
+
+
+kbd {
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: #f1f3f4;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -296,6 +317,13 @@ div.item-inner {
   }
   .md-select option {
     background-color: #202124;
+  }
+
+  kbd {
+    background-color: #202124;
+    color: rgb(232, 234, 237);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 }
 

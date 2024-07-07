@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#29292c">
+  <title>Manage Hotkeys - JSON Formatter</title>
+  <meta name="description" content="Customize the JSON Formatter.">
+  <link rel="shortcut icon" href="./images/icons/icon_round_1024.png" type="image/png">
+  <link rel="apple-touch-icon" href="./images/icons/icon_round_1024.png">
+  <link rel="stylesheet" href="./css/UI.css">
+  <script src="./js/globals.js"></script>
+  <!-- <script src="./js/options.js" type="module"></script> -->
+</head>
+
+<body>
+  <div class="root">
+    <h2 id="header" class="title">Hotkeys</h2>
+    <div class="container">
+
+      <!-- 
+### Shortcut Keys Reference:
+* `P` - Parsed View
+* `R` - Raw View
+* `Shift + R` - Formatted Raw View
+* `D` - Toggle Dark Mode
+* `[` - Collapse All
+* `]` - Expand All
+* `T` - Toggle Toolbar 
+-->
+      <!-- Parsed View -->
+      <div class="item" title="Parsed View">
+        <div class="item-inner">
+          <div class="label">
+            <span>Parsed View</span>
+          </div>
+          <div>
+            <kbd>P</kbd>
+          </div>
+          <!-- <input type="text" class="md-input" id="parsed_view" aria-label="Parsed View" title="Parsed View" value="P"> -->
+        </div>
+      </div>
+      <div class="hr"></div>
+
+      <!-- Raw View -->
+      <div class="item" title="Raw View">
+        <div class="item-inner">
+          <div class="label">
+            <span>Raw View</span>
+          </div>
+          <div>
+            <kbd>R</kbd>
+          </div>
+          <!-- <input type="text" class="md-input" id="raw_view" aria-label="Raw View" title="Raw View" value="R"> -->
+        </div>
+      </div>
+      <div class="hr"></div>
+
+      <!-- Formatted Raw View -->
+      <div class="item" title="Formatted Raw View">
+        <div class="item-inner">
+          <div class="label">
+            <span>Formatted Raw View</span>
+          </div>
+          <div>
+            <kbd>Shift</kbd> + <kbd>R</kbd>
+          </div>
+          <!-- <input type="text" class="md-input" id="formatted_raw_view" aria-label="Formatted Raw View"
+            title="Formatted Raw View" value="Shift + R"> -->
+        </div>
+      </div>
+      <div class="hr"></div>
+
+      <!-- Toggle Dark Mode -->
+      <div class="item" title="Toggle Dark Mode">
+        <div class="item-inner">
+          <div class="label">
+            <span>Toggle Dark Mode</span>
+          </div>
+          <div>
+            <kbd>D</kbd>
+          </div>
+          <!-- <input type="text" class="md-input" id="toggle_dark_mode" aria-label="Toggle Dark Mode"
+            title="Toggle Dark Mode" value="D"> -->
+        </div>
+      </div>
+      <div class="hr"></div>
+
+      <!-- Collapse All -->
+      <div class="item" title="Collapse All">
+        <div class="item-inner">
+          <div class="label">
+            <span>Collapse All</span>
+          </div>
+          <div>
+            <kbd>[</kbd>
+          </div>
+          <!-- <input type="text" class="md-input" id="collapse_all" aria-label="Collapse All" title="Collapse All"
+            value="["> -->
+        </div>
+      </div>
+      <div class="hr"></div>
+
+      <!-- Expand All -->
+      <div class="item" title="Expand All">
+        <div class="item-inner">
+          <div class="label">
+            <span>Expand All</span>
+          </div>
+          <div>
+            <kbd>]</kbd>
+          </div>
+          <!-- <input type="text" class="md-input" id="expand_all" aria-label="Expand All" title="Expand All" value="]"> -->
+        </div>
+      </div>
+      <div class="hr"></div>
+
+      <!-- Toggle Toolbar -->
+      <div class="item" title="Toggle Toolbar">
+        <div class="item-inner">
+          <div class="label">
+            <span>Toggle Toolbar</span>
+          </div>
+          <div>
+            <kbd>T</kbd>
+          </div>
+          <!-- <input type="text" class="md-input" id="toggle_toolbar" aria-label="Toggle Toolbar" title="Toggle Toolbar"
+            value="T"> -->
+        </div>
+      </div>
+      <!-- <div class="hr"></div> -->
+
+      <!-- Reset Hotkeys -->
+      <div class="item">
+        <div class="item-inner">
+          <button id="reset" aria-label="Reset to Default" title="Reset to Default" role="button" class="cr-button"
+            type="button" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+              class="cr-button-icon" style="margin-right: 4px;">
+              <path
+                d="M480-120q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q117 0 198.5-81.5T760-480q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120v-240h80v94q51-64 124.5-99T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Zm112-192L440-464v-216h80v184l128 128-56 56Z" />
+            </svg>
+            <span>Reset to Default</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
