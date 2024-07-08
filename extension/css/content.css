@@ -376,6 +376,7 @@ body.JF_dark .JF_context_menu {
   padding: 8px 24px;
   cursor: pointer;
   transition: background-color 100ms ease;
+  font-family: Roboto, "Segoe UI", Tahoma, sans-serif;
 }
 
 .JF_context_menu .JF_context_menu_item:hover {

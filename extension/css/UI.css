@@ -10,6 +10,7 @@
 * {
   box-sizing: border-box;
 }
+
 h1,
 h2,
 h3,
@@ -76,6 +77,10 @@ div.item {
   -webkit-user-select: none;
 }
 
+.hotkeys .item {
+  padding-right: 8px;
+}
+
 div.icon-actions {
   display: flex;
   gap: 8px;
@@ -86,7 +91,7 @@ div.item.clickable:hover {
   background-color: rgba(32, 33, 36, 0.1);
 }
 
-div.item.clickable > a:focus-visible {
+div.item.clickable>a:focus-visible {
   box-shadow: none;
   outline: none;
 }
@@ -109,6 +114,56 @@ div.item-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  vertical-align: middle;
+}
+
+.hotkeys div.item-inner {
+  padding: 8px 0;
+  min-height: auto;
+}
+
+div.item-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cr-icon-button {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #292a2d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.cr-icon-button:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.item-action {
+  visibility: hidden;
+}
+
+.header-note {
+  font-size: 0.8rem;
+  display: block;
+  color: #5f6368;
+  margin-bottom: 6px;
+  padding: 0 4px;
+}
+
+div.item:hover .item-action {
+  visibility: visible;
+}
+
+.item-end {
+  margin-bottom: 12px;
 }
 
 .icon {
@@ -189,6 +244,7 @@ div.item-inner {
   line-height: inherit;
   user-select: none;
   -webkit-user-select: none;
+  appearance: none;
   -webkit-appearance: none;
   overflow: visible;
   vertical-align: middle;
@@ -243,17 +299,21 @@ div.item-inner {
   box-shadow: none;
 }
 
+.kbd-wrapper {
+  display: flex;
+  gap: 8px;
+}
 
 kbd {
   font-size: 0.8rem;
   font-weight: 500;
+  display: block;
   background-color: #f1f3f4;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 2px 6px;
+  margin-bottom: 1px;
   border-radius: 4px;
-  margin-left: 8px;
-  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -263,6 +323,18 @@ kbd {
     border-color: rgb(232, 234, 237);
     color: rgb(232, 234, 237);
     outline-color: rgb(232, 234, 237);
+  }
+
+  .cr-icon-button {
+    color: #f8f9fa;
+  }
+
+  .header-note {
+    color: #9ea0a5;
+  }
+
+  .cr-icon-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
   body {
@@ -299,7 +371,7 @@ kbd {
     background-color: rgba(255, 255, 255, 0.1);
   }
 
-  div.item.clickable > a:focus-visible {
+  div.item.clickable>a:focus-visible {
     box-shadow: none;
     outline: none;
   }
@@ -315,6 +387,7 @@ kbd {
   .md-select:focus {
     box-shadow: 0 0 0 2px rgba(138, 180, 248, 0.5);
   }
+
   .md-select option {
     background-color: #202124;
   }
