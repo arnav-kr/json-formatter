@@ -1,11 +1,5 @@
 var hotkeyInput, modal, modalPreview, modalNote, resetButton, options = {},
   bucket = "JSON_FORMATTER_OPTIONS",
-  displayTexts = {
-    left: "←",
-    right: "→",
-    up: "↑",
-    down: "↓",
-  },
   stateObj = {
     currentValue: "",
     currentTarget: "",
@@ -135,7 +129,7 @@ window.addEventListener("load", async () => {
 });
 
 function keyPreview(str) {
-  return str.split("+").map(key => `<kbd>${displayTexts[key] || key}</kbd>`).join("+");
+  return str.split("+").map(key => `<kbd>${globalThis.sharedData.displayTexts[key] || key}</kbd>`).join("+");
 }
 
 function handleClose(e) {

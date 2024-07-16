@@ -1,3 +1,10 @@
+const displayTexts = {
+  left: "←",
+  right: "→",
+  up: "↑",
+  down: "↓",
+};
+
 const defaultOptions = {
   "whats_new_screen_shown": true,
   "tab": "parsed",
@@ -1197,6 +1204,8 @@ const defaultOptions = {
   }
 };
 
+
 globalThis.sharedData = {
   defaultOptions,
+  displayTexts,
 };
