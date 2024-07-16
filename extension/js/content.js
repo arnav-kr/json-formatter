@@ -439,7 +439,10 @@ SOFTWARE.
 
       // preventing chrome native UI
       if (firstEl.textContent.length == 0) {
-        preCode = document.getElementsByTagName("pre")[0].textContent
+        try {
+          preCode = document.getElementsByTagName("pre")[0].textContent
+        }
+        catch (e) { }
       }
       else {
         preCode = firstEl.textContent;

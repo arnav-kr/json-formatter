@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="./images/icons/icon_round_1024.png">
   <link rel="stylesheet" href="./css/UI.css">
   <script src="./js/globals.js"></script>
-  <!-- <script src="./js/options.js" type="module"></script> -->
+  <script src="./js/hotkeys.js" type="module"></script>
 </head>
 
 <body>
@@ -21,18 +21,8 @@
     <span class="header-note">Double Click or Hover to Edit an Hotkey</span>
     <div class="container hotkeys">
 
-      <!-- 
-### Shortcut Keys Reference:
-* `P` - Parsed View
-* `R` - Raw View
-* `Shift + R` - Formatted Raw View
-* `D` - Toggle Dark Mode
-* `[` - Collapse All
-* `]` - Expand All
-* `T` - Toggle Toolbar 
--->
       <!-- Parsed View -->
-      <div class="item clickable" title="Parsed View">
+      <div class="item clickable" title="Parsed View" data-target="parsed">
         <div class="item-inner">
           <div class="label">
             <span>Parsed View</span>
@@ -42,7 +32,7 @@
               <kbd>P</kbd>
             </div>
             <div class="item-action">
-              <button id="edit" aria-label="Edit" title="Edit" role="button" class="cr-icon-button" type="button">
+              <button aria-label="Edit" title="Edit" role="button" class="cr-icon-button hotkey-edit-btn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 -960 960 960" width="18px"
                   fill="currentColor">
                   <path
@@ -57,7 +47,7 @@
       <div class="hr"></div>
 
       <!-- Raw View -->
-      <div class="item clickable" title="Raw View">
+      <div class="item clickable" title="Raw View" data-target="raw">
         <div class="item-inner">
           <div class="label">
             <span>Raw View</span>
@@ -67,7 +57,7 @@
               <kbd>R</kbd>
             </div>
             <div class="item-action">
-              <button id="edit" aria-label="Edit" title="Edit" role="button" class="cr-icon-button" type="button">
+              <button aria-label="Edit" title="Edit" role="button" class="cr-icon-button hotkey-edit-btn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 -960 960 960" width="18px"
                   fill="currentColor">
                   <path
@@ -82,7 +72,7 @@
       <div class="hr"></div>
 
       <!-- Formatted Raw View -->
-      <div class="item clickable" title="Formatted Raw View">
+      <div class="item clickable" title="Formatted Raw View" data-target="formatted_raw">
         <div class="item-inner">
           <div class="label">
             <span>Formatted Raw View</span>
@@ -92,7 +82,7 @@
               <kbd>Shift</kbd><span>+</span><kbd>R</kbd>
             </div>
             <div class="item-action">
-              <button id="edit" aria-label="Edit" title="Edit" role="button" class="cr-icon-button" type="button">
+              <button aria-label="Edit" title="Edit" role="button" class="cr-icon-button hotkey-edit-btn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 -960 960 960" width="18px"
                   fill="currentColor">
                   <path
@@ -108,7 +98,7 @@
       <div class="hr"></div>
 
       <!-- Toggle Dark Mode -->
-      <div class="item clickable" title="Toggle Dark Mode">
+      <div class="item clickable" title="Toggle Dark Mode" data-target="dark">
         <div class="item-inner">
           <div class="label">
             <span>Toggle Dark Mode</span>
@@ -118,7 +108,7 @@
               <kbd>D</kbd>
             </div>
             <div class="item-action">
-              <button id="edit" aria-label="Edit" title="Edit" role="button" class="cr-icon-button" type="button">
+              <button aria-label="Edit" title="Edit" role="button" class="cr-icon-button hotkey-edit-btn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 -960 960 960" width="18px"
                   fill="currentColor">
                   <path
@@ -134,7 +124,7 @@
       <div class="hr"></div>
 
       <!-- Collapse All -->
-      <div class="item clickable" title="Collapse All">
+      <div class="item clickable" title="Collapse All" data-target="collapse_all">
         <div class="item-inner">
           <div class="label">
             <span>Collapse All</span>
@@ -144,7 +134,7 @@
               <kbd>[</kbd>
             </div>
             <div class="item-action">
-              <button id="edit" aria-label="Edit" title="Edit" role="button" class="cr-icon-button" type="button">
+              <button aria-label="Edit" title="Edit" role="button" class="cr-icon-button hotkey-edit-btn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 -960 960 960" width="18px"
                   fill="currentColor">
                   <path
@@ -160,7 +150,7 @@
       <div class="hr"></div>
 
       <!-- Expand All -->
-      <div class="item clickable" title="Expand All">
+      <div class="item clickable" title="Expand All" data-target="expand_all">
         <div class="item-inner">
           <div class="label">
             <span>Expand All</span>
@@ -170,7 +160,7 @@
               <kbd>]</kbd>
             </div>
             <div class="item-action">
-              <button id="edit" aria-label="Edit" title="Edit" role="button" class="cr-icon-button" type="button">
+              <button aria-label="Edit" title="Edit" role="button" class="cr-icon-button hotkey-edit-btn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 -960 960 960" width="18px"
                   fill="currentColor">
                   <path
@@ -185,7 +175,7 @@
       <div class="hr"></div>
 
       <!-- Toggle Toolbar -->
-      <div class="item clickable" title="Toggle Toolbar">
+      <div class="item clickable" title="Toggle Toolbar" data-target="toolbar">
         <div class="item-inner">
           <div class="label">
             <span>Toggle Toolbar</span>
@@ -195,7 +185,7 @@
               <kbd>T</kbd>
             </div>
             <div class="item-action">
-              <button id="edit" aria-label="Edit" title="Edit" role="button" class="cr-icon-button" type="button">
+              <button aria-label="Edit" title="Edit" role="button" class="cr-icon-button hotkey-edit-btn" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 -960 960 960" width="18px"
                   fill="currentColor">
                   <path
@@ -224,6 +214,24 @@
           </button>
         </div>
       </div>
+    </div>
+  </div>
+  <div id="modal" class="modal">
+    <div class="modal-box">
+      <p>Press desired key combination then press ENTER.</p>
+      <!-- <input class="input empty" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" wrap="off" aria-label="Press desired key combination and then press ENTER." aria-live="off" title="code: ShiftRight, keyCode: 16, key: Shift => UI: Control+Shift, user settings: ctrl+shift, dispatch: null" style="background-color: inherit; color: var(--vscode-input-foreground);"> -->
+      <input autofocus autocorrect="off" autocapitalize="off" spellcheck="false" type="text" wrap="off"
+        aria-label="Press desired key combination then press ENTER." aria-live="off" id="hotkey" class="modal-input"
+        title="Hotkey" required>
+      <div class="modal-preview kbd-wrapper">
+        <!-- <kbd>Shift</kbd> + <kbd>R</kbd> -->
+      </div>
+      <p class="modal-note" style="color: #ff858d;">
+        <!-- &#9432; Already in use for "Formatted Raw View" -->
+      </p>
+      <!-- <button id="save" aria-label="Save" title="Save" role="button" class="cr-button" type="button">
+        <span>Save</span>
+      </button> -->
     </div>
   </div>
 </body>

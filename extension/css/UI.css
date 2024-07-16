@@ -77,8 +77,9 @@ div.item {
   -webkit-user-select: none;
 }
 
-.hotkeys .item {
+.hotkeys .item:not(.item-end) {
   padding-right: 8px;
+  cursor: pointer;
 }
 
 div.icon-actions {
@@ -112,6 +113,7 @@ div.item-inner {
   min-height: 56px;
   width: 100%;
   display: flex;
+  gap: 16px;
   align-items: center;
   justify-content: space-between;
   vertical-align: middle;
@@ -269,6 +271,7 @@ div.item:hover .item-action {
 
 .cr-button:disabled {
   opacity: 0.38;
+  cursor: default;
 }
 
 .cr-button:disabled:hover {
@@ -301,7 +304,7 @@ div.item:hover .item-action {
 
 .kbd-wrapper {
   display: flex;
-  gap: 8px;
+  gap: 4px;
 }
 
 kbd {
@@ -316,6 +319,56 @@ kbd {
   border-radius: 4px;
 }
 
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-box {
+  background-color: #ffffff;
+  color: #202124;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-box p {
+  margin: 0;
+  text-align: center;
+}
+
+.modal-input {
+  border: 1px solid #dadce0;
+  background-color: #f1f3f4;
+  border-radius: 4px;
+  padding: 8px;
+  width: 100%;
+  font-size: 14px;
+  transition: border-color 0.2s;
+  text-align: center;
+}
+
+.modal-input:focus-visible {
+  box-shadow: 0 0 0 2px #1a73e8;
+  outline: none;
+}
+
 @media (prefers-color-scheme: dark) {
   .md-select {
     background-color: rgba(0, 0, 0, 0.3);
@@ -323,6 +376,17 @@ kbd {
     border-color: rgb(232, 234, 237);
     color: rgb(232, 234, 237);
     outline-color: rgb(232, 234, 237);
+  }
+
+  .modal-box {
+    color: rgb(232, 234, 237);
+    background-color: #292a2d;
+  }
+
+  .modal-input {
+    background-color: #202124;
+    border-color: #292a2d;
+    color: rgb(232, 234, 237);
   }
 
   .cr-icon-button {
