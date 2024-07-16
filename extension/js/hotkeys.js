@@ -1,36 +1,17 @@
-var hotkeyInput, modal, modalPreview, modalNote;
-let longNames = {
-  left: "←",
-  right: "→",
-  up: "↑",
-  down: "↓",
-}
-let stateObj = {
-  currentValue: "",
-  currentTarget: "",
-  errored: false,
-  /* 
-        <!-- 
-### Shortcut Keys Reference:
-* `P` - Parsed View
-* `R` - Raw View
-* `Shift + R` - Formatted Raw View
-* `D` - Toggle Dark Mode
-* `[` - Collapse All
-* `]` - Expand All
-* `T` - Toggle Toolbar 
--->
- */
-  hotkeys: {
-    parsed: "p",
-    raw: "r",
-    formatted_raw: "shift+r",
-    dark: "d",
-    collapse_all: "[",
-    expand_all: "]",
-    toolbar: "t",
-  }
-}
+var hotkeyInput, modal, modalPreview, modalNote, resetButton, options = {},
+  bucket = "JSON_FORMATTER_OPTIONS",
+  displayTexts = {
+    left: "←",
+    right: "→",
+    up: "↑",
+    down: "↓",
+  },
+  stateObj = {
+    currentValue: "",
+    currentTarget: "",
+    errored: false,
+    isDirty: false,
+  };
 let state = new Proxy(stateObj, {
   set: (target, key, value) => {
     target[key] = value;
@@ -40,9 +21,9 @@ let state = new Proxy(stateObj, {
       modalPreview.innerHTML = keyPreview(value);
 
       let newKey = value;
-      let found = Object.entries(target.hotkeys).find(([k, v]) => v === newKey);
+      // check if key is already in use
+      let found = Object.entries(options.hotkeys).find(([k, v]) => v === newKey);
       if (found && found[0] !== target.currentTarget) {
-        console.log(found);
         modalNote.innerHTML = `Already in use for "${found[0].replace(/_/g, " ").split(" ").map(i => i[0].toUpperCase() + i.slice(1)).join(" ")}"`;
         state.errored = true;
       } else {
@@ -50,18 +31,35 @@ let state = new Proxy(stateObj, {
         modalNote.innerHTML = "";
       }
     }
+
+    if (key === "isDirty") {
+      resetButton.disabled = !value;
+    }
     return true;
   }
 });
 
-window.addEventListener("load", async => {
+window.addEventListener("load", async () => {
+  // setting elements
   hotkeyInput = document.getElementById("hotkey");
   modal = document.getElementById("modal");
   modalPreview = document.querySelector(".modal-preview");
   modalNote = document.querySelector(".modal-note");
+  resetButton = document.getElementById("reset");
 
+  // initialise extension settings
+  await initExtensionSettings();
+
+  // toggle dirty state
+  state.isDirty = isDirty();
+
+  // reset to default
+  resetButton.addEventListener("click", resetToDefault);
+
+  // close when input loses focus
   hotkeyInput.addEventListener("blur", handleClose);
 
+  // double click to open modal
   document.querySelectorAll(".hotkeys .item:not(.item-end)").forEach(item => {
     item.addEventListener("dblclick", event => {
       event.preventDefault();
@@ -70,6 +68,7 @@ window.addEventListener("load", async => {
     });
   });
 
+  // click edit button to open modal
   document.querySelectorAll(".hotkey-edit-btn").forEach(btn => {
     btn.addEventListener("click", event => {
       event.preventDefault();
@@ -78,27 +77,36 @@ window.addEventListener("load", async => {
     });
   });
 
-  hotkeyInput.addEventListener("keydown", event => {
+  // handle shortcut key inputs
+  hotkeyInput.addEventListener("keydown", async (event) => {
     event.preventDefault();
     event.stopPropagation();
 
     state.currentTarget = hotkeyInput.dataset.target;
+
+    // handle key submission
     if (event.key === "Enter") {
       if (state.errored) return;
       let target = hotkeyInput.dataset.target;
-      // save hotkey
-      // chrome.storage.local.get("hotkeys", data => {
-      //   let hotkeys = data.hotkeys || {};
-      //   hotkeys[inputField] = hotkey;
-      //   chrome.storage.local.set({ hotkeys });
-      // });
+
+      // update local state
+      options.hotkeys[target] = state.currentValue;
+
       // update UI
-      state.hotkeys[target] = state.currentValue;
       let inputField = document.querySelector(`.item[data-target="${target}"] .kbd-wrapper`);
       inputField.innerHTML = keyPreview(state.currentValue);
+
+      // save hotkey
+      await chrome.storage.local.set({ [bucket]: options });
+
+      // toggle dirty state
+      state.isDirty = isDirty();
+
+      // close modal
       handleClose();
     }
 
+    // esc to clear input
     if (event.key === "Escape") {
       state.currentValue = "";
       return;
@@ -127,8 +135,7 @@ window.addEventListener("load", async => {
 });
 
 function keyPreview(str) {
-  console.log("str %s", str);
-  return str.split("+").map(key => `<kbd>${longNames[key] || key}</kbd>`).join("+");
+  return str.split("+").map(key => `<kbd>${displayTexts[key] || key}</kbd>`).join("+");
 }
 
 function handleClose(e) {
@@ -146,4 +153,63 @@ function openModal(inputField) {
   modal.style.display = "flex";
   hotkeyInput.dataset.target = inputField;
   hotkeyInput.focus();
+}
+
+function isDirty() {
+  return Object.keys(options.hotkeys).some(key => options.hotkeys[key] !== globalThis.sharedData.defaultOptions.hotkeys[key]);
+}
+
+function resetToDefault() {
+  options.hotkeys = Object.assign({}, globalThis.sharedData.defaultOptions.hotkeys);
+  populateValues();
+  chrome.storage.local.set({ [bucket]: options });
+  state.isDirty = isDirty();
+}
+
+function populateValues() {
+  for (let key in options.hotkeys) {
+    let item = document.querySelector(`.hotkeys .item[data-target="${key}"]`);
+    item.querySelector(".kbd-wrapper").innerHTML = keyPreview(options.hotkeys[key]);
+  }
+}
+
+async function initExtensionSettings() {
+  // Get Options
+  let data = await chrome.storage.local.get(bucket);
+  // No Options set, setting them
+  if (Object.keys(data[bucket] || {}).length === 0) {
+    await chrome.storage.local.set({ [bucket]: globalThis.sharedData.defaultOptions });
+    Object.assign(options, globalThis.sharedData.defaultOptions);
+  }
+  else {
+    // doesn't have hotkeys, update it to new format
+    if (!data[bucket].hasOwnProperty("hotkeys")) {
+      let newData = Object.assign(options, data[bucket]);
+      newData.hotkeys = Object.assign({}, globalThis.sharedData.defaultOptions.hotkeys);
+      Object.assign(options, newData);
+      await chrome.storage.local.set({ [bucket]: options });
+    }
+    else {
+      // update our local copy
+      Object.assign(options, data[bucket]);
+    }
+    // update list items with new data
+    populateValues();
+  }
+
+  // Syncing Options
+  chrome.storage.onChanged.addListener(async (changes, area) => {
+    if (area === 'local' && changes[bucket]?.newValue) {
+      // No Options set, setting them
+      if (Object.keys(changes[bucket].newValue || {}).length === 0) {
+        await chrome.storage.local.set({ [bucket]: globalThis.sharedData.defaultOptions });
+        Object.assign(options, globalThis.sharedData.defaultOptions);
+      }
+      else {
+        // update our local copy
+        Object.assign(options, data[bucket].newValue);
+      }
+    }
+  });
+  return true;
 }

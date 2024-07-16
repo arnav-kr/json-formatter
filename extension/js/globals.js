@@ -4,6 +4,15 @@ const defaultOptions = {
   "colorScheme": "auto",
   "wordWrap": false,
   "sortingOrder": "unchanged",
+  "hotkeys": {
+    "parsed": "p",
+    "raw": "r",
+    "formatted_raw": "shift+r",
+    "dark": "d",
+    "collapse_all": "[",
+    "expand_all": "]",
+    "toolbar": "t",
+  },
   "themes": {
     "current": {
       "dark": {
