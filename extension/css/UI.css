@@ -369,6 +369,23 @@ kbd {
   outline: none;
 }
 
+.modal-info {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-direction: row-reverse;
+  vertical-align: middle;
+  color: #d93025;
+}
+
+.modal-note:empty+svg {
+  display: none;
+}
+
+.modal-info svg {
+  margin-top: 1px;
+}
+
 @media (prefers-color-scheme: dark) {
   .md-select {
     background-color: rgba(0, 0, 0, 0.3);
@@ -461,6 +478,10 @@ kbd {
     color: rgb(232, 234, 237);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .modal-info {
+    color: #ff8385;
   }
 }
 

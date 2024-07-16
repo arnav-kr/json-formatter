@@ -5,8 +5,10 @@ let longNames = {
   up: "↑",
   down: "↓",
 }
-let state = {
-  currentInputValue: "",
+let stateObj = {
+  currentValue: "",
+  currentTarget: "",
+  errored: false,
   /* 
         <!-- 
 ### Shortcut Keys Reference:
@@ -29,6 +31,28 @@ let state = {
     toolbar: "t",
   }
 }
+let state = new Proxy(stateObj, {
+  set: (target, key, value) => {
+    target[key] = value;
+
+    if (key === "currentValue") {
+      hotkeyInput.value = value;
+      modalPreview.innerHTML = keyPreview(value);
+
+      let newKey = value;
+      let found = Object.entries(target.hotkeys).find(([k, v]) => v === newKey);
+      if (found && found[0] !== target.currentTarget) {
+        console.log(found);
+        modalNote.innerHTML = `Already in use for "${found[0].replace(/_/g, " ").split(" ").map(i => i[0].toUpperCase() + i.slice(1)).join(" ")}"`;
+        state.errored = true;
+      } else {
+        state.errored = false;
+        modalNote.innerHTML = "";
+      }
+    }
+    return true;
+  }
+});
 
 window.addEventListener("load", async => {
   hotkeyInput = document.getElementById("hotkey");
@@ -58,7 +82,9 @@ window.addEventListener("load", async => {
     event.preventDefault();
     event.stopPropagation();
 
+    state.currentTarget = hotkeyInput.dataset.target;
     if (event.key === "Enter") {
+      if (state.errored) return;
       let target = hotkeyInput.dataset.target;
       // save hotkey
       // chrome.storage.local.get("hotkeys", data => {
@@ -67,19 +93,18 @@ window.addEventListener("load", async => {
       //   chrome.storage.local.set({ hotkeys });
       // });
       // update UI
+      state.hotkeys[target] = state.currentValue;
       let inputField = document.querySelector(`.item[data-target="${target}"] .kbd-wrapper`);
-      inputField.innerHTML = keyPreview(state.currentInputValue);
+      inputField.innerHTML = keyPreview(state.currentValue);
       handleClose();
     }
 
-    let keyCombination = new Set();
     if (event.key === "Escape") {
-      hotkeyInput.value = "";
-      modalPreview.innerHTML = "";
-      modalNote.innerHTML = "";
+      state.currentValue = "";
       return;
     }
 
+    let keyCombination = new Set();
     if (event.ctrlKey) keyCombination.add("ctrl");
     if (event.shiftKey) keyCombination.add("shift");
     if (event.altKey) keyCombination.add("alt");
@@ -87,7 +112,7 @@ window.addEventListener("load", async => {
     if (event.metaKey) keyCombination.add("meta");
 
     if (event.key !== "Control" && event.key !== "Shift" && event.key !== "Alt" && event.key !== "AltGraph" && event.key !== "Meta") keyCombination.add(event.key.toLowerCase());
-    // update input value
+
     let final = Array.from(keyCombination)
       .join("+")
       .replace(/arrow([a-z]{2,5})/g, "$1")
@@ -96,13 +121,13 @@ window.addEventListener("load", async => {
       .replace(/audiovolumeup/g, "volumeup")
       .replace(/audiomute/g, "mute")
       .replace(/\s/g, "space")
-    hotkeyInput.value = final;
-    modalPreview.innerHTML = keyPreview(final);
-    state.currentInputValue = final;
+
+    state.currentValue = final;
   });
 });
 
 function keyPreview(str) {
+  console.log("str %s", str);
   return str.split("+").map(key => `<kbd>${longNames[key] || key}</kbd>`).join("+");
 }
 
