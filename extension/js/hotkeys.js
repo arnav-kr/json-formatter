@@ -12,6 +12,10 @@ let state = new Proxy(stateObj, {
 
     if (key === "currentValue") {
       hotkeyInput.value = value;
+      if (value === "") {
+        modalPreview.innerHTML = "";
+        return true;
+      }
       modalPreview.innerHTML = keyPreview(value);
 
       let newKey = value;
