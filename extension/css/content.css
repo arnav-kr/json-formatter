@@ -373,9 +373,12 @@ body.JF_dark .JF_context_menu {
 }
 
 .JF_context_menu .JF_context_menu_item {
+  display: flex;
+  gap: 8px;
   padding: 8px 24px;
   cursor: pointer;
   transition: background-color 100ms ease;
+  font-family: Roboto, "Segoe UI", Tahoma, sans-serif;
 }
 
 .JF_context_menu .JF_context_menu_item:hover {
@@ -387,6 +390,23 @@ body.JF_dark #JF_context_menu .JF_context_menu_item:hover {
 }
 
 .JF_context_menu .JF_context_menu_item .JF_context_menu_item_shortcut {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.JF_context_menu .JF_context_menu_item kbd {
+  font-size: 0.7rem;
+  font-weight: 500;
+  display: block;
+  background-color: #f1f3f4;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 2px 6px;
+  margin-bottom: 1px;
+  border-radius: 4px;
+}
+
+/* .JF_context_menu .JF_context_menu_item kbd {
   font-size: 0.7rem;
   background-color: #f1f3f4;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
@@ -395,9 +415,9 @@ body.JF_dark #JF_context_menu .JF_context_menu_item:hover {
   border-radius: 4px;
   margin-left: 8px;
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-}
+} */
 
-body.JF_dark #JF_context_menu .JF_context_menu_item .JF_context_menu_item_shortcut {
+body.JF_dark #JF_context_menu .JF_context_menu_item kbd {
   background-color: #202124;
   color: rgb(232, 234, 237);
   border: 1px solid rgba(255, 255, 255, 0.1);

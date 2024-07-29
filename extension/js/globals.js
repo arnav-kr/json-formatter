@@ -1,9 +1,25 @@
+const displayTexts = {
+  left: "←",
+  right: "→",
+  up: "↑",
+  down: "↓",
+};
+
 const defaultOptions = {
   "whats_new_screen_shown": true,
   "tab": "parsed",
   "colorScheme": "auto",
   "wordWrap": false,
   "sortingOrder": "unchanged",
+  "hotkeys": {
+    "parsed": "p",
+    "raw": "r",
+    "formatted_raw": "shift+r",
+    "dark": "d",
+    "collapse_all": "[",
+    "expand_all": "]",
+    "toolbar": "t",
+  },
   "themes": {
     "current": {
       "dark": {
@@ -1188,6 +1204,8 @@ const defaultOptions = {
   }
 };
 
+
 globalThis.sharedData = {
   defaultOptions,
+  displayTexts,
 };

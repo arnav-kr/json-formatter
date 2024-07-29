@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#29292c">
+  <title>Manage Hotkeys - JSON Formatter</title>
+  <meta name="description" content="Customize the JSON Formatter.">
+  <link rel="shortcut icon" href="./images/icons/icon_round_1024.png" type="image/png">
+  <link rel="apple-touch-icon" href="./images/icons/icon_round_1024.png">
+  <link rel="stylesheet" href="./css/UI.css">
+  <script src="./js/globals.js"></script>
+  <script src="./js/hotkeys.js" type="module"></script>
+</head>
+
+<body>
+  <div class="root">
+    <h2 id="header" class="title">Hotkeys</h2>
+    <span class="header-note">Double Click or Hover to Edit an Hotkey</span>
+    <div class="container hotkeys">
+
+      <!-- Parsed View -->
+      <div class="item clickable" title="Parsed View" data-target="parsed">
+        <div class="item-inner">
+          <div class="label">
+            <span>Parsed View</span>
+          </div>
+          <div class="item-control">
+            <div class="kbd-wrapper">
+              <kbd>p</kbd>
+            </div>
+            <div class="item-action">
+              <button aria-label="Edit" title="Edit" role="button" class="cr-icon-button hotkey-edit-btn" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 -960 960 960" width="18px"
+                  fill="currentColor">
+                  <path
+                    d="M216-216h51l375-375-51-51-375 375v51Zm-72 72v-153l498-498q11-11 23.84-16 12.83-5 27-5 14.16 0 27.16 5t24 16l51 51q11 11 16 24t5 26.54q0 14.45-5.02 27.54T795-642L297-144H144Zm600-549-51-51 51 51Zm-127.95 76.95L591-642l51 51-25.95-25.05Z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <!-- <input type="text" class="md-input" id="parsed_view" aria-label="Parsed View" title="Parsed View" value="P"> -->
+        </div>
+      </div>
+      <div class="hr"></div>
+
+      <!-- Raw View -->
+      <div class="item clickable" title="Raw View" data-target="raw">
+        <div class="item-inner">
+          <div class="label">
+            <span>Raw View</span>
+          </div>
+          <div class="item-control">
+            <div class="kbd-wrapper">
+              <kbd>r</kbd>
+            </div>
+            <div class="item-action">
+              <button aria-label="Edit" title="Edit" role="button" class="cr-icon-button hotkey-edit-btn" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 -960 960 960" width="18px"
+                  fill="currentColor">
+                  <path
+                    d="M216-216h51l375-375-51-51-375 375v51Zm-72 72v-153l498-498q11-11 23.84-16 12.83-5 27-5 14.16 0 27.16 5t24 16l51 51q11 11 16 24t5 26.54q0 14.45-5.02 27.54T795-642L297-144H144Zm600-549-51-51 51 51Zm-127.95 76.95L591-642l51 51-25.95-25.05Z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <!-- <input type="text" class="md-input" id="raw_view" aria-label="Raw View" title="Raw View" value="R"> -->
+        </div>
+      </div>
+      <div class="hr"></div>
+
+      <!-- Formatted Raw View -->
+      <div class="item clickable" title="Formatted Raw View" data-target="formatted_raw">
+        <div class="item-inner">
+          <div class="label">
+            <span>Formatted Raw View</span>
+          </div>
+          <div class="item-control">
+            <div class="kbd-wrapper">
+              <kbd>Shift</kbd><span>+</span><kbd>r</kbd>
+            </div>
+            <div class="item-action">
+              <button aria-label="Edit" title="Edit" role="button" class="cr-icon-button hotkey-edit-btn" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 -960 960 960" width="18px"
+                  fill="currentColor">
+                  <path
+                    d="M216-216h51l375-375-51-51-375 375v51Zm-72 72v-153l498-498q11-11 23.84-16 12.83-5 27-5 14.16 0 27.16 5t24 16l51 51q11 11 16 24t5 26.54q0 14.45-5.02 27.54T795-642L297-144H144Zm600-549-51-51 51 51Zm-127.95 76.95L591-642l51 51-25.95-25.05Z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <!-- <input type="text" class="md-input" id="formatted_raw_view" aria-label="Formatted Raw View"
+            title="Formatted Raw View" value="Shift + R"> -->
+        </div>
+      </div>
+      <div class="hr"></div>
+
+      <!-- Toggle Dark Mode -->
+      <div class="item clickable" title="Toggle Dark Mode" data-target="dark">
+        <div class="item-inner">
+          <div class="label">
+            <span>Toggle Dark Mode</span>
+          </div>
+          <div class="item-control">
+            <div class="kbd-wrapper">
+              <kbd>d</kbd>
+            </div>
+            <div class="item-action">
+              <button aria-label="Edit" title="Edit" role="button" class="cr-icon-button hotkey-edit-btn" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 -960 960 960" width="18px"
+                  fill="currentColor">
+                  <path
+                    d="M216-216h51l375-375-51-51-375 375v51Zm-72 72v-153l498-498q11-11 23.84-16 12.83-5 27-5 14.16 0 27.16 5t24 16l51 51q11 11 16 24t5 26.54q0 14.45-5.02 27.54T795-642L297-144H144Zm600-549-51-51 51 51Zm-127.95 76.95L591-642l51 51-25.95-25.05Z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <!-- <input type="text" class="md-input" id="toggle_dark_mode" aria-label="Toggle Dark Mode"
+            title="Toggle Dark Mode" value="D"> -->
+        </div>
+      </div>
+      <div class="hr"></div>
+
+      <!-- Collapse All -->
+      <div class="item clickable" title="Collapse All" data-target="collapse_all">
+        <div class="item-inner">
+          <div class="label">
+            <span>Collapse All</span>
+          </div>
+          <div class="item-control">
+            <div class="kbd-wrapper">
+              <kbd>[</kbd>
+            </div>
+            <div class="item-action">
+              <button aria-label="Edit" title="Edit" role="button" class="cr-icon-button hotkey-edit-btn" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 -960 960 960" width="18px"
+                  fill="currentColor">
+                  <path
+                    d="M216-216h51l375-375-51-51-375 375v51Zm-72 72v-153l498-498q11-11 23.84-16 12.83-5 27-5 14.16 0 27.16 5t24 16l51 51q11 11 16 24t5 26.54q0 14.45-5.02 27.54T795-642L297-144H144Zm600-549-51-51 51 51Zm-127.95 76.95L591-642l51 51-25.95-25.05Z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <!-- <input type="text" class="md-input" id="collapse_all" aria-label="Collapse All" title="Collapse All"
+            value="["> -->
+        </div>
+      </div>
+      <div class="hr"></div>
+
+      <!-- Expand All -->
+      <div class="item clickable" title="Expand All" data-target="expand_all">
+        <div class="item-inner">
+          <div class="label">
+            <span>Expand All</span>
+          </div>
+          <div class="item-control">
+            <div class="kbd-wrapper">
+              <kbd>]</kbd>
+            </div>
+            <div class="item-action">
+              <button aria-label="Edit" title="Edit" role="button" class="cr-icon-button hotkey-edit-btn" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 -960 960 960" width="18px"
+                  fill="currentColor">
+                  <path
+                    d="M216-216h51l375-375-51-51-375 375v51Zm-72 72v-153l498-498q11-11 23.84-16 12.83-5 27-5 14.16 0 27.16 5t24 16l51 51q11 11 16 24t5 26.54q0 14.45-5.02 27.54T795-642L297-144H144Zm600-549-51-51 51 51Zm-127.95 76.95L591-642l51 51-25.95-25.05Z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <!-- <input type="text" class="md-input" id="expand_all" aria-label="Expand All" title="Expand All" value="]"> -->
+        </div>
+      </div>
+      <div class="hr"></div>
+
+      <!-- Toggle Toolbar -->
+      <div class="item clickable" title="Toggle Toolbar" data-target="toolbar">
+        <div class="item-inner">
+          <div class="label">
+            <span>Toggle Toolbar</span>
+          </div>
+          <div class="item-control">
+            <div class="kbd-wrapper">
+              <kbd>t</kbd>
+            </div>
+            <div class="item-action">
+              <button aria-label="Edit" title="Edit" role="button" class="cr-icon-button hotkey-edit-btn" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 -960 960 960" width="18px"
+                  fill="currentColor">
+                  <path
+                    d="M216-216h51l375-375-51-51-375 375v51Zm-72 72v-153l498-498q11-11 23.84-16 12.83-5 27-5 14.16 0 27.16 5t24 16l51 51q11 11 16 24t5 26.54q0 14.45-5.02 27.54T795-642L297-144H144Zm600-549-51-51 51 51Zm-127.95 76.95L591-642l51 51-25.95-25.05Z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <!-- <input type="text" class="md-input" id="toggle_toolbar" aria-label="Toggle Toolbar" title="Toggle Toolbar"
+            value="T"> -->
+        </div>
+      </div>
+      <!-- <div class="hr"></div> -->
+
+      <!-- Reset Hotkeys -->
+      <div class="item item-end">
+        <div class="item-inner">
+          <button id="reset" aria-label="Reset to Default" title="Reset to Default" role="button" class="cr-button"
+            type="button" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+              class="cr-button-icon" style="margin-right: 4px;">
+              <path
+                d="M480-120q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q117 0 198.5-81.5T760-480q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120v-240h80v94q51-64 124.5-99T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Zm112-192L440-464v-216h80v184l128 128-56 56Z" />
+            </svg>
+            <span>Reset to Default</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="modal" class="modal">
+    <div class="modal-box">
+      <p>Press desired key combination then press ENTER.</p>
+      <!-- <input class="input empty" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" wrap="off" aria-label="Press desired key combination and then press ENTER." aria-live="off" title="code: ShiftRight, keyCode: 16, key: Shift => UI: Control+Shift, user settings: ctrl+shift, dispatch: null" style="background-color: inherit; color: var(--vscode-input-foreground);"> -->
+      <input autofocus autocorrect="off" autocapitalize="off" spellcheck="false" type="text" wrap="off"
+        aria-label="Press desired key combination then press ENTER." aria-live="off" id="hotkey" class="modal-input"
+        title="Hotkey" required>
+      <div class="modal-preview kbd-wrapper">
+        <!-- <kbd>Shift</kbd> + <kbd>R</kbd> -->
+      </div>
+      <div class="modal-info">
+        <p class="modal-note"></p>
+        <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="currentColor">
+          <path
+            d="M444-288h72v-240h-72v240Zm35.79-312q15.21 0 25.71-10.29t10.5-25.5q0-15.21-10.29-25.71t-25.5-10.5q-15.21 0-25.71 10.29t-10.5 25.5q0 15.21 10.29 25.71t25.5 10.5Zm.49 504Q401-96 331-126t-122.5-82.5Q156-261 126-330.96t-30-149.5Q96-560 126-629.5q30-69.5 82.5-122T330.96-834q69.96-30 149.5-30t149.04 30q69.5 30 122 82.5T834-629.28q30 69.73 30 149Q864-401 834-331t-82.5 122.5Q699-156 629.28-126q-69.73 30-149 30Zm-.28-72q130 0 221-91t91-221q0-130-91-221t-221-91q-130 0-221 91t-91 221q0 130 91 221t221 91Zm0-312Z" />
+        </svg>
+        <!-- &#9432; Already in use for "Formatted Raw View" -->
+      </div>
+      <!-- <button id="save" aria-label="Save" title="Save" role="button" class="cr-button" type="button">
+        <span>Save</span>
+      </button> -->
+    </div>
+  </div>
+</body>
+
+</html>

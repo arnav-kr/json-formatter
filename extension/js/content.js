@@ -40,16 +40,7 @@ SOFTWARE.
     isToolbarOpen = false,
     options = Object.assign({}, globalThis.sharedData.defaultOptions),
     bucket = "JSON_FORMATTER_OPTIONS",
-    wordWrap = false,
-    hotkeys = {
-      toolbar: "t",
-      parsed: "p",
-      formatted_raw: "r",
-      raw: "r",
-      dark: "d",
-      collapse_all: "[",
-      expand_all: "]",
-    };
+    wordWrap = false;
 
   let IS_PREPARE_SCRIPT_RUN = false;
 
@@ -278,15 +269,15 @@ SOFTWARE.
   <pre class="JF_raw JF_dark notranslate" id="formatted_raw" translate="no" ${options.tab == "formatted_raw" ? "" : "hidden"}></pre>
   <pre class="JF_raw JF_dark notranslate" id="raw" translate="no" ${options.tab == "raw" ? "" : "hidden"}></pre>
   <div id="JF_context_menu" class="JF_context_menu">
-    <div id="JF_context_menu_collapse_all" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Collapse All</span><span class="JF_context_menu_item_shortcut">[</span></div>
-    <div id="JF_context_menu_expand_all" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Expand All</span><span class="JF_context_menu_item_shortcut">]</span></div>
-    <div id="JF_context_menu_dark" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Toggle Dark Mode</span><span class="JF_context_menu_item_shortcut">D</span></div>
-    <div id="JF_context_menu_parsed" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Open Parsed View</span><span class="JF_context_menu_item_shortcut">P</span></div>
-    <div id="JF_context_menu_formatted_raw" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Open Formatted Raw View</span><span class="JF_context_menu_item_shortcut">shift + R</span></div>
-    <div id="JF_context_menu_raw" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Open Raw View</span><span class="JF_context_menu_item_shortcut">R</span></div>
-    <div id="JF_context_menu_toolbar" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Toggle Toolbar</span><span class="JF_context_menu_item_shortcut">T</span></div>
+    <div id="JF_context_menu_collapse_all" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Collapse All</span><span class="JF_context_menu_item_shortcut">${keyPreview(options.hotkeys.collapse_all)}</span></div>
+    <div id="JF_context_menu_expand_all" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Expand All</span><span class="JF_context_menu_item_shortcut">${keyPreview(options.hotkeys.expand_all)}</span></div>
+    <div id="JF_context_menu_dark" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Toggle Dark Mode</span><span class="JF_context_menu_item_shortcut">${keyPreview(options.hotkeys.dark)}</span></div>
+    <div id="JF_context_menu_parsed" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Open Parsed View</span><span class="JF_context_menu_item_shortcut">${keyPreview(options.hotkeys.parsed)}</span></div>
+    <div id="JF_context_menu_formatted_raw" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Open Formatted Raw View</span><span class="JF_context_menu_item_shortcut">${keyPreview(options.hotkeys.formatted_raw)}</span></div>
+    <div id="JF_context_menu_raw" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Open Raw View</span><span class="JF_context_menu_item_shortcut">${keyPreview(options.hotkeys.raw)}</span></div>
+    <div id="JF_context_menu_toolbar" class="JF_context_menu_item"><span class="JF_context_menu_item_name">Toggle Toolbar</span><span class="JF_context_menu_item_shortcut">${keyPreview(options.hotkeys.toolbar)}</span></div>
   </div>
-  `;
+    `;
     currentView = options.tab;
 
     btn_parsed = document.getElementById("open_parsed");
@@ -355,48 +346,52 @@ SOFTWARE.
       if (e.target.tagName === "INPUT" || e.target.isContentEditable) {
         return false;
       }
-      if (
-        !e.ctrlKey &&
-        !e.altKey &&
-        !e.metaKey &&
-        e.shiftKey
-      ) {
-        if (e.key === hotkeys.formatted_raw || e.code === "Key" + hotkeys.formatted_raw.toUpperCase()) {
-          e.preventDefault();
-          openView("formatted_raw");
-        }
-      }
+      let keyCombination = new Set();
+      if (e.ctrlKey) keyCombination.add("ctrl");
+      if (e.shiftKey) keyCombination.add("shift");
+      if (e.altKey) keyCombination.add("alt");
+      if (e.key === "AltGraph") keyCombination.add("alt");
+      if (e.metaKey) keyCombination.add("meta");
 
-      if (
-        !e.ctrlKey &&
-        !e.altKey &&
-        !e.metaKey &&
-        !e.shiftKey
-      ) {
-        if (e.key === hotkeys.toolbar || e.code === "Key" + hotkeys.toolbar.toUpperCase()) {
+      if (e.key !== "Control" && e.key !== "Shift" && e.key !== "Alt" && e.key !== "AltGraph" && e.key !== "Meta") keyCombination.add(e.key.toLowerCase());
+
+      let final = Array.from(keyCombination)
+        .join("+")
+        .replace(/arrow([a-z]{2,5})/g, "$1")
+        .replace(/printscreen/g, "prtsc")
+        .replace(/audiovolumedown/g, "volumedown")
+        .replace(/audiovolumeup/g, "volumeup")
+        .replace(/audiomute/g, "mute")
+        .replace(/\s/g, "space")
+      switch (final) {
+        case options.hotkeys.toolbar:
           e.preventDefault();
           toggleToolbar();
-        }
-        if (e.key === hotkeys.dark || e.code === "Key" + hotkeys.dark.toUpperCase()) {
+          break;
+        case options.hotkeys.dark:
           e.preventDefault();
           await toggleDarkMode();
-        }
-        if (e.key === hotkeys.parsed || e.code === "Key" + hotkeys.parsed.toUpperCase()) {
+          break;
+        case options.hotkeys.parsed:
           e.preventDefault();
           openView("parsed");
-        }
-        if (e.key === hotkeys.raw || e.code === "Key" + hotkeys.raw.toUpperCase()) {
+          break;
+        case options.hotkeys.raw:
           e.preventDefault();
           openView("raw");
-        }
-        if (e.key === hotkeys.collapse_all || e.code === "Key" + hotkeys.collapse_all.toUpperCase()) {
+          break;
+        case options.hotkeys.formatted_raw:
           e.preventDefault();
-          collapseChildren(tree);
-        }
-        if (e.key === hotkeys.expand_all || e.code === "Key" + hotkeys.expand_all.toUpperCase()) {
+          openView("formatted_raw");
+          break;
+        case options.hotkeys.collapse_all:
           e.preventDefault();
-          expandChildren(tree);
-        }
+          currentView == "parsed" ? collapseChildren(tree) : void 0;
+          break;
+        case options.hotkeys.expand_all:
+          e.preventDefault();
+          currentView == "parsed" ? expandChildren(tree) : void 0;
+          break;
       }
     });
   }
@@ -439,7 +434,10 @@ SOFTWARE.
 
       // preventing chrome native UI
       if (firstEl.textContent.length == 0) {
-        preCode = document.getElementsByTagName("pre")[0].textContent
+        try {
+          preCode = document.getElementsByTagName("pre")[0].textContent
+        }
+        catch (e) { }
       }
       else {
         preCode = firstEl.textContent;
@@ -514,7 +512,7 @@ SOFTWARE.
       <div class="json-key">${key}</div>
       <div class="json-size">${size}</div>
     </div>
-  `
+    `
   }
 
   function notExpandedTemplate(params = {}) {
@@ -526,7 +524,7 @@ SOFTWARE.
       <div class="json-separator">:</div>
       <div class="${wordWrap ? "JF_word-wrap" : ""} json-value json-${type}">${value}</div>
     </div>
-  `
+    `
   }
 
   function hideNodeChildren(node) {
@@ -807,29 +805,6 @@ SOFTWARE.
     str = str.replace(/</gm, "&lt;").replace(/>/gm, "&gt;")
     return str;
   }
-  /*
-   escape the following to make then visible and not treated as special char 
-  \"
-  \\
-  \/
-  \b
-  \f
-  \n
-  \r
-  \t
-  \u
-   */
-  function jsonEscape(json) {
-    return json
-      .replaceAll(/\\/g, "\\\\")
-      .replaceAll(/\\n/g, "\\n")
-      .replaceAll(/\\r/g, "\\r")
-      .replaceAll(/\\t/g, "\\t")
-      .replaceAll(/\\f/g, "\\f")
-      .replaceAll(/\\b/g, "\\b")
-      .replaceAll(/\\u/g, "\\u")
-      .replaceAll(/\\\//g, "\\/");
-  }
 
   function normalize(sortingFunction) {
     return function (key, value) {
@@ -1028,6 +1003,10 @@ SOFTWARE.
         contextMenu.style.visibility = "hidden";
       }
     }
+  }
+
+  function keyPreview(str) {
+    return str.split("+").map(key => `<kbd>${globalThis.sharedData.displayTexts[key] || key}</kbd>`).join("+");
   }
 
   function isBrowserNativeUIShown(document) {
