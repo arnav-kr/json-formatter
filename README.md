@@ -10,7 +10,7 @@
 [![GitHub](https://img.shields.io/github/license/arnav-kr/json-formatter?style=flat-square&logo=github&logoColor=white&label=GitHub&labelColor=%233d3d3d&color=%234285F4)](https://github.com/arnav-kr/json-formatter)
 
 
-**[V2.0.6.0 CHANGELOG](CHANGELOG.md)**
+**[V2.1.6.0 CHANGELOG](CHANGELOG.md)**
 
 ## Features:
 * 60+ Themes for both Light and Dark Mode
@@ -25,6 +25,7 @@
 * Collapse/Expand All option
 * Remembers Theme Preferences
 * Shortcut Keys for ease of use
+* Customize Shortcut Keys
 * Collapsible Toolbar
 
 <a href="https://chrome.google.com/webstore/detail/json-formatter/gpmodmeblccallcadopbcoeoejepgpnb"><img src="https://user-images.githubusercontent.com/72879799/229783871-ec49dba0-5c17-411b-892a-6ba0abee3fe7.svg" alt="Add to Chrome" height="64px"/></a>
@@ -33,7 +34,7 @@
 
 <a href="https://microsoftedge.microsoft.com/addons/detail/json-formatter/hdebmbedhflilekbidmmdiaiilaegkjl"><img src="https://user-images.githubusercontent.com/72879799/229780863-e60a44cd-a768-47d8-9755-c46075c3751b.svg" alt="Add to Microsoft Edge" height="64px"/></a>
 
-### Shortcut Keys Reference:
+### Default Shortcut Keys Reference:
 * `P` - Parsed View
 * `R` - Raw View
 * `Shift + R` - Formatted Raw View
@@ -41,6 +42,8 @@
 * `[` - Collapse All
 * `]` - Expand All
 * `T` - Toggle Toolbar
+
+Moreover, you can customize these shortcut keys as per your convenience from the extension settings.
 
 
 ## Screenshots:
