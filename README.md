@@ -76,5 +76,5 @@ Moreover, you can customize these shortcut keys as per your convenience from the
 
 ### License:
 
-[MIT Licence](LICENSE)
+[AGPL-3.0 License](LICENSE)
 
