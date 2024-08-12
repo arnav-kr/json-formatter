@@ -1,0 +1,113 @@
+{
+  "name": "JSON Formatter",
+  "short_name": "JSON Formatter",
+  
+  "{{chrome}}.version_name": "Version 2.1.6 Beta",
+  "{{chrome}}.manifest_version": 3,
+  "{{firefox}}.manifest_version": 2,
+  "description": "Formats JSON automatically! Open Source, Available with 60+ Themes, Syntax Highlighting, automatically linkifies links and more.",
+  "author": "json-formatter.js.org",
+  "homepage_url": "https://github.com/arnav-kr/json-formatter",
+  "{{chrome}}.minimum_chrome_version": "88",
+  "{{chrome}}.offline_enabled": true,
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "{{chrome}}.action": {
+    "default_icon": {
+      "16": "images/icons/icon_round_16.png",
+      "32": "images/icons/icon_round_32.png",
+      "48": "images/icons/icon_round_48.png",
+      "64": "images/icons/icon_round_64.png",
+      "72": "images/icons/icon_round_72.png",
+      "128": "images/icons/icon_round_128.png",
+      "256": "images/icons/icon_round_256.png",
+      "384": "images/icons/icon_round_384.png",
+      "512": "images/icons/icon_round_512.png",
+      "1024": "images/icons/icon_round_1024.png"
+    },
+    "default_title": "JSON Formatter - Edit Preferences",
+    "default_popup": "options.html"
+  },
+  "{{firefox}}.browser_action": {
+    "default_area": "navbar",
+    "default_icon": {
+      "16": "images/icons/icon_round_16.png",
+      "32": "images/icons/icon_round_32.png",
+      "48": "images/icons/icon_round_48.png",
+      "64": "images/icons/icon_round_64.png",
+      "72": "images/icons/icon_round_72.png",
+      "128": "images/icons/icon_round_128.png",
+      "256": "images/icons/icon_round_256.png",
+      "384": "images/icons/icon_round_384.png",
+      "512": "images/icons/icon_round_512.png",
+      "1024": "images/icons/icon_round_1024.png"
+    },
+    "default_title": "JSON Formatter - Edit Preferences",
+    "default_popup": "options.html"
+  },
+  "icons": {
+    "16": "icons/icon_round_16.png",
+    "32": "icons/icon_round_32.png",
+    "48": "icons/icon_round_48.png",
+    "64": "icons/icon_round_64.png",
+    "72": "icons/icon_round_72.png",
+    "128": "icons/icon_round_128.png",
+    "256": "icons/icon_round_256.png",
+    "384": "icons/icon_round_384.png",
+    "512": "icons/icon_round_512.png",
+    "1024": "icons/icon_round_1024.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/globals.js",
+        "js/utils.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_origin_as_fallback": true
+    }
+  ],
+  "{{chrome}}.host_permissions": [
+    "*://*/*",
+    "<all_urls>"
+  ],
+  "{{chrome}}.permissions": [
+    "storage",
+    "unlimitedStorage"
+  ],
+  "{{firefox}}.permissions": [
+    "*://*/*",
+    "<all_urls>",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "{{chrome}}.web_accessible_resources": [
+    {
+      "resources": [
+        "images/*",
+        "js/*",
+        "css/*",
+        "*.html"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "{{firefox}}.web_accessible_resources": [
+    "images/*",
+    "js/*",
+    "css/*",
+    "*.html"
+  ]
+}

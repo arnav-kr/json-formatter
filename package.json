@@ -1,0 +1,44 @@
+{
+  "name": "json-formatter",
+  "version": "2.1.7",
+  "type": "module",
+  "description": "Formats JSON automatically! Open Source, Available with 60+ Themes, Syntax Highlighting, automatically linkifies links and more.",
+  "scripts": {
+    "compile": "tsc --noEmit",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arnav-kr/json-formatter.git"
+  },
+  "extensionConfig": {
+    "isBeta": true
+  },
+  "keywords": [
+    "json-formatter",
+    "browser-extensions",
+    "browser-addons",
+    "browser-plugins",
+    "chrome-extensions",
+    "edge-addons",
+    "firefox-addons",
+    "plugins",
+    "extensions",
+    "arnav-kr",
+    "arnav"
+  ],
+  "author": "arnav-kr (https://github.com/arnav-kr)",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/arnav-kr/json-formatter/issues"
+  },
+  "homepage": "https://github.com/arnav-kr/json-formatter#readme",
+  "devDependencies": {
+    "@types/webextension-polyfill": "^0.10.7",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.0",
+    "vite-plugin-web-extension": "^4.1.6",
+    "webextension-polyfill": "^0.12.0"
+  }
+}
