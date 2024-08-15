@@ -15,6 +15,10 @@ export default defineConfig({
   plugins: [
     webExtension({
       manifest: generateManifest,
+      skipManifestValidation: true, // Google schema is not up-to-date :(
+      additionalInputs: [
+        
+      ],
       watchFilePaths: ["package.json", "manifest.json"],
     }),
   ],
