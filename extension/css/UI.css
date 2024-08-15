@@ -47,6 +47,13 @@ body {
   max-width: 680px;
   box-sizing: border-box;
   margin-left: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#header {
+  justify-content: space-between;
 }
 
 .root {
@@ -128,6 +135,28 @@ div.item-control {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+
+.icon-button {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background-color: transparent;
+  transition: 150ms ease;
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  background-color: rgba(32, 33, 36, 0.1);
+}
+
+.icon-button:active {
+  background-color: rgba(32, 33, 36, 0.2);
 }
 
 .cr-icon-button {
