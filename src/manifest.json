@@ -1,7 +1,6 @@
 {
   "name": "JSON Formatter",
   "short_name": "JSON Formatter",
-  
   "{{chrome}}.version_name": "Version 2.1.6 Beta",
   "{{chrome}}.manifest_version": 3,
   "{{firefox}}.manifest_version": 2,
@@ -11,7 +10,7 @@
   "{{chrome}}.minimum_chrome_version": "88",
   "{{chrome}}.offline_enabled": true,
   "options_ui": {
-    "page": "options.html",
+    "page": "src/pages/index.html",
     "open_in_tab": false
   },
   "{{chrome}}.action": {
@@ -28,7 +27,7 @@
       "1024": "images/icons/icon_round_1024.png"
     },
     "default_title": "JSON Formatter - Edit Preferences",
-    "default_popup": "options.html"
+    "default_popup": "src/pages/index.html"
   },
   "{{firefox}}.browser_action": {
     "default_area": "navbar",
@@ -45,7 +44,7 @@
       "1024": "images/icons/icon_round_1024.png"
     },
     "default_title": "JSON Formatter - Edit Preferences",
-    "default_popup": "options.html"
+    "default_popup": "src/pages/index.html"
   },
   "icons": {
     "16": "icons/icon_round_16.png",
@@ -65,16 +64,15 @@
         "<all_urls>"
       ],
       "js": [
-        "js/globals.js",
-        "js/utils.js",
-        "js/content.js"
+        "src/lib/consts.ts",
+        "src/lib/utils.ts",
+        "src/content.ts"
       ],
       "css": [
-        "css/content.css"
+        "src/styles/content.css"
       ],
       "run_at": "document_start",
-      "all_frames": true,
-      "match_origin_as_fallback": true
+      "all_frames": true
     }
   ],
   "{{chrome}}.host_permissions": [
@@ -94,10 +92,10 @@
   "{{chrome}}.web_accessible_resources": [
     {
       "resources": [
-        "images/*",
-        "js/*",
-        "css/*",
-        "*.html"
+        "public/*",
+        "src/pages/*",
+        "src/lib/*.ts",
+        "src/styes/*.css"
       ],
       "matches": [
         "<all_urls>"
@@ -105,9 +103,9 @@
     }
   ],
   "{{firefox}}.web_accessible_resources": [
-    "images/*",
-    "js/*",
-    "css/*",
-    "*.html"
+    "public/*",
+    "src/lib/*.ts",
+    "src/styes/*.css",
+    "src/pages/**/*.html"
   ]
 }
