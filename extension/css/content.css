@@ -27,6 +27,7 @@
 
 .JF_json-container .empty-icon {
   width: 18px;
+  min-width: 18px;
 }
 
 .JF_json-container .json-type {
@@ -117,6 +118,7 @@ body.JF_.JF_dark {
 
 .JF_json-container.JF_dark .empty-icon {
   width: 18px;
+  min-width: 18px;
 }
 
 .JF_json-container.JF_dark .json-type {
@@ -217,12 +219,12 @@ body.JF_.JF_dark {
   justify-content: center;
 }
 
-.JF_button-wrapper>button:first-child {
+.JF_button-wrapper > button:first-child {
   border-radius: 4px 0 0 4px;
   left: 1px;
 }
 
-.JF_button-wrapper>button:nth-child(2) {
+.JF_button-wrapper > button:nth-child(2) {
   border-radius: 0;
   border-width: 0 1px;
   border-style: solid;
@@ -230,7 +232,7 @@ body.JF_.JF_dark {
   margin: 0;
 }
 
-.JF_button-wrapper>button:last-child {
+.JF_button-wrapper > button:last-child {
   border-radius: 0 4px 4px 0;
 }
 
@@ -334,9 +336,9 @@ body.JF_.JF_dark {
 
 .JF_word-wrap {
   /* enable wrapping like in vs code, break anywhere */
-  white-space: pre-wrap;
-  word-break: break-word;
-  word-wrap: break-word;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  word-wrap: break-word !important;
 }
 
 .JF_invisible-toolbar {
