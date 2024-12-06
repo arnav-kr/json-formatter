@@ -1,8 +1,8 @@
 {
   "name": "JSON Formatter",
   "short_name": "JSON Formatter",
-  "version": "2.1.7",
-  "version_name": "Version 2.1.7 Beta",
+  "version": "2.1.8",
+  "version_name": "Version 2.1.8 Beta",
   "manifest_version": 3,
   "description": "Formats JSON automatically! Open Source, Available with 60+ Themes, Syntax Highlighting, automatically linkifies links and more.",
   "author": "Arnav",
