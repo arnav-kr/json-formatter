@@ -1,5 +1,7 @@
-![JSON Formatter](https://github.com/arnav-kr/json-formatter/blob/main/images/banners/promo_tile_marquee.png?raw=true)
+<!-- ![JSON Formatter](https://github.com/arnav-kr/json-formatter/blob/main/images/banners/promo_tile_marquee.png?raw=true) -->
 
+<img src="images/banners/JF_VTuber_logo.svg" width="512"/>
+  
 # JSON Formatter
 
 ### A Browser Extensions for formating and prettifying JSON but better.
