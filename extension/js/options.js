@@ -4,6 +4,7 @@ var tabEl,
   darkThemeEl,
   wordWrapEl,
   sortingOrderEl,
+  rawUnicodeEscapesEl,
   options = {},
   bucket = "JSON_FORMATTER_OPTIONS";
 
@@ -15,6 +16,7 @@ window.addEventListener("load", async () => {
   darkThemeEl = document.getElementById("dark_theme");
   wordWrapEl = document.getElementById("word_wrap");
   sortingOrderEl = document.getElementById("sorting_order");
+  rawUnicodeEscapesEl = document.getElementById("raw_unicode_escapes");
 
   await fetchExtensionSettings();
   console.log(options);
@@ -43,6 +45,7 @@ window.addEventListener("load", async () => {
     darkThemeEl.value = options.themes.current.dark.id;
     wordWrapEl.value = options.wordWrap;
     sortingOrderEl.value = options.sortingOrder;
+    rawUnicodeEscapesEl.value = options.rawUnicodeEscapes;
   }
   async function fetchExtensionSettings() {
     // Get Options
@@ -135,6 +138,12 @@ window.addEventListener("load", async () => {
   sortingOrderEl.addEventListener("input", async (e) => {
     if (options.sortingOrder == e.target.value) return;
     options.sortingOrder = e.target.value;
+    await chrome.storage.local.set({ [bucket]: options });
+  });
+
+  rawUnicodeEscapesEl.addEventListener("input", async (e) => {
+    if (options.rawUnicodeEscapes == e.target.value) return;
+    options.rawUnicodeEscapes = e.target.value == "true" ? true : false;
     await chrome.storage.local.set({ [bucket]: options });
   });
 });

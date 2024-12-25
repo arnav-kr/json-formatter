@@ -1,2 +1,3 @@
-# CHANGELOG V2.1.8
-* 🐞 Fix [[#29](https://github.com/arnav-kr/json-formatter/issues/29)]
+# CHANGELOG V2.1.9
+* 🐞 Fix [[#32](https://github.com/arnav-kr/json-formatter/issues/32)]
+* New option to Enable/Disable Raw Unicode Escapes
