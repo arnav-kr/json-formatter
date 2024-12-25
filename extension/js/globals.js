@@ -10,6 +10,7 @@ const defaultOptions = {
   "tab": "parsed",
   "colorScheme": "auto",
   "wordWrap": false,
+  "rawUnicodeEscapes": false,
   "sortingOrder": "unchanged",
   "hotkeys": {
     "parsed": "p",

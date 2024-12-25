@@ -40,9 +40,8 @@ SOFTWARE.
     isToolbarOpen = false,
     options = Object.assign({}, globalThis.sharedData.defaultOptions),
     bucket = "JSON_FORMATTER_OPTIONS",
-    wordWrap = false;
-
-  let IS_PREPARE_SCRIPT_RUN = false;
+    wordWrap = false,
+    IS_PREPARE_SCRIPT_RUN = false;
 
   if (document.readyState === "complete" && !IS_PREPARE_SCRIPT_RUN) {
     _();
@@ -72,7 +71,7 @@ SOFTWARE.
     }
     else {
       // legacy support
-      if (!data[bucket].hasOwnProperty("themes") || !data[bucket].hasOwnProperty("colorScheme") || !data[bucket].hasOwnProperty("wordWrap") || !data[bucket].hasOwnProperty("sortingOrder")) {
+      if (!data[bucket].hasOwnProperty("themes") || !data[bucket].hasOwnProperty("colorScheme") || !data[bucket].hasOwnProperty("wordWrap") || !data[bucket].hasOwnProperty("sortingOrder") || !data[bucket].hasOwnProperty("rawUnicodeEscapes")) {
         // still has old data format, update it to new format
         let newDataFormat = Object.assign({}, globalThis.sharedData.defaultOptions);
         if (data[bucket].themeMode == "auto") {
@@ -86,7 +85,14 @@ SOFTWARE.
             newDataFormat.colorScheme = "light";
           }
         }
-        newDataFormat.tab = data[bucket].defaultTab;
+        if (data[bucket].defaultTab) {
+          newDataFormat.tab = data[bucket].defaultTab;
+        }
+        delete data[bucket].themeMode;
+        delete data[bucket].currentTheme;
+        delete data[bucket].defaultTab;
+
+        newDataFormat = { ...newDataFormat, ...data[bucket] };
 
         Object.assign(options, newDataFormat);
         await chrome.storage.local.set({ [bucket]: newDataFormat });
@@ -167,7 +173,10 @@ SOFTWARE.
       sortingFuncton = normalize();
     }
     formattedRawCode.innerHTML =
-      JSON.stringify(JSON.parse(code.replace(/\\u/g, "&bsol;u")), sortingFuncton, 2);
+      JSON.stringify(JSON.parse(
+        options.rawUnicodeEscapes === true ?
+          code.replace(/\\u/g, "&bsol;u") : code
+      ), sortingFuncton, 2);
 
     globalThis.code = code;
 
@@ -177,18 +186,26 @@ SOFTWARE.
     leadingLine.style = 'margin-left: 0px; height: 18px;';
     formattedRawCode.appendChild(leadingLine);
 
-    rawCode.innerHTML = JSON.stringify(JSON.parse(code.replace(/\\u/g, "&bsol;u")), sortingFuncton);
+    rawCode.innerHTML = JSON.stringify(JSON.parse(
+      options.rawUnicodeEscapes === true ?
+        code.replace(/\\u/g, "&bsol;u") : code
+    ), sortingFuncton);
 
     let leadingLine1 = document.createElement('div');
     leadingLine1.className = 'line emptyLine';
     leadingLine1.textContent = '';
     leadingLine1.style = 'margin-left: 0px; height: 18px;';
     rawCode.appendChild(leadingLine1);
-
-    tree = createTree(JSON.parse(code
-      .replace(/\\/g, "\\\\")
-      .replace(/\\\\\"/g, "\\\\\\\""),
-      sortingFuncton));
+    tree = createTree(
+      JSON.parse(
+        code
+          .replace(/\\/g, "\\\\")
+          .replace(/\\\\\"/g, "\\\\\\\"")
+          .replace(/\\\\u/g, 
+            options.rawUnicodeEscapes === true ? "\\\\u" : "\\u"
+          ),
+        sortingFuncton)
+    );
     var thme = isDark ? "dark" : "light";
     var renderedCode = render(tree, parsedCode, { theme: thme, string: true });
     expandChildren(tree);

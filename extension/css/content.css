@@ -376,6 +376,7 @@ body.JF_dark .JF_context_menu {
 
 .JF_context_menu .JF_context_menu_item {
   display: flex;
+  align-items: center;
   gap: 8px;
   padding: 8px 24px;
   cursor: pointer;
