@@ -71,7 +71,7 @@ SOFTWARE.
     }
     else {
       // legacy support
-      if (!data[bucket].hasOwnProperty("themes") || !data[bucket].hasOwnProperty("colorScheme") || !data[bucket].hasOwnProperty("wordWrap") || !data[bucket].hasOwnProperty("sortingOrder") || !data[bucket].hasOwnProperty("rawUnicodeEscapes")) {
+      if (!data[bucket].hasOwnProperty("themes") || !data[bucket].hasOwnProperty("colorScheme") || !data[bucket].hasOwnProperty("wordWrap") || !data[bucket].hasOwnProperty("sortingOrder") || !data[bucket].hasOwnProperty("rawUnicodeEscapes") || !data[bucket].hasOwnProperty("contextMenus")) {
         // still has old data format, update it to new format
         let newDataFormat = Object.assign({}, globalThis.sharedData.defaultOptions);
         if (data[bucket].themeMode == "auto") {
@@ -134,6 +134,7 @@ SOFTWARE.
   }
 
   function setupContextMenu() {
+    if(!options.contextMenus) return;
     window.addEventListener("contextmenu", function (e) {
       if (window.getComputedStyle(contextMenu).visibility === "visible") return false;
       e.preventDefault();

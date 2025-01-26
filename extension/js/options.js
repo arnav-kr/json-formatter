@@ -5,6 +5,7 @@ var tabEl,
   wordWrapEl,
   sortingOrderEl,
   rawUnicodeEscapesEl,
+  contextMenusEl,
   options = {},
   bucket = "JSON_FORMATTER_OPTIONS";
 
@@ -16,7 +17,8 @@ window.addEventListener("load", async () => {
   darkThemeEl = document.getElementById("dark_theme");
   wordWrapEl = document.getElementById("word_wrap");
   sortingOrderEl = document.getElementById("sorting_order");
-  rawUnicodeEscapesEl = document.getElementById("raw_unicode_escapes");
+  rawUnicodeEscapesEl = document.getElementById("raw_unicode_escapes")
+  contextMenusEl = document.getElementById("context_menus");
 
   await fetchExtensionSettings();
   console.log(options);
@@ -46,6 +48,7 @@ window.addEventListener("load", async () => {
     wordWrapEl.value = options.wordWrap;
     sortingOrderEl.value = options.sortingOrder;
     rawUnicodeEscapesEl.value = options.rawUnicodeEscapes;
+    contextMenusEl.value = options.contextMenus;
   }
   async function fetchExtensionSettings() {
     // Get Options
@@ -57,9 +60,10 @@ window.addEventListener("load", async () => {
       Object.assign(options, globalThis.sharedData.defaultOptions);
     }
     else {
-      if (!data[bucket].hasOwnProperty("themes") || !data[bucket].hasOwnProperty("colorScheme") || !data[bucket].hasOwnProperty("wordWrap") || !data[bucket].hasOwnProperty("sortingOrder")) {
+      if (!data[bucket].hasOwnProperty("themes") || !data[bucket].hasOwnProperty("colorScheme") || !data[bucket].hasOwnProperty("wordWrap") || !data[bucket].hasOwnProperty("sortingOrder") || !data[bucket].hasOwnProperty("rawUnicodeEscapes") || !data[bucket].hasOwnProperty("contextMenus")) {
         // still has old data format, update it to new format
         let newDataFormat = Object.assign({}, globalThis.sharedData.defaultOptions);
+        console.log(newDataFormat);
         if (data[bucket].themeMode == "auto") {
           newDataFormat.colorScheme = "auto";
         }
@@ -71,8 +75,16 @@ window.addEventListener("load", async () => {
             newDataFormat.colorScheme = "light";
           }
         }
-        newDataFormat.tab = data[bucket].defaultTab;
+        if (data[bucket].defaultTab) {
+          newDataFormat.tab = data[bucket].defaultTab;
+        }
 
+        delete data[bucket].themeMode;
+        delete data[bucket].currentTheme;
+        delete data[bucket].defaultTab;
+
+        newDataFormat = { ...newDataFormat, ...data[bucket] };
+        console.log(newDataFormat);
         Object.assign(options, newDataFormat);
         await chrome.storage.local.set({ [bucket]: newDataFormat });
       }
@@ -144,6 +156,12 @@ window.addEventListener("load", async () => {
   rawUnicodeEscapesEl.addEventListener("input", async (e) => {
     if (options.rawUnicodeEscapes == e.target.value) return;
     options.rawUnicodeEscapes = e.target.value == "true" ? true : false;
+    await chrome.storage.local.set({ [bucket]: options });
+  });
+
+  contextMenusEl.addEventListener("input", async (e) => {
+    if (options.contextMenus == e.target.value) return;
+    options.contextMenus = e.target.value == "true" ? true : false;
     await chrome.storage.local.set({ [bucket]: options });
   });
 });

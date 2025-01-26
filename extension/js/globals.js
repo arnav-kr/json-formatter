@@ -11,6 +11,7 @@ const defaultOptions = {
   "colorScheme": "auto",
   "wordWrap": false,
   "rawUnicodeEscapes": false,
+  "contextMenus": false,
   "sortingOrder": "unchanged",
   "hotkeys": {
     "parsed": "p",
