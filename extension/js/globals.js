@@ -351,6 +351,23 @@ const defaultOptions = {
         },
         {
           "version": "1.0.0",
+          "name": "Everblush Lavender",
+          "id": "8a7c3e5f2d1b4a9e6c8f0d2a4b6e8c0a:D",
+          "immortal": true,
+          "colorScheme": "dark",
+          "colors": {
+            "background": "#141b1e",
+            "textPrimary": "#b3b9b8",
+            "textSecondary": "#dadada",
+            "key": "#67b0e8",
+            "numberValue": "#e5c76b",
+            "booleanValue": "#bc90df",
+            "stringValue": "#8ccf7e",
+            "icons": "#e57474"
+          }
+        },
+        {
+          "version": "1.0.0",
           "name": "Gruvbox Dark",
           "id": "791f72e3ffbd4b14b2bd8f2bd6dff649:D",
           "immortal": true,
