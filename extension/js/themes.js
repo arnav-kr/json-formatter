@@ -183,6 +183,12 @@ window.addEventListener("load", () => {
       else {
         // update our local copy
         Object.assign(options, data[bucket]);
+        // update theme store
+        const defaultStore = globalThis.sharedData.defaultOptions.themes.store;
+        if (JSON.stringify(options.themes.store) !== JSON.stringify(defaultStore)) {
+          options.themes.store = defaultStore;
+          await chrome.storage.local.set({ [bucket]: options });
+        }
       }
     }
     updateThemes();
