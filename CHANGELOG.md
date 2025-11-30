@@ -1,2 +1,2 @@
-# CHANGELOG V2.1.10
-* New option to Enable/Disable Custom Context Menu
+# CHANGELOG V2.1.11
+* New Everblush Lavender Theme added by [@samuelTallet](https://github.com/SamuelTallet)
