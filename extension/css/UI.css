@@ -20,6 +20,10 @@ h6 {
   font-weight: 500;
 }
 
+html {
+  background-color: #f8f9fa;
+}
+
 body {
   background-color: #f8f9fa;
   color: #202124;
@@ -319,6 +323,20 @@ div.item:hover .item-action {
   background-color: #0157c7;
 }
 
+.cr-button-secondary {
+  background-color: #f1f3f4;
+  color: #3c4043;
+  border: 1px solid #dadce0;
+}
+
+.cr-button-secondary:hover {
+  background-color: #e8eaed;
+}
+
+.cr-button-secondary:active {
+  background-color: #dee1e6;
+}
+
 .cr-button:focus-visible {
   box-shadow: 0 0 0 2px #000000;
 }
@@ -416,6 +434,24 @@ kbd {
 }
 
 @media (prefers-color-scheme: dark) {
+  html {
+    background-color: #202124;
+  }
+
+  .cr-button-secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgb(232, 234, 237);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .cr-button-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .cr-button-secondary:active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
   .md-select {
     background-color: rgba(0, 0, 0, 0.3);
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIxMiIgZmlsbD0iIzlhYTBhNiI+PHBhdGggZD0iTTAgMGgyNEwxMiAxMnoiLz48L3N2Zz4=);

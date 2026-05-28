@@ -13,6 +13,7 @@ const defaultOptions = {
   "rawUnicodeEscapes": false,
   "contextMenus": false,
   "sortingOrder": "unchanged",
+  "domainExclusions": [],
   "hotkeys": {
     "parsed": "p",
     "raw": "r",

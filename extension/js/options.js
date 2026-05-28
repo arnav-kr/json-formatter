@@ -60,7 +60,7 @@ window.addEventListener("load", async () => {
       Object.assign(options, globalThis.sharedData.defaultOptions);
     }
     else {
-      if (!data[bucket].hasOwnProperty("themes") || !data[bucket].hasOwnProperty("colorScheme") || !data[bucket].hasOwnProperty("wordWrap") || !data[bucket].hasOwnProperty("sortingOrder") || !data[bucket].hasOwnProperty("rawUnicodeEscapes") || !data[bucket].hasOwnProperty("contextMenus")) {
+      if (!data[bucket].hasOwnProperty("themes") || !data[bucket].hasOwnProperty("colorScheme") || !data[bucket].hasOwnProperty("wordWrap") || !data[bucket].hasOwnProperty("sortingOrder") || !data[bucket].hasOwnProperty("rawUnicodeEscapes") || !data[bucket].hasOwnProperty("contextMenus") || !data[bucket].hasOwnProperty("domainExclusions")) {
         // still has old data format, update it to new format
         let newDataFormat = Object.assign({}, globalThis.sharedData.defaultOptions);
         console.log(newDataFormat);

@@ -71,7 +71,7 @@ SOFTWARE.
     }
     else {
       // legacy support
-      if (!data[bucket].hasOwnProperty("themes") || !data[bucket].hasOwnProperty("colorScheme") || !data[bucket].hasOwnProperty("wordWrap") || !data[bucket].hasOwnProperty("sortingOrder") || !data[bucket].hasOwnProperty("rawUnicodeEscapes") || !data[bucket].hasOwnProperty("contextMenus")) {
+      if (!data[bucket].hasOwnProperty("themes") || !data[bucket].hasOwnProperty("colorScheme") || !data[bucket].hasOwnProperty("wordWrap") || !data[bucket].hasOwnProperty("sortingOrder") || !data[bucket].hasOwnProperty("rawUnicodeEscapes") || !data[bucket].hasOwnProperty("contextMenus") || !data[bucket].hasOwnProperty("domainExclusions")) {
         // still has old data format, update it to new format
         let newDataFormat = Object.assign({}, globalThis.sharedData.defaultOptions);
         if (data[bucket].themeMode == "auto") {
@@ -415,6 +415,10 @@ SOFTWARE.
   }
 
   async function _() {
+    await fetchExtensionSettings();
+    const trie = globalThis.sharedData.utils.buildExclusionTrie(options.domainExclusions);
+    if (globalThis.sharedData.utils.isExcluded(window.location.hostname, trie)) return false;
+
     var preCode;
     if (!document ||
       !document.body ||
@@ -514,7 +518,6 @@ SOFTWARE.
       // document.body.classList.remove("dark", "JF_");
     }
     if (isJSON) {
-      await fetchExtensionSettings();
       await prepareBody();
       setupContextMenu();
       formatJSON(preCode);

@@ -6,6 +6,45 @@ const isValidColorScheme = scheme => ["dark", "light"].indexOf(scheme) !== -1;
 
 const requiredColors = ["background", "textPrimary", "textSecondary", "key", "numberValue", "booleanValue", "stringValue", "icons"]
 
+function buildExclusionTrie(exclusions) {
+  const trie = {};
+  if (!exclusions || !Array.isArray(exclusions)) return trie;
+  for (const pattern of exclusions) {
+    if (!pattern || typeof pattern !== "string") continue;
+    const parts = pattern.toLowerCase().split('.').reverse();
+    let node = trie;
+    for (const part of parts) {
+      if (!node[part]) node[part] = {};
+      node = node[part];
+    }
+    node._terminal = true;
+  }
+  return trie;
+}
+
+
+function isExcluded(hostname, trie) {
+  if (!trie || Object.keys(trie).length === 0) return false;
+  const parts = hostname.toLowerCase().split('.').reverse();
+  let node = trie;
+
+  for (let i = 0; i < parts.length; i++) {
+    // Greedy match: ** matches current and all remaining segments
+    if (node['**']) return true;
+
+    const part = parts[i];
+    if (node[part]) {
+      node = node[part];
+    } else if (node['*']) {
+      // Non-greedy match: * matches exactly one segment
+      node = node['*'];
+    } else {
+      return false;
+    }
+  }
+  return !!node._terminal;
+}
+
 function validate(string) {
   let errors = [];
   // check if undefined
@@ -271,5 +310,7 @@ globalThis.sharedData.utils = {
   parse,
   parseThemeId,
   generateThemeId,
-  getThemeById
+  getThemeById,
+  buildExclusionTrie,
+  isExcluded
 }

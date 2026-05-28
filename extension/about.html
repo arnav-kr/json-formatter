@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#29292c">
+  <title>About - JSON Formatter</title>
+  <meta name="description" content="About JSON Formatter.">
+  <link rel="shortcut icon" href="./images/icons/icon_round_1024.png" type="image/png">
+  <link rel="apple-touch-icon" href="./images/icons/icon_round_1024.png">
+  <link rel="stylesheet" href="./css/UI.css">
+  <style>
+    .about-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 0 10px 0;
+      text-align: center;
+    }
+
+    .app-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 8px;
+      border-radius: 10px;
+    }
+
+    .app-name {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .app-version {
+      font-size: 0.85rem;
+      color: #5f6368;
+    }
+
+    .social-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .social-icon-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: rgba(32, 33, 36, 0.06);
+      transition: all 0.2s ease;
+    }
+
+    .social-icon-link:hover {
+      background-color: rgba(26, 115, 232, 0.15);
+    }
+
+    .social-icon-link:hover .brand-icon {
+      fill: #1a73e8;
+    }
+
+    .brand-icon {
+      width: 16px;
+      height: 16px;
+      fill: #5f6368;
+      transition: fill 0.2s;
+    }
+
+    .about-section {
+      padding: 10px 20px;
+    }
+
+    .section-content {
+      line-height: 1.4;
+      color: #5f6368;
+    }
+
+    .item-start {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .action-icon {
+      width: 20px;
+      height: 20px;
+      fill: #5f6368;
+      flex-shrink: 0;
+      transform: translateY(-2px);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .app-version {
+        color: #9ea0a5;
+      }
+      .section-content {
+        color: #9ea0a5;
+      }
+      .social-icon-link {
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+      .social-icon-link:hover {
+        background-color: rgba(138, 180, 248, 0.2);
+      }
+      .social-icon-link:hover .brand-icon {
+        fill: #8ab4f8;
+      }
+      .brand-icon, .action-icon {
+        fill: #9ea0a5;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="root">
+    <h2 id="header">
+      <div class="title">
+        <a class="icon-button" type="button" role="navigation" aria-label="Go Back" title="Go Back"
+          href="./options.html">
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="24">
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+          </svg>
+        </a>
+        <span>About</span>
+      </div>
+    </h2>
+
+    <div class="container">
+      <div class="about-header">
+        <img src="./images/icons/icon_round_128.png" alt="JSON Formatter" class="app-icon">
+        <h1 class="app-name">JSON Formatter</h1>
+        <span class="app-version" id="app-version">Version 2.1.20</span>
+        <div class="social-row">
+          <a href="https://github.com/arnav-kr/json-formatter" target="_blank" class="social-icon-link" title="GitHub Repository">
+            <svg class="brand-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+            </svg>
+          </a>
+          <a href="https://x.com/JSONFormatter_" target="_blank" class="social-icon-link" title="Twitter / X">
+            <svg class="brand-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <!-- Support -->
+      <div class="item clickable">
+        <a href="https://go.arnv.dev/support" target="_blank">
+          <div class="item-inner">
+            <div class="item-start">
+              <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+              </svg>
+              <div class="label">
+                <span>Support & Donate</span>
+                <div class="header-note" style="padding: 0; margin-top: 2px;">Support the developer</div>
+              </div>
+            </div>
+            <div class="icon-wrapper">
+              <svg viewBox="0 0 24 24" width="20px" height="20px" class="icon">
+                <path d="M10 7l5 5-5 5z"></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="hr"></div>
+
+      <!-- Reporting -->
+      <div class="item clickable">
+        <a href="https://github.com/arnav-kr/json-formatter/issues/new?template=bug_report.yaml" target="_blank">
+          <div class="item-inner">
+            <div class="item-start">
+              <svg class="action-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 6.41895C16.5672 6.66656 17.0891 7.01876 17.5352 7.46484C17.6609 7.59055 17.779 7.72234 17.8896 7.85938C18.4052 7.69923 18.8718 7.40272 19.2363 6.99512C19.7273 6.44606 19.9991 5.73557 20 4.99902C20.0006 4.4468 20.4488 3.99946 21.001 4C21.5532 4.00064 22.0005 4.44877 22 5.00098C21.9986 6.22855 21.5457 7.41299 20.7275 8.32813C20.1991 8.91906 19.541 9.36901 18.8135 9.65234C18.9353 10.0874 19 10.5402 19 11V12H22C22.5523 12 23 12.4477 23 13C23 13.5523 22.5523 14 22 14H19C19 14.7784 18.8684 15.5428 18.6211 16.2656C19.3743 16.5238 20.0615 16.9605 20.6201 17.5469C21.507 18.478 22.0014 19.7151 22 21.001C21.9994 21.5532 21.5512 22.0005 20.999 22C20.4468 21.9994 19.9995 21.5512 20 20.999C20.0009 20.2275 19.704 19.4854 19.1719 18.9268C18.7674 18.5021 18.2507 18.2088 17.6875 18.0762C17.4665 18.3846 17.222 18.6784 16.9502 18.9502C15.6374 20.2629 13.8565 21 12 21C10.1435 21 8.36256 20.2629 7.0498 18.9502C6.77789 18.6783 6.53264 18.3847 6.31152 18.0762C5.74871 18.2089 5.23235 18.5024 4.82812 18.9268C4.29598 19.4854 3.99913 20.2275 4 20.999C4.00054 21.5512 3.55321 21.9994 3.00098 22C2.44876 22.0005 2.00062 21.5532 2 21.001C1.99859 19.7151 2.493 18.478 3.37988 17.5469C3.93825 16.9607 4.62506 16.5238 5.37793 16.2656C5.13065 15.5429 5 14.7783 5 14H2C1.44772 14 1 13.5523 1 13C1 12.4477 1.44772 12 2 12H5V11C5 10.5403 5.06378 10.0873 5.18555 9.65234C4.45834 9.36899 3.80067 8.91883 3.27246 8.32813C2.45426 7.41299 2.00141 6.22855 2 5.00098C1.99946 4.44877 2.4468 4.00064 2.99902 4C3.55123 3.99946 3.99936 4.4468 4 4.99902C4.00089 5.73557 4.27271 6.44606 4.76367 6.99512C5.12795 7.40249 5.5942 7.69916 6.10938 7.85938C6.22014 7.72216 6.33899 7.59069 6.46484 7.46484C6.91093 7.01876 7.43281 6.66656 8 6.41895V6C8 5.2794 8.19486 4.57911 8.55469 3.96875L7.29297 2.70703C6.90244 2.31651 6.90244 1.68349 7.29297 1.29297C7.68349 0.902444 8.31651 0.902444 8.70703 1.29297L9.96875 2.55469C10.5791 2.19486 11.2794 2 12 2C12.7203 2 13.4201 2.19514 14.0303 2.55469L15.293 1.29297C15.6835 0.902444 16.3165 0.902444 16.707 1.29297C17.0976 1.68349 17.0976 2.31651 16.707 2.70703L15.4443 3.96875C15.8043 4.57921 16 5.27924 16 6V6.41895ZM13.4229 4.5957C13.7921 4.96986 14 5.47394 14 6H10C10 5.47417 10.2072 4.96981 10.5762 4.5957C10.5795 4.59249 10.5836 4.59018 10.5869 4.58691C10.5902 4.58365 10.5925 4.57947 10.5957 4.57617C10.9698 4.20719 11.4742 4 12 4C12.5256 4 13.0293 4.20749 13.4033 4.57617C13.4067 4.57964 13.4097 4.58349 13.4131 4.58691C13.4162 4.59001 13.4197 4.59265 13.4229 4.5957Z"/>
+              </svg>
+              <div class="label">
+                <span>Report an Issue</span>
+                <div class="header-note" style="padding: 0; margin-top: 2px;">Something isn't working right?</div>
+              </div>
+            </div>
+            <div class="icon-wrapper">
+              <svg viewBox="0 0 24 24" width="20px" height="20px" class="icon">
+                <path d="M10 7l5 5-5 5z"></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="hr"></div>
+
+      <div class="item clickable">
+        <a href="https://github.com/arnav-kr/json-formatter/issues/new?template=feature_request.yaml" target="_blank">
+          <div class="item-inner">
+            <div class="item-start">
+              <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z" clip-rule="evenodd" />
+              </svg>
+              <div class="label">
+                <span>Request a Feature</span>
+                <div class="header-note" style="padding: 0; margin-top: 2px;">Have an idea for improvement?</div>
+              </div>
+            </div>
+            <div class="icon-wrapper">
+              <svg viewBox="0 0 24 24" width="20px" height="20px" class="icon">
+                <path d="M10 7l5 5-5 5z"></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="hr"></div>
+
+      <!-- Developer -->
+      <div class="item clickable">
+        <a href="https://arnv.dev" target="_blank">
+          <div class="item-inner">
+            <div class="item-start">
+              <svg class="action-icon" viewBox="0 0 142.08 156">
+                <g transform="translate(9.39, 132.78)">
+                  <path d="M 67.65625 1.796875 C 66.550781 -4.203125 65.398438 -9.972656 64.203125 -15.515625 C 63.003906 -21.066406 61.703125 -26.445313 60.296875 -31.65625 C 50.898438 -31.351563 42.597656 -31.148438 35.390625 -31.046875 C 28.191406 -30.953125 22.796875 -30.90625 19.203125 -30.90625 C 10.296875 -30.90625 5.84375 -33.953125 5.84375 -40.046875 C 5.84375 -43.046875 6.789063 -45.671875 8.6875 -47.921875 C 10.59375 -50.171875 13.25 -52.5 16.65625 -54.90625 C 21.445313 -58.195313 26.316406 -61.539063 31.265625 -64.9375 C 36.222656 -68.34375 41.300781 -71.75 46.5 -75.15625 C 44.800781 -79.851563 43 -84.5 41.09375 -89.09375 C 39.195313 -93.695313 37.25 -98.347656 35.25 -103.046875 L 47.25 -108.75 C 49.144531 -104.445313 51.019531 -100.144531 52.875 -95.84375 C 54.726563 -91.550781 56.453125 -87.203125 58.046875 -82.796875 C 63.148438 -86.097656 68.347656 -89.398438 73.640625 -92.703125 C 78.941406 -96.003906 84.34375 -99.253906 89.84375 -102.453125 L 95.25 -91.5 C 89.445313 -88.195313 83.796875 -84.894531 78.296875 -81.59375 C 72.796875 -78.300781 67.394531 -75.003906 62.09375 -71.703125 C 63.800781 -67.097656 65.40625 -62.445313 66.90625 -57.75 C 68.40625 -53.050781 69.800781 -48.351563 71.09375 -43.65625 C 78.300781 -43.945313 85.503906 -44.289063 92.703125 -44.6875 C 99.898438 -45.09375 107 -45.5 114 -45.90625 L 115.65625 -34.046875 C 108.550781 -33.648438 101.5 -33.273438 94.5 -32.921875 C 87.5 -32.578125 80.75 -32.300781 74.25 -32.09375 C 75.550781 -27.195313 76.703125 -22.25 77.703125 -17.25 C 78.703125 -12.25 79.648438 -7.195313 80.546875 -2.09375 Z M 20.09375 -42.15625 C 26.300781 -42.25 32.503906 -42.394531 38.703125 -42.59375 C 44.898438 -42.800781 51.050781 -42.953125 57.15625 -43.046875 C 56.15625 -46.648438 55.078125 -50.203125 53.921875 -53.703125 C 52.773438 -57.203125 51.601563 -60.648438 50.40625 -64.046875 C 39.90625 -57.148438 29.703125 -50.101563 19.796875 -42.90625 Z M 20.09375 -42.15625"/>
+                </g>
+              </svg>
+              <div class="label">
+                <span>Developer Website</span>
+                <div class="header-note" style="padding: 0; margin-top: 2px;">arnv.dev</div>
+              </div>
+            </div>
+            <div class="icon-wrapper">
+              <svg viewBox="0 0 24 24" width="20px" height="20px" class="icon">
+                <path d="M10 7l5 5-5 5z"></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="hr"></div>
+
+      <div class="about-section">
+        <div class="section-content" style="font-size: 0.78rem; text-align: center; opacity: 0.9;">
+          <a href="https://github.com/arnav-kr/json-formatter/blob/main/LICENSE" target="_blank" style="text-decoration: underline;">MIT License</a>. Copyright &copy; 2021 Arnav Kumar.
+        </div>
+      </div>
+      <div class="item-end" style="margin-bottom: 4px;"></div>
+    </div>
+  </div>
+  <script src="./js/about.js" type="module"></script>
+</body>
+
+</html>
