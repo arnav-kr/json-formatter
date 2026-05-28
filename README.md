@@ -19,6 +19,7 @@
 * Syntax Highlighting
 * Works Offline
 * No tracking or analytics
+* Supports excluding domains from formatting
 * Word Wrapping and Sorting Order to stay organized
 * Works with any JSON Webpage
 * Automatically Linkify Links
