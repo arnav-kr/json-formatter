@@ -12,7 +12,7 @@
 [![GitHub](https://img.shields.io/github/license/arnav-kr/json-formatter?style=flat-square&logo=github&logoColor=white&label=GitHub&labelColor=%233d3d3d&color=%234285F4)](https://github.com/arnav-kr/json-formatter)
 
 
-**[V2.1.12.0 CHANGELOG](CHANGELOG.md)**
+**[V2.2.0 CHANGELOG](CHANGELOG.md)**
 
 ## Features:
 * 60+ Themes for both Light and Dark Mode
@@ -62,14 +62,14 @@ Moreover, you can customize these shortcut keys as per your convenience from the
 
 ## Installation
 
-**Method 1** - Install JSON Formatter from [Chrome Web Store](https://chrome.google.com/webstore/detail/json-formatter/gpmodmeblccallcadopbcoeoejepgpnb)
+**Method 1** - Install JSON Formatter from [Chrome Web Store](https://chrome.google.com/webstore/detail/json-formatter/gpmodmeblccallcadopbcoeoejepgpnb), [Edge Add-ons Store](https://microsoftedge.microsoft.com/addons/detail/json-formatter/) or [Firefox Add-ons Store](https://addons.mozilla.org/en-US/firefox/addon/json-formatter/)
 
 **Method 2** - Install It locally
 * clone/download this repo,
-* open Chrome and go to chrome://chrome/extensions/,
+* open Chrome and go to chrome://extensions/
 * enable "Developer mode",
 * click "Load unpacked extension",
-* select the extension folder in this repo.
+* select the `extension` folder in this repo.
 
 ### Credits
 
@@ -80,4 +80,3 @@ Moreover, you can customize these shortcut keys as per your convenience from the
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 Third-party licenses: [THIRD_PARTY_LICENSES](THIRD_PARTY_LICENSES)
-
